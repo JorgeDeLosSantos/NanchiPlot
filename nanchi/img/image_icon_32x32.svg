@@ -15,7 +15,7 @@
    version="1.1"
    inkscape:version="0.48.5 r10040"
    sodipodi:docname="image_icon_32x32.svg"
-   inkscape:export-filename="C:\Users\User\Desktop\LABPro\PX1602 - Grupy\this\img\image_icon_32x32.png"
+   inkscape:export-filename="C:\Users\User\Desktop\LABPro\PX1602 - NanchiPlot\NanchiPlot\nanchi\img\image_icon_32x32.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -392,7 +392,7 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="11.313708"
+     inkscape:zoom="0.99999996"
      inkscape:cx="24.75"
      inkscape:cy="19.535534"
      inkscape:current-layer="layer1"
@@ -423,41 +423,61 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer">
     <rect
-       style="fill:#803300;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       style="fill:#008080;fill-opacity:1;fill-rule:nonzero;stroke:none"
        id="rect3026"
        width="32.084969"
        height="31.99658"
-       x="0.088388346"
-       y="0.0034182533" />
+       x="-0.14473878"
+       y="-0.067029797" />
     <rect
        style="fill:#f2f2f2;fill-opacity:1;fill-rule:nonzero;stroke:none"
        id="rect3062"
-       width="28.284269"
-       height="27.135221"
-       x="2.0329328"
-       y="2.478292" />
-    <path
-       style="fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:none"
-       d="m 17.785589,3.771131 c -1.881766,0.063228 -3.768909,0.5338664 -5.53125,1.5 -5.9867909,3.2820209 -8.1704359,10.756329 -4.8750009,16.71875 3.1132799,5.629278 9.9835779,7.875493 15.7812509,5.34375 -3.915212,-0.876359 -7.428908,-3.098233 -9.53125,-6.46875 l 0,-0.03125 C 9.957496,14.943126 11.873261,7.7000721 17.785589,3.771131 z"
-       id="path3032-1"
-       inkscape:connector-curvature="0" />
+       width="29.698484"
+       height="20.064152"
+       x="1.0926994"
+       y="8.4182491" />
+    <rect
+       style="fill:#0000ff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="rect3784"
+       width="6.1871853"
+       height="6.1871848"
+       x="6.4843874"
+       y="19.64357" />
     <path
        sodipodi:type="star"
        style="fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:none"
-       id="path3060"
+       id="path3786"
        sodipodi:sides="5"
-       sodipodi:cx="-23.069359"
-       sodipodi:cy="-2.6482322"
-       sodipodi:r1="11.454716"
-       sodipodi:r2="5.9029746"
-       sodipodi:arg1="-0.79389562"
-       sodipodi:arg2="-0.22195034"
-       inkscape:flatsided="false"
+       sodipodi:cx="-34.117905"
+       sodipodi:cy="-12.547729"
+       sodipodi:r1="8.3815279"
+       sodipodi:r2="6.7807984"
+       sodipodi:arg1="0.4825133"
+       sodipodi:arg2="1.1108318"
+       inkscape:flatsided="true"
        inkscape:rounded="0"
        inkscape:randomized="0"
-       d="m -15.03877,-10.816473 -2.272414,6.868804 4.491872,6.4128552 -7.234835,-0.038617 -4.710923,6.2537059 -2.19896,-6.8926707 -7.403383,-2.54785246 5.875803,-4.22128764 0.135381,-7.8283652 5.830406,4.2837714 z"
-       inkscape:transform-center-x="0.17174753"
-       inkscape:transform-center-y="-0.46802766"
-       transform="matrix(0.2886891,0,0,0.2886891,27.749641,14.492761)" />
+       d="m -26.693283,-8.6586409 -8.829029,4.3739414 -6.888186,-7.0452835 4.571897,-8.728167 9.713773,1.650981 z"
+       inkscape:transform-center-x="0.21433241"
+       inkscape:transform-center-y="0.19495931"
+       transform="matrix(0.49387016,0,0,0.51808906,32.395327,20.327911)" />
+    <path
+       sodipodi:type="star"
+       style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path3788"
+       sodipodi:sides="3"
+       sodipodi:cx="-36.416"
+       sodipodi:cy="36.419418"
+       sodipodi:r1="9.4290113"
+       sodipodi:r2="4.7145057"
+       sodipodi:arg1="1.0400228"
+       sodipodi:arg2="2.0872204"
+       inkscape:flatsided="true"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m -31.643029,44.551146 -14.20174,-8.064077 14.084566,-8.267029 z"
+       inkscape:transform-center-x="-0.71203299"
+       inkscape:transform-center-y="-0.28123707"
+       transform="matrix(0.14740825,0.42761386,-0.50536054,0.1742093,46.230666,31.802358)" />
   </g>
 </svg>

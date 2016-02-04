@@ -1,2 +1,4 @@
 # NanchiPlot
-Easy plot data (wxPython, Matplotlib &amp; NumPy)
+
+NanchiPlot es un mini-software de graficado, que utiliza Matplotlib como base y wxPython como 
+librería de controles gráficos.

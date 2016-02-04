@@ -13,7 +13,7 @@ import nanchi.uiaux as aux
 from nanchi._const_ import *
 
 
-class WXGraph(wx.Frame):
+class NanchiPlot(wx.Frame):
 	def __init__(self,parent):
 		wx.Frame.__init__(self,parent,title="WXGraph 0.0.1",size=(800,600))
 		self.initMenu()
@@ -21,6 +21,11 @@ class WXGraph(wx.Frame):
 		self.initToolBar()
 		self.initSizers()
 		self.initEvents()
+		
+		# Icon
+		self.icon = wx.Icon("nanchi/img/nanchi_logo.png")
+		self.SetIcon(self.icon)
+		
 		self.Centre(True)
 		self.Show()
 		
@@ -158,5 +163,5 @@ class WXGraph(wx.Frame):
 
 if __name__=='__main__':
 	app = wx.App()
-	frame = WXGraph(None)
+	frame = NanchiPlot(None)
 	app.MainLoop()
