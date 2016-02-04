@@ -1,0 +1,55 @@
+lines.linewidth: 2
+lines.color: FF00FF
+lines.antialiased: True
+lines.markersize: 7.0
+
+patch.linewidth: 0.5
+patch.facecolor: 348ABD
+patch.edgecolor: AEAEFF
+patch.antialiased: True
+
+font.family: Arial
+font.size: 10.0
+
+axes.facecolor: 202020
+axes.edgecolor: bcbcbc
+axes.linewidth: 1.0
+axes.grid: True
+axes.titlesize: x-large
+axes.titleweight: bold
+axes.labelsize: large
+axes.labelcolor: FAFAFA
+axes.axisbelow: True
+axes.color_cycle: 348ABD, E24A33, 988ED5, 777777, FBC15E, 8EBA42, FFB5B8
+
+grid.color: FFFFFF
+grid.linestyle: dotted
+
+xtick.major.size: 0.0
+xtick.minor.size: 0.0
+xtick.major.pad: 6.0
+xtick.minor.pad: 6.0
+xtick.color: F0F0F0
+xtick.direction: in
+ytick.major.size: 0.0
+ytick.minor.size: 0.0
+ytick.major.pad: 6.0
+ytick.minor.pad: 6.0
+ytick.color: F0F0F0
+ytick.direction: in
+
+legend.fancybox: True
+legend.numpoints: 1
+legend.frameon: True
+legend.framealpha: 0.8
+legend.shadow: True
+
+text.color: white
+text.settex: True
+
+figure.facecolor: 587070
+figure.edgecolor: 0.5
+figure.subplot.hspace: 0.5
+
+savefig.facecolor: 587070
+savefig.edgecolor: 101010
