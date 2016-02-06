@@ -287,6 +287,10 @@ class DataGrid(grid.Grid):
 		pum.AppendSeparator()
 		editcollabel = wx.MenuItem(pum, -1, "Editar etiqueta de columna")
 		pum.AppendItem(editcollabel)
+		pum.AppendSeparator()
+		randomfill = wx.MenuItem(pum, -1, "Rellenar columna aleatoriamente")
+		pum.AppendItem(randomfill)
+		
 		
 		# Binds
 		pum.Bind(wx.EVT_MENU, self.del_rows, delrows)
@@ -294,6 +298,7 @@ class DataGrid(grid.Grid):
 		pum.Bind(wx.EVT_MENU, self.add_row, addrow)
 		pum.Bind(wx.EVT_MENU, self.add_col, addcol)
 		pum.Bind(wx.EVT_MENU, self.edit_collabel, editcollabel)
+		pum.Bind(wx.EVT_MENU, self.random_fill, randomfill)
 		# Show 
 		self.PopupMenu(pum)
 		pum.Destroy()
@@ -320,6 +325,14 @@ class DataGrid(grid.Grid):
 			label = dlg.GetValue()
 		for col in ccols:
 			self.SetColLabelValue(col,label)
+	
+	def random_fill(self,event):
+		col = self.GetSelectedCols()[0]
+		nrows = self.GetNumberRows()
+		data = np.random.random((nrows,1))
+		for i in range(nrows):
+			val = str(data[i][0])
+			self.SetCellValue(i,col,val)
 
 		
 if __name__=='__main__':

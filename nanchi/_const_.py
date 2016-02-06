@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
-import wx # Why?
+
+
+#
+VERSION = "0.1.0-dev"
+NANCHI_MAIN_CAPTION = "NanchiPlot "+VERSION
 
 # Colors
 

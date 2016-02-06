@@ -1,9 +1,10 @@
 (dp0
 S'xlabel'
 p1
-V
+VDatos
 p2
 sS'ylabel'
 p3
-g2
+VInData
+p4
 s.

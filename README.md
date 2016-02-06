@@ -22,6 +22,12 @@ Las opciones de graficado disponible son:
 * Representación de imágenes
 
 
+## Versión:
+ 
+Actualmente en fase de desarrollo inicial. ** (0.1.0)-dev **
+
+
+
 ## Más información
 
 ```

@@ -15,7 +15,7 @@ from nanchi._const_ import *
 
 class NanchiPlot(wx.Frame):
 	def __init__(self,parent):
-		wx.Frame.__init__(self,parent,title="WXGraph 0.0.1",size=(800,600))
+		wx.Frame.__init__(self,parent,title=NANCHI_MAIN_CAPTION,size=(800,600))
 		self.initMenu()
 		self.initCtrls()
 		self.initToolBar()
@@ -36,13 +36,15 @@ class NanchiPlot(wx.Frame):
 		salir = m_archivo.Append(-1, "Salir")
 		
 		m_ayuda = wx.Menu()
-		guardar = m_ayuda.Append(-1, "Ayuda")
-		salir = m_ayuda.Append(-1, "Acerca de...")
+		ayuda = m_ayuda.Append(-1, "Ayuda")
+		acerca_de = m_ayuda.Append(-1, "Acerca de...")
 		
 		menu_bar = wx.MenuBar()
 		menu_bar.Append(m_archivo, "Archivo")
 		menu_bar.Append(m_ayuda, "Ayuda")
 		self.SetMenuBar(menu_bar)
+		
+		self.Bind(wx.EVT_MENU, self.OnAbout, acerca_de)
 		
 	def initSizers(self):
 		self.mainsz = wx.BoxSizer(wx.VERTICAL)
@@ -159,7 +161,9 @@ class NanchiPlot(wx.Frame):
 		rows,cols = X.shape
 		self.graph_panel.axes.imshow(X, cmap=cm.gray)
 		self.graph_panel.canvas.draw()
-
+		
+	def OnAbout(self,event):
+		aux.AboutDialog(None)
 
 if __name__=='__main__':
 	app = wx.App()
