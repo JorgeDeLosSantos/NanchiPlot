@@ -24,8 +24,7 @@ Las opciones de graficado disponible son:
 
 ## Versión:
  
-Actualmente en fase de desarrollo inicial. ** (0.1.0)-dev **
-
+Actualmente en fase de desarrollo inicial. **(0.1.0)-dev**
 
 
 ## Más información

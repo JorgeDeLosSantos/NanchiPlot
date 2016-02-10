@@ -13,6 +13,7 @@ from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
 
 import pickle 
 
+import setplot
 from util import isempty
 from _const_ import *  # String & Constants values
 
@@ -126,6 +127,7 @@ class GraphSetup(wx.Panel):
 		graph_properties = {"xlabel":xlabel,"ylabel":ylabel}
 		pickle.dump(graph_properties, open('graph_properties.dat',"wb"))
 
+
 class GraphPanel(wx.Panel):
 	def __init__(self,parent,*args,**kwargs):
 		wx.Panel.__init__(self,parent,-1)
@@ -144,13 +146,11 @@ class GraphPanel(wx.Panel):
 	def initCanvas(self):
 		# Crear figure & axes
 		self.figure = plt.Figure()
-		self.figure.set_facecolor(FIGURE_BG_COLOR)
-		
 		self.axes = self.figure.add_subplot(111)
-		self.axes.set_axis_bgcolor(AXES_BG_COLOR)
-		
-		# FigureCanvas
 		self.canvas = FigureCanvas(self, -1, self.figure)
+		# Graph properties
+		setplot.set_default_params(self.axes,self.figure)
+		# FigureCanvas
 		self.mainsz.Add(self.canvas, 1, wx.EXPAND|wx.ALL, 2)
 		
 		
@@ -232,7 +232,10 @@ class DataGrid(grid.Grid):
 		for i in range(nrows):
 			for j in range(ncols):
 				cval = self.GetCellValue(i,j)
-				X[i][j] = float(cval)
+				if not isempty(cval):
+					X[i][j] = float(cval)
+				else:
+					X[i][j] = np.nan
 		return X
 		
 	def GetSelectedCols(self):
@@ -269,7 +272,7 @@ class DataGrid(grid.Grid):
 		try:
 			cval = float(cval)
 		except ValueError:
-			cval = 0.0
+			cval = np.nan
 		self.SetCellValue(row,col,str(cval))
 		
 			

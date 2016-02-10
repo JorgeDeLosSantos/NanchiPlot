@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 # 
 # Author: Jorge De Los Santos
-# Version: 0.1.0
+# Version: 0.1.0-dev
 
 import wx
 import os
 import numpy as np
 import matplotlib.cm as cm
+import nanchi.setplot as setplot
 import nanchi.iodata as io
 import nanchi.uibase as ui
 import nanchi.uiaux as aux
@@ -26,6 +27,9 @@ class NanchiPlot(wx.Frame):
 		self.icon = wx.Icon("nanchi/img/nanchi_logo.png")
 		self.SetIcon(self.icon)
 		
+		self.stbar = aux.StatusBar(self,-1)
+		self.SetStatusBar(self.stbar)
+		self.stbar.SetStatusText("Importe o inserte datos para comenzar...")
 		self.Centre(True)
 		self.Show()
 		
@@ -44,6 +48,8 @@ class NanchiPlot(wx.Frame):
 		menu_bar.Append(m_ayuda, "Ayuda")
 		self.SetMenuBar(menu_bar)
 		
+		self.Bind(wx.EVT_MENU, self.OnSave, guardar)
+		self.Bind(wx.EVT_MENU, self.OnImport, importar)
 		self.Bind(wx.EVT_MENU, self.OnAbout, acerca_de)
 		
 	def initSizers(self):
@@ -74,9 +80,19 @@ class NanchiPlot(wx.Frame):
 		self.Bind(wx.EVT_TOOL, self.OnScatter, self.toolbar.scatter_tool)
 		self.Bind(wx.EVT_TOOL, self.OnPie, self.toolbar.pie_tool)
 		self.Bind(wx.EVT_TOOL, self.OnImage, self.toolbar.image_tool)
+		self.Bind(wx.EVT_TOOL, self.OnContour, self.toolbar.contour_tool)
+		self.Bind(wx.EVT_TOOL, self.OnContourf, self.toolbar.contourf_tool)
+		
 		
 	def OnMenu(self,event):
 		pass
+		
+	def OnSave(self,event):
+		wldc = "PNG (*.png)|*.png"
+		dlg=wx.FileDialog(self, "Guardar", os.getcwd(), style=wx.SAVE, wildcard=wldc)
+		if dlg.ShowModal() == wx.ID_OK:
+			self.graph_panel.figure.savefig(dlg.GetPath())
+		dlg.Destroy()
 		
 	def OnImport(self,event):
 		path = ""
@@ -84,9 +100,12 @@ class NanchiPlot(wx.Frame):
 		dlg = wx.FileDialog(self, message="Seleccione un archivo",
 		defaultDir=os.getcwd(), wildcard=wildcard, style=wx.OPEN)
 		if dlg.ShowModal() == wx.ID_OK:
+			busy_dlg = aux.BusyInfo("Espere un momento...", self)
 			path = dlg.GetPath()
 			data = io.read_txt(path)
 			self.data_panel.grid_data.SetArrayData(data)
+			del busy_dlg
+		dlg.Destroy()
 		
 			
 	def OnLoadImage(self,event):
@@ -95,9 +114,15 @@ class NanchiPlot(wx.Frame):
 		dlg = wx.FileDialog(self, message="Seleccione una imagen",
 		defaultDir=os.getcwd(), wildcard=wildcard, style=wx.OPEN)
 		if dlg.ShowModal() == wx.ID_OK:
+			busy_dlg = aux.BusyInfo("Espere un momento...", self)
 			path = dlg.GetPath()
 			data = io.imread(path)
 			self.data_panel.grid_data.SetArrayData(data)
+			self.stbar.SetStatusText("Imagen cargada de: "+path)
+			del busy_dlg
+		else:
+			self.stbar.SetStatusText("Imagen no cargada")
+		dlg.Destroy()
 			
 	def OnFunction(self,event):
 		x = np.linspace(0,10)
@@ -113,7 +138,8 @@ class NanchiPlot(wx.Frame):
 		
 		
 	def OnPlot(self,event):
-		self.graph_panel.axes.cla()
+		setplot.set_default_params(self.graph_panel.axes,self.graph_panel.figure)
+		busy_dlg = aux.BusyInfo("Espere un momento...", self)
 		X = self.data_panel.grid_data.GetArrayData()
 		rows,cols = X.shape
 		if cols == 2: # Common case
@@ -125,10 +151,11 @@ class NanchiPlot(wx.Frame):
 				clabel = self.data_panel.grid_data.GetColLabelValue(col)
 				self.graph_panel.axes.plot(X[:,col],label=clabel)
 			self.graph_panel.axes.legend()
-		self.graph_panel.axes.relim()
 		self.graph_panel.canvas.draw()
+		del busy_dlg
 		
 	def OnBar(self,event):
+		self.graph_panel.axes.cla()
 		X = self.data_panel.grid_data.GetArrayData()
 		rows,cols = X.shape
 		if cols == 1: # Common case
@@ -137,6 +164,7 @@ class NanchiPlot(wx.Frame):
 		self.graph_panel.canvas.draw()
 		
 	def OnScatter(self,event):
+		self.graph_panel.axes.cla()
 		X = self.data_panel.grid_data.GetArrayData()
 		rows,cols = X.shape
 		if cols == 2: # Common case
@@ -162,8 +190,23 @@ class NanchiPlot(wx.Frame):
 		self.graph_panel.axes.imshow(X, cmap=cm.gray)
 		self.graph_panel.canvas.draw()
 		
+	def OnContour(self,event):
+		self.graph_panel.axes.cla()
+		X = self.data_panel.grid_data.GetArrayData()
+		rows,cols = X.shape
+		self.graph_panel.axes.contour(X)
+		self.graph_panel.canvas.draw()
+		
+	def OnContourf(self,event):
+		self.graph_panel.axes.cla()
+		X = self.data_panel.grid_data.GetArrayData()
+		rows,cols = X.shape
+		self.graph_panel.axes.contourf(X)
+		self.graph_panel.canvas.draw()
+		
 	def OnAbout(self,event):
 		aux.AboutDialog(None)
+
 
 if __name__=='__main__':
 	app = wx.App()
