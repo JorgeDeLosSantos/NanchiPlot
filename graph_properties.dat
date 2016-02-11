@@ -1,10 +1,10 @@
 (dp0
 S'xlabel'
 p1
-VTiempo (s)
+VXABEL
 p2
 sS'ylabel'
 p3
-VEsfuerzo (MPa)
+VYABEL
 p4
 s.

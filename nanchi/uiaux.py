@@ -60,7 +60,7 @@ class CustomTB(wx.ToolBar):
 
 class AboutDialog(wx.Frame):
 	def __init__(self,parent,*args,**kwargs):
-		wx.Frame.__init__(self,parent=parent,title=NANCHI_MAIN_CAPTION, size=(350,250))
+		wx.Frame.__init__(self,parent=parent,title=NANCHI_MAIN_CAPTION, size=(350,220))
 		self.winhtml = HTMLWindow(self)
 		self.winhtml.LoadPage("nanchi/help/about.html")
 		self.Centre(True)
@@ -78,9 +78,8 @@ class StatusBar(wx.StatusBar):
 	def __init__(self,*args,**kwargs):
 		wx.StatusBar.__init__(self,*args,**kwargs)
 		
-		
 
-class BusyInfo(object):   
+class BusyInfo(object):
     def __init__(self, msg, parent=None, bgColour="#f0f0f0", fgColour="#8080ff"):
         self.frame = _InfoFrame(parent, msg, bgColour, fgColour)
         self.frame.Show()

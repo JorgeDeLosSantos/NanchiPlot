@@ -14,7 +14,7 @@ from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
 import pickle 
 
 import setplot
-from util import isempty
+from util import isempty, rgb2hex
 from _const_ import *  # String & Constants values
 
 class GraphNoteBook(aui.AuiNotebook):
@@ -148,11 +148,54 @@ class GraphPanel(wx.Panel):
 		self.figure = plt.Figure()
 		self.axes = self.figure.add_subplot(111)
 		self.canvas = FigureCanvas(self, -1, self.figure)
+		self.figure.canvas.mpl_connect('button_press_event', self.OnRightClick)
 		# Graph properties
 		setplot.set_default_params(self.axes,self.figure)
 		# FigureCanvas
 		self.mainsz.Add(self.canvas, 1, wx.EXPAND|wx.ALL, 2)
 		
+	def OnRightClick(self,event):
+		if event.button == 3:
+			pum = wx.Menu()
+			intext = wx.MenuItem(pum, -1, u"Insertar texto/anotación")
+			pum.AppendItem(intext)
+			axbackg = wx.MenuItem(pum, -1, u"Color de fondo")
+			pum.AppendItem(axbackg)
+			#pum.AppendSeparator()
+			
+			# Binds
+			self.Bind(wx.EVT_MENU, self.OnText, intext)
+			self.Bind(wx.EVT_MENU, self.OnBackground, axbackg)
+			# Show
+			self.PopupMenu(pum)
+			pum.Destroy()
+		else:
+			pass
+	
+	def OnText(self,event):
+		self.TEXT_EVT = self.canvas.mpl_connect("button_press_event", self.set_text)
+		
+	def set_text(self,event):
+		cx = event.xdata
+		cy = event.ydata
+		dialog = wx.TextEntryDialog(None,
+		"Inserte el texto",
+		NANCHI_MAIN_CAPTION, "", style=wx.OK|wx.CANCEL)
+		if dialog.ShowModal() == wx.ID_OK:
+			self.axes.text(cx, cy, unicode(dialog.GetValue()))
+			self.canvas.draw()
+		dialog.Destroy()
+		self.canvas.mpl_disconnect(self.TEXT_EVT)
+		
+	def OnBackground(self,event):
+		dlg = wx.ColourDialog(self)
+		if dlg.ShowModal() == wx.ID_OK:
+			color = dlg.GetColourData().Colour
+			r,g,b = color.Red(),color.Green(),color.Blue()
+			self.axes.set_axis_bgcolor(rgb2hex(r,g,b))
+		dlg.Destroy()
+		self.canvas.draw()
+	
 		
 class GraphWindow(wx.Frame):
 	def __init__(self,parent,title,*args,**kwargs):

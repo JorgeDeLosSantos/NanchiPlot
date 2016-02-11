@@ -35,9 +35,9 @@ class NanchiPlot(wx.Frame):
 		
 	def initMenu(self):
 		m_archivo = wx.Menu()
-		guardar = m_archivo.Append(-1, "Guardar")
-		importar = m_archivo.Append(-1, "Importar datos...")
-		salir = m_archivo.Append(-1, "Salir")
+		guardar = m_archivo.Append(-1, "Exportar imagen... \tCtrl+S")
+		importar = m_archivo.Append(-1, "Importar datos... \tCtrl+I")
+		salir = m_archivo.Append(-1, "Salir \tCtrl+Q")
 		
 		m_ayuda = wx.Menu()
 		ayuda = m_ayuda.Append(-1, "Ayuda")
@@ -51,6 +51,7 @@ class NanchiPlot(wx.Frame):
 		self.Bind(wx.EVT_MENU, self.OnSave, guardar)
 		self.Bind(wx.EVT_MENU, self.OnImport, importar)
 		self.Bind(wx.EVT_MENU, self.OnAbout, acerca_de)
+		self.Bind(wx.EVT_MENU, self.OnExit, salir)
 		
 	def initSizers(self):
 		self.mainsz = wx.BoxSizer(wx.VERTICAL)
@@ -83,6 +84,8 @@ class NanchiPlot(wx.Frame):
 		self.Bind(wx.EVT_TOOL, self.OnContour, self.toolbar.contour_tool)
 		self.Bind(wx.EVT_TOOL, self.OnContourf, self.toolbar.contourf_tool)
 		
+	def OnExit(self,event):
+		self.Close(True)
 		
 	def OnMenu(self,event):
 		pass
