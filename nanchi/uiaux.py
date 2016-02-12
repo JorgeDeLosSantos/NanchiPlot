@@ -12,17 +12,17 @@ class CustomTB(wx.ToolBar):
 		self.SetBackgroundColour("#ffffff")
 		
 		# Bitmaps
-		import_bmp = wx.Bitmap("nanchi/img/import_icon_32x32.png")
-		function_bmp = wx.Bitmap("nanchi/img/function_icon_32x32.png")
-		load_image_bmp = wx.Bitmap("nanchi/img/load_image_icon_32x32.png")
+		import_bmp = wx.Bitmap(PATH_IMPORT_ICON)
+		function_bmp = wx.Bitmap(PATH_FUNCTION_ICON)
+		load_image_bmp = wx.Bitmap(PATH_LOAD_IMAGE_ICON)
 		
-		plot_bmp = wx.Bitmap("nanchi/img/plot_icon_32x32.png")
-		bar_bmp = wx.Bitmap("nanchi/img/bar_icon_32x32.png")
-		scatter_bmp = wx.Bitmap("nanchi/img/scatter_icon_32x32.png")
-		pie_bmp = wx.Bitmap("nanchi/img/pie_icon_32x32.png")
-		image_bmp = wx.Bitmap("nanchi/img/image_icon_32x32.png")
-		contour_bmp = wx.Bitmap("nanchi/img/contour_icon_32x32.png")
-		contourf_bmp = wx.Bitmap("nanchi/img/contourf_icon_32x32.png")
+		plot_bmp = wx.Bitmap(PATH_PLOT_ICON)
+		bar_bmp = wx.Bitmap(PATH_BAR_ICON)
+		scatter_bmp = wx.Bitmap(PATH_SCATTER_ICON)
+		pie_bmp = wx.Bitmap(PATH_PIE_ICON)
+		image_bmp = wx.Bitmap(PATH_IMAGE_ICON)
+		contour_bmp = wx.Bitmap(PATH_CONTOUR_ICON)
+		contourf_bmp = wx.Bitmap(PATH_CONTOURF_ICON)
 		
 		# Toolbar components
 		self.import_tool = self.AddLabelTool(-1, "Importar datos...", 

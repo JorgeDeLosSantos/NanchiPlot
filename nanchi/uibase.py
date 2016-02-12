@@ -17,24 +17,33 @@ import setplot
 from util import isempty, rgb2hex
 from _const_ import *  # String & Constants values
 
-class GraphNoteBook(aui.AuiNotebook):
+class NanchiNoteBook(aui.AuiNotebook):
     def __init__(self, parent):
-        aui.AuiNotebook.__init__(self, parent=parent, 
-        style=wx.aui.AUI_NB_RIGHT | wx.aui.AUI_NB_TAB_SPLIT)
-        
-        self.gp1 = GraphPanel(self)
-        self.gp2 = GraphSetup(self)
-        
-        self.AddPage(self.gp1, u"Gráficas")
-        self.AddPage(self.gp2, u"Configurar")
-        #self.SetPadding((10,10))
-        
-        self.axes = self.gp1.axes
-        self.figure = self.gp1.figure
-        self.canvas = self.gp1.canvas
-        
-        self.Bind(aui.EVT_AUINOTEBOOK_PAGE_CHANGED, self.OnPageChanged)
-        #self.Bind(wx.EVT_NOTEBOOK_PAGE_CHANGING, self.OnPageChanging)
+		_styles = aui.AUI_NB_TOP | aui.AUI_NB_TAB_SPLIT | aui.AUI_NB_TAB_MOVE
+		aui.AuiNotebook.__init__(self, parent=parent, style=_styles)
+		
+		self.graphs = GraphPanel(self)
+		self.data = DataPanel(self)
+		self.setup = SetupPanel(self)
+
+		self.AddPage(self.graphs, u"Gráficas")
+		self.AddPage(self.data, u"Datos")
+		#self.AddPage(self.setup, u"Configurar")
+		
+		self.Split(1, wx.LEFT)
+		mgr = self.GetAuiManager()
+		p1 = mgr.GetPane("Datos")
+		p1.Snappable()
+		
+		
+		mgr.Update()
+		self.Refresh()
+
+		self.axes = self.graphs.axes
+		self.figure = self.graphs.figure
+		self.canvas = self.graphs.canvas
+
+		self.Bind(aui.EVT_AUINOTEBOOK_PAGE_CHANGED, self.OnPageChanged)
 
     def OnPageChanged(self, event):
 		gp = pickle.load(open("graph_properties.dat","rb"))
@@ -42,11 +51,9 @@ class GraphNoteBook(aui.AuiNotebook):
 		self.axes.set_ylabel(gp["ylabel"])
 		self.canvas.draw() # Draw canvas 
         
-    def OnPageChanging(self, event):
-        pass
 
 
-class GraphSetup(wx.Panel):
+class SetupPanel(wx.Panel):
 	def __init__(self,parent,*args,**kwargs):
 		wx.Panel.__init__(self,parent,*args,**kwargs)
 		# Fonts
@@ -385,7 +392,7 @@ if __name__=='__main__':
 	app = wx.App()
 	fr = GraphWindow(None,"Hi",size=(600,400))
 	sz = wx.BoxSizer(wx.VERTICAL)
-	p = GraphNoteBook(fr)
+	p = NanchiNoteBook(fr)
 	#p = DataPanel(fr)
 	sz.Add(p, 1, wx.EXPAND|wx.ALL, 5)
 	fr.SetSizer(sz)
