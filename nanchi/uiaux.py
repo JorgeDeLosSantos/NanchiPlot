@@ -58,9 +58,13 @@ class CustomTB(wx.ToolBar):
 		contourf_bmp, shortHelp=u"Contorno relleno")
 		
 
+# HELP WINDOW ====================================================================
+
 class AboutDialog(wx.Frame):
 	def __init__(self,parent,*args,**kwargs):
-		wx.Frame.__init__(self,parent=parent,title=NANCHI_MAIN_CAPTION, size=(350,220))
+		_styles = wx.CAPTION|wx.CLOSE_BOX
+		wx.Frame.__init__(self,parent=parent,title=NANCHI_MAIN_CAPTION,
+		size=(350,200), style=_styles)
 		self.winhtml = HTMLWindow(self)
 		self.winhtml.LoadPage("nanchi/help/about.html")
 		self.Centre(True)
@@ -72,6 +76,8 @@ class HTMLWindow(html.HtmlWindow):
 	
 	def OnLinkClicked(self, link):
 		webbrowser.open(link.GetHref())
+
+
 
 
 class StatusBar(wx.StatusBar):
@@ -144,7 +150,9 @@ def test_toolbar():
 	
 	
 def test_about():
-	pass
+	app=wx.App()
+	fr = AboutDialog(None)
+	app.MainLoop()
 
 
 if __name__=='__main__':

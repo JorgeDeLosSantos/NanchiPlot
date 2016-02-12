@@ -28,16 +28,7 @@ class NanchiNoteBook(aui.AuiNotebook):
 
 		self.AddPage(self.graphs, u"Gráficas")
 		self.AddPage(self.data, u"Datos")
-		#self.AddPage(self.setup, u"Configurar")
-		
-		self.Split(1, wx.LEFT)
-		mgr = self.GetAuiManager()
-		p1 = mgr.GetPane("Datos")
-		p1.Snappable()
-		
-		
-		mgr.Update()
-		self.Refresh()
+		self.AddPage(self.setup, u"Configurar")
 
 		self.axes = self.graphs.axes
 		self.figure = self.graphs.figure
@@ -129,10 +120,11 @@ class SetupPanel(wx.Panel):
 		self.SetSizer(self.mainsz)
 
 	def OnSaveChanges(self,event):
-		xlabel = self.xlabel.GetValue()
-		ylabel = self.ylabel.GetValue()
-		graph_properties = {"xlabel":xlabel,"ylabel":ylabel}
-		pickle.dump(graph_properties, open('graph_properties.dat',"wb"))
+		pass
+		#xlabel = self.xlabel.GetValue()
+		#ylabel = self.ylabel.GetValue()
+		#graph_properties = {"xlabel":xlabel,"ylabel":ylabel}
+		#pickle.dump(graph_properties, open('graph_properties.dat',"wb"))
 
 
 class GraphPanel(wx.Panel):
@@ -168,11 +160,18 @@ class GraphPanel(wx.Panel):
 			pum.AppendItem(intext)
 			axbackg = wx.MenuItem(pum, -1, u"Color de fondo")
 			pum.AppendItem(axbackg)
+			pum.AppendSeparator()
+			xlabel = wx.MenuItem(pum, -1, u"Etiqueta X")
+			pum.AppendItem(xlabel)
+			ylabel = wx.MenuItem(pum, -1, u"Etiqueta Y")
+			pum.AppendItem(ylabel)
 			#pum.AppendSeparator()
 			
 			# Binds
 			self.Bind(wx.EVT_MENU, self.OnText, intext)
 			self.Bind(wx.EVT_MENU, self.OnBackground, axbackg)
+			self.Bind(wx.EVT_MENU, self.OnXLabel, xlabel)
+			self.Bind(wx.EVT_MENU, self.OnYLabel, ylabel)
 			# Show
 			self.PopupMenu(pum)
 			pum.Destroy()
@@ -185,7 +184,7 @@ class GraphPanel(wx.Panel):
 	def set_text(self,event):
 		cx = event.xdata
 		cy = event.ydata
-		dialog = wx.TextEntryDialog(None,
+		dialog = wx.TextEntryDialog(self,
 		"Inserte el texto",
 		NANCHI_MAIN_CAPTION, "", style=wx.OK|wx.CANCEL)
 		if dialog.ShowModal() == wx.ID_OK:
@@ -202,7 +201,24 @@ class GraphPanel(wx.Panel):
 			self.axes.set_axis_bgcolor(rgb2hex(r,g,b))
 		dlg.Destroy()
 		self.canvas.draw()
-	
+		
+	def OnXLabel(self,event):
+		dialog = wx.TextEntryDialog(self,
+		"Inserte la etiqueta en X",
+		NANCHI_MAIN_CAPTION, "", style=wx.OK|wx.CANCEL)
+		if dialog.ShowModal() == wx.ID_OK:
+			self.axes.set_xlabel(dialog.GetValue())
+			self.canvas.draw()
+		dialog.Destroy()
+		
+	def OnYLabel(self,event):
+		dialog = wx.TextEntryDialog(self,
+		"Inserte la etiqueta en Y",
+		NANCHI_MAIN_CAPTION, "", style=wx.OK|wx.CANCEL)
+		if dialog.ShowModal() == wx.ID_OK:
+			self.axes.set_ylabel(dialog.GetValue())
+			self.canvas.draw()
+		dialog.Destroy()
 		
 class GraphWindow(wx.Frame):
 	def __init__(self,parent,title,*args,**kwargs):

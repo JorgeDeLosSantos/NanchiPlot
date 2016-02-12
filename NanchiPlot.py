@@ -2,7 +2,6 @@
 # 
 # Author: Jorge De Los Santos
 # Version: 0.1.0-dev
-
 import wx
 import os
 import numpy as np
@@ -36,10 +35,15 @@ class NanchiPlot(wx.Frame):
 		self.figure = self.notebook.graphs.figure
 		self.canvas = self.notebook.graphs.canvas
 		
+		self.data = self.notebook.data
+		
 		self.Centre(True)
 		self.Show()
 		
 	def initMenu(self):
+		"""
+		Crear la barra de Menús
+		"""
 		m_archivo = wx.Menu()
 		guardar = m_archivo.Append(-1, "Exportar imagen... \tCtrl+S")
 		importar = m_archivo.Append(-1, "Importar datos... \tCtrl+I")
@@ -61,6 +65,9 @@ class NanchiPlot(wx.Frame):
 		self.Bind(wx.EVT_MENU, self.OnExit, salir)
 		
 	def initSizers(self):
+		"""
+		Inicializar los sizers
+		"""
 		self.mainsz = wx.BoxSizer(wx.VERTICAL)
 		self.panelsz = wx.BoxSizer(wx.HORIZONTAL)
 		self.mainsz.Add(self.toolbar, 0, wx.EXPAND)
@@ -70,14 +77,23 @@ class NanchiPlot(wx.Frame):
 		self.SetSizer(self.mainsz)
 		
 	def initCtrls(self):
+		"""
+		Inicializar los controles básicos
+		"""
 		self.mainpanel = wx.Panel(self,-1)
 		self.notebook = ui.NanchiNoteBook(self.mainpanel)
 		
 	def initToolBar(self):
+		"""
+		Inicializar la barra de herramientas
+		"""
 		self.toolbar = aux.CustomTB(self)
 		self.toolbar.Realize()
 		
 	def initEvents(self):
+		"""
+		Inicializar (conexión de ) eventos
+		"""
 		self.Bind(wx.EVT_TOOL, self.OnImport, self.toolbar.import_tool)
 		self.Bind(wx.EVT_TOOL, self.OnLoadImage, self.toolbar.load_image_tool)
 		self.Bind(wx.EVT_TOOL, self.OnFunction, self.toolbar.function_tool)
@@ -90,12 +106,23 @@ class NanchiPlot(wx.Frame):
 		self.Bind(wx.EVT_TOOL, self.OnContourf, self.toolbar.contourf_tool)
 		
 	def OnExit(self,event):
+		"""
+		Archivo -> Salir -> (Atajo) Ctrl+Q 
+		"""
 		self.Close(True)
 		
 	def OnHelp(self,event):
+		"""
+		Ayuda -> Ayuda
+		
+		Abre la documentación en HTML
+		"""
 		os.startfile(PATH_HTML_DOCUMENTATION)
 		
 	def OnSave(self,event):
+		"""
+		Archivo -> Exportar imagen -> (Atajo) Ctrl + S
+		"""
 		wldc = "PNG (*.png)|*.png"
 		dlg=wx.FileDialog(self, "Guardar", os.getcwd(), style=wx.SAVE, wildcard=wldc)
 		if dlg.ShowModal() == wx.ID_OK:
@@ -103,6 +130,12 @@ class NanchiPlot(wx.Frame):
 		dlg.Destroy()
 		
 	def OnImport(self,event):
+		"""
+		Archivo -> Importar datos -> (Atajo) Ctrl + I
+		Toolbar -> Importar datos
+		
+		Importa datos de un fichero de texto plano
+		"""
 		path = ""
 		wildcard = "*.txt"
 		dlg = wx.FileDialog(self, message="Seleccione un archivo",
@@ -115,7 +148,7 @@ class NanchiPlot(wx.Frame):
 				self.sb.SetStatusText(SB_ON_IMPORT_DATA_FAIL%(path))
 				del busy_dlg
 			else:
-				self.data_panel.grid_data.SetArrayData(data)
+				self.data.grid_data.SetArrayData(data)
 				del busy_dlg
 		dlg.Destroy()
 		
@@ -129,7 +162,7 @@ class NanchiPlot(wx.Frame):
 			busy_dlg = aux.BusyInfo("Espere un momento...", self)
 			path = dlg.GetPath()
 			data = io.imread(path)
-			self.data_panel.grid_data.SetArrayData(data)
+			self.data.grid_data.SetArrayData(data)
 			self.sb.SetStatusText(SB_ON_IMPORT_IMAGE%(path))
 			del busy_dlg
 		else:
@@ -143,9 +176,9 @@ class NanchiPlot(wx.Frame):
 		if dialog.ShowModal() == wx.ID_OK:
 			fx = dialog.GetValue()
 			fx = eval(fx)
-			self.data_panel.grid_data.SetArrayData(np.array([x,fx]).transpose())
-			self.data_panel.grid_data.SetColLabelValue(0,"x")
-			self.data_panel.grid_data.SetColLabelValue(1,"f(x)")
+			self.data.grid_data.SetArrayData(np.array([x,fx]).transpose())
+			self.data.grid_data.SetColLabelValue(0,"x")
+			self.data.grid_data.SetColLabelValue(1,"f(x)")
 			self.sb.SetStatusText(SB_ON_CREATE_DATA_FUNCTION)
 		dialog.Destroy()
 		
@@ -153,7 +186,7 @@ class NanchiPlot(wx.Frame):
 	def OnPlot(self,event):
 		setplot.set_default_params(self.axes,self.figure)
 		busy_dlg = aux.BusyInfo("Espere un momento...", self)
-		X = self.data_panel.grid_data.GetArrayData()
+		X = self.data.grid_data.GetArrayData()
 		rows,cols = X.shape
 		if cols == 2: # Common case
 			self.axes.plot(X[:,0],X[:,1])
@@ -161,7 +194,7 @@ class NanchiPlot(wx.Frame):
 			self.axes.plot(X[:,0])
 		elif cols > 2:
 			for col in range(cols):
-				clabel = self.data_panel.grid_data.GetColLabelValue(col)
+				clabel = self.data.grid_data.GetColLabelValue(col)
 				self.axes.plot(X[:,col],label=clabel)
 			self.axes.legend()
 		self.canvas.draw()
@@ -169,7 +202,7 @@ class NanchiPlot(wx.Frame):
 		
 	def OnBar(self,event):
 		self.axes.cla()
-		X = self.data_panel.grid_data.GetArrayData()
+		X = self.data.grid_data.GetArrayData()
 		rows,cols = X.shape
 		if cols == 1: # Common case
 			x = range(len(X[:,0]))
@@ -178,7 +211,7 @@ class NanchiPlot(wx.Frame):
 		
 	def OnScatter(self,event):
 		self.axes.cla()
-		X = self.data_panel.grid_data.GetArrayData()
+		X = self.data.grid_data.GetArrayData()
 		rows,cols = X.shape
 		if cols == 2: # Common case
 			self.axes.plot(X[:,0],X[:,1],"bo")
@@ -188,7 +221,7 @@ class NanchiPlot(wx.Frame):
 		
 	def OnPie(self,event):
 		self.axes.cla()
-		X = self.data_panel.grid_data.GetArrayData()
+		X = self.data.grid_data.GetArrayData()
 		rows,cols = X.shape
 		if cols == 1:
 			self.axes.pie(X[:,0])
@@ -198,27 +231,28 @@ class NanchiPlot(wx.Frame):
 		
 	def OnImage(self,event):
 		self.axes.cla()
-		X = self.data_panel.grid_data.GetArrayData()
+		X = self.data.grid_data.GetArrayData()
 		rows,cols = X.shape
 		self.axes.imshow(X, cmap=cm.gray)
 		self.canvas.draw()
 		
 	def OnContour(self,event):
 		self.axes.cla()
-		X = self.data_panel.grid_data.GetArrayData()
+		X = self.data.grid_data.GetArrayData()
 		rows,cols = X.shape
 		self.axes.contour(X)
 		self.canvas.draw()
 		
 	def OnContourf(self,event):
 		self.axes.cla()
-		X = self.data_panel.grid_data.GetArrayData()
+		X = self.data.grid_data.GetArrayData()
 		rows,cols = X.shape
 		self.axes.contourf(X)
 		self.canvas.draw()
 		
 	def OnAbout(self,event):
-		aux.AboutDialog(None)
+		os.system('java -jar java/plotting.jar')
+		#aux.AboutDialog(None)
 
 
 if __name__=='__main__':
