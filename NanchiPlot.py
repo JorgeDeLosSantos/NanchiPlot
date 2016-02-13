@@ -5,6 +5,8 @@
 import wx
 import os
 import numpy as np
+import matplotlib
+matplotlib.use('WXAgg')
 import matplotlib.cm as cm
 import nanchi.setplot as setplot
 import nanchi.iodata as io

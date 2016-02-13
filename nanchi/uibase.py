@@ -6,14 +6,17 @@ import wx.lib.scrolledpanel as scrolled
 import os
 import numpy as np
 import matplotlib
-matplotlib.use('WXAgg')
+#matplotlib.use('WXAgg')
 
 import matplotlib.pyplot as plt
-from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
+#from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
+from uimpl import FigureCanvas
+from matplotlib.figure import Figure
 
 import pickle 
 
 import setplot
+import uimpl
 from util import isempty, rgb2hex
 from _const_ import *  # String & Constants values
 
@@ -144,15 +147,16 @@ class GraphPanel(wx.Panel):
 		
 	def initCanvas(self):
 		# Crear figure & axes
-		self.figure = plt.Figure()
+		self.figure = Figure()
 		self.axes = self.figure.add_subplot(111)
 		self.canvas = FigureCanvas(self, -1, self.figure)
-		self.figure.canvas.mpl_connect('button_press_event', self.OnRightClick)
+		
+		self.EVT_ON_RIGHT = self.canvas.mpl_connect('button_press_event', self.OnRightClick)
 		# Graph properties
 		setplot.set_default_params(self.axes,self.figure)
 		# FigureCanvas
 		self.mainsz.Add(self.canvas, 1, wx.EXPAND|wx.ALL, 2)
-		
+	
 	def OnRightClick(self,event):
 		if event.button == 3:
 			pum = wx.Menu()
@@ -165,19 +169,22 @@ class GraphPanel(wx.Panel):
 			pum.AppendItem(xlabel)
 			ylabel = wx.MenuItem(pum, -1, u"Etiqueta Y")
 			pum.AppendItem(ylabel)
-			#pum.AppendSeparator()
+			pum.AppendSeparator()
+			zoom_box = wx.MenuItem(pum, -1, u"Zoom Box")
+			pum.AppendItem(zoom_box)
 			
 			# Binds
 			self.Bind(wx.EVT_MENU, self.OnText, intext)
 			self.Bind(wx.EVT_MENU, self.OnBackground, axbackg)
 			self.Bind(wx.EVT_MENU, self.OnXLabel, xlabel)
 			self.Bind(wx.EVT_MENU, self.OnYLabel, ylabel)
+			self.Bind(wx.EVT_MENU, self.OnZoom, zoom_box)
 			# Show
 			self.PopupMenu(pum)
 			pum.Destroy()
 		else:
 			pass
-	
+			
 	def OnText(self,event):
 		self.TEXT_EVT = self.canvas.mpl_connect("button_press_event", self.set_text)
 		
@@ -219,6 +226,10 @@ class GraphPanel(wx.Panel):
 			self.axes.set_ylabel(dialog.GetValue())
 			self.canvas.draw()
 		dialog.Destroy()
+		
+	def OnZoom(self,event):
+		self.canvas.zoomit()
+		
 		
 class GraphWindow(wx.Frame):
 	def __init__(self,parent,title,*args,**kwargs):

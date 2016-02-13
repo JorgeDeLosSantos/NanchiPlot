@@ -55,6 +55,21 @@ def OnPutText(event):
 	app.MainLoop()
 	plt.draw()
 
-cid = fig.canvas.mpl_connect("pick_event", OnPutText)
+
+def OnZoom(event):
+	global mot
+	mot = fig.canvas.mpl_connect("motion_notify_event", OnMotion)
+	
+
+def OnMotion(event):
+	
+	
+def OnRelease(event):
+	global mot
+	fig.canvas.mpl_disconnect(mot)
+
+mot = []
+bp = fig.canvas.mpl_connect("button_press_event", OnZoom)
+br = fig.canvas.mpl_connect("button_release_event", OnRelease)
 
 plt.show()
