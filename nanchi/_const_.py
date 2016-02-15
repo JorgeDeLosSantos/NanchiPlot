@@ -3,10 +3,9 @@ import os.path as path
 
 #
 VERSION = "0.1.0-dev"
-NANCHI_MAIN_CAPTION = "NanchiPlot "+VERSION
+NANCHI_MAIN_CAPTION = "NanchiPlot %s"%(VERSION)
 
 # Colors
-
 PANEL_BG_COLOR = "#f0f0f0"
 FRAME_BG_COLOR = "#aaf0f0"
 AXES_BG_COLOR = "#ffffff"
@@ -18,7 +17,7 @@ XTICK_COLOR = "#280033"
 YTICK_COLOR = "#280033"
 
 # Captions
-DEFAULT_DIALOG_CAPTION = "wxGraph 0.1.0"
+DEFAULT_DIALOG_CAPTION = NANCHI_MAIN_CAPTION
 
 # Graphics properties
 LINE_STYLES = "'-' | '--' | '-.' | ':' | 'None' ".split("|")
@@ -29,17 +28,20 @@ PATH_NANCHI_LOGO = path.join(IMGS_PATH,"nanchi_logo.png")
 PATH_IMPORT_ICON = path.join(IMGS_PATH, "import_icon_32x32.png")
 PATH_LOAD_IMAGE_ICON = path.join(IMGS_PATH, "load_image_icon_32x32.png")
 PATH_FUNCTION_ICON = path.join(IMGS_PATH, "function_icon_32x32.png")
+PATH_BIVARIABLE_FUNCTION_ICON = path.join(IMGS_PATH, "bivariable_function_icon_32x32.png")
 PATH_PLOT_ICON = path.join(IMGS_PATH, "plot_icon_32x32.png")
+PATH_POLAR_ICON = path.join(IMGS_PATH, "polar_icon_32x32.png")
 PATH_BAR_ICON = path.join(IMGS_PATH, "bar_icon_32x32.png")
 PATH_SCATTER_ICON = path.join(IMGS_PATH, "scatter_icon_32x32.png")
 PATH_PIE_ICON = path.join(IMGS_PATH, "pie_icon_32x32.png")
 PATH_IMAGE_ICON = path.join(IMGS_PATH, "image_icon_32x32.png")
 PATH_CONTOUR_ICON = path.join(IMGS_PATH, "contour_icon_32x32.png")
 PATH_CONTOURF_ICON = path.join(IMGS_PATH, "contourf_icon_32x32.png")
+PATH_ZOOM_BOX_ICON = path.join(IMGS_PATH, "zoom_box_icon_32x32.png")
+PATH_RESET_VIEW_ICON = path.join(IMGS_PATH, "reset_view_icon_32x32.png")
 
 # Documentation path
-PATH_HTML_DOCUMENTATION = r"doc\build\html\index.html"
-
+PATH_HTML_DOCUMENTATION = r"docs\build\html\index.html"
 
 # Status for "Status bar"
 SB_ON_INIT = "Importe o inserte datos para comenzar..."

@@ -27,7 +27,7 @@ class NanchiPlot(wx.Frame):
 		# Icon
 		self.icon = wx.Icon(PATH_NANCHI_LOGO)
 		self.SetIcon(self.icon)
-		
+		 
 		# Status bar
 		self.sb = aux.StatusBar(self,-1)
 		self.SetStatusBar(self.sb)
@@ -36,7 +36,6 @@ class NanchiPlot(wx.Frame):
 		self.axes = self.notebook.graphs.axes
 		self.figure = self.notebook.graphs.figure
 		self.canvas = self.notebook.graphs.canvas
-		
 		self.data = self.notebook.data
 		
 		self.Centre(True)
@@ -106,6 +105,8 @@ class NanchiPlot(wx.Frame):
 		self.Bind(wx.EVT_TOOL, self.OnImage, self.toolbar.image_tool)
 		self.Bind(wx.EVT_TOOL, self.OnContour, self.toolbar.contour_tool)
 		self.Bind(wx.EVT_TOOL, self.OnContourf, self.toolbar.contourf_tool)
+		self.Bind(wx.EVT_TOOL, self.OnZoomBox, self.toolbar.zoom_box_tool)
+		self.Bind(wx.EVT_TOOL, self.OnResetView, self.toolbar.reset_view_tool)
 		
 	def OnExit(self,event):
 		"""
@@ -252,9 +253,17 @@ class NanchiPlot(wx.Frame):
 		self.axes.contourf(X)
 		self.canvas.draw()
 		
+	def OnZoomBox(self,event):
+		self.canvas.zoomit()
+		
+	def OnResetView(self,event):
+		self.axes.relim()
+		self.axes.autoscale()
+		self.canvas.disconnect_all()
+		self.canvas.draw()
+		
 	def OnAbout(self,event):
-		os.system('java -jar java/plotting.jar')
-		#aux.AboutDialog(None)
+		aux.AboutDialog(None)
 
 
 if __name__=='__main__':

@@ -40,10 +40,11 @@ class NanchiNoteBook(aui.AuiNotebook):
 		self.Bind(aui.EVT_AUINOTEBOOK_PAGE_CHANGED, self.OnPageChanged)
 
     def OnPageChanged(self, event):
-		gp = pickle.load(open("graph_properties.dat","rb"))
-		self.axes.set_xlabel(gp["xlabel"])
-		self.axes.set_ylabel(gp["ylabel"])
-		self.canvas.draw() # Draw canvas 
+		pass
+		#gp = pickle.load(open("graph_properties.dat","rb"))
+		#self.axes.set_xlabel(gp["xlabel"])
+		#self.axes.set_ylabel(gp["ylabel"])
+		#self.canvas.draw() # Draw canvas 
         
 
 
@@ -230,7 +231,8 @@ class GraphPanel(wx.Panel):
 	def OnZoom(self,event):
 		self.canvas.zoomit()
 		
-		
+
+
 class GraphWindow(wx.Frame):
 	def __init__(self,parent,title,*args,**kwargs):
 		wx.Frame.__init__(self,parent=parent,title=title,*args,**kwargs)

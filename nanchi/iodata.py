@@ -4,16 +4,15 @@ import numpy.linalg as la
 import matplotlib.pyplot as plt
 
 def read_txt(filename,delimiter=None,dtype="float"):
+	dlms = [","," ","\t"]
+	X = None
 	if delimiter is None:
-		delimiter = ","
-		try:
-			X = np.loadtxt(filename,delimiter=delimiter,dtype=dtype)
-		except:
-			delimiter = " "
+		for dlm in dlms:
 			try:
-				X = np.loadtxt(filename,delimiter=delimiter,dtype=dtype)
+				X = np.loadtxt(filename,delimiter=dlm,dtype=dtype)
+				return X
 			except:
-				X = None
+				pass
 	return X
 	
 def read_csv():

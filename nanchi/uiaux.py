@@ -14,15 +14,20 @@ class CustomTB(wx.ToolBar):
 		# Bitmaps
 		import_bmp = wx.Bitmap(PATH_IMPORT_ICON)
 		function_bmp = wx.Bitmap(PATH_FUNCTION_ICON)
+		bivariable_function_bmp = wx.Bitmap(PATH_BIVARIABLE_FUNCTION_ICON)
 		load_image_bmp = wx.Bitmap(PATH_LOAD_IMAGE_ICON)
 		
 		plot_bmp = wx.Bitmap(PATH_PLOT_ICON)
+		polar_bmp = wx.Bitmap(PATH_POLAR_ICON)
 		bar_bmp = wx.Bitmap(PATH_BAR_ICON)
 		scatter_bmp = wx.Bitmap(PATH_SCATTER_ICON)
 		pie_bmp = wx.Bitmap(PATH_PIE_ICON)
 		image_bmp = wx.Bitmap(PATH_IMAGE_ICON)
 		contour_bmp = wx.Bitmap(PATH_CONTOUR_ICON)
 		contourf_bmp = wx.Bitmap(PATH_CONTOURF_ICON)
+		
+		zoom_box_bmp = wx.Bitmap(PATH_ZOOM_BOX_ICON)
+		reset_view_bmp = wx.Bitmap(PATH_RESET_VIEW_ICON)
 		
 		# Toolbar components
 		self.import_tool = self.AddLabelTool(-1, "Importar datos...", 
@@ -34,10 +39,16 @@ class CustomTB(wx.ToolBar):
 		self.function_tool = self.AddLabelTool(-1, "Generar datos...", 
 		function_bmp, shortHelp=u"Generar datos de función...")
 		
+		self.bivariable_function_tool = self.AddLabelTool(-1, "Generar datos...", 
+		bivariable_function_bmp, shortHelp=u"Generar datos de función bivariable...")
+		
 		self.AddSeparator()
 		
 		self.plot_tool = self.AddLabelTool(-1, u"Líneas", 
 		plot_bmp, shortHelp=u"Líneas")
+		
+		self.polar_tool = self.AddLabelTool(-1, u"Polar", 
+		polar_bmp, shortHelp=u"Polar")
 		
 		self.bar_tool = self.AddLabelTool(-1, "Barras", 
 		bar_bmp, shortHelp=u"Barras")
@@ -57,8 +68,76 @@ class CustomTB(wx.ToolBar):
 		self.contourf_tool = self.AddLabelTool(-1, "Contorno relleno", 
 		contourf_bmp, shortHelp=u"Contorno relleno")
 		
+		self.AddSeparator()
+		self.AddSeparator()
+		self.AddSeparator()
+		self.AddSeparator()
+		
+		self.zoom_box_tool = self.AddLabelTool(-1, "Zoom Box", 
+		zoom_box_bmp, shortHelp=u"Zoom Box")
+		
+		self.reset_view_tool = self.AddLabelTool(-1, "Reset view", 
+		reset_view_bmp, shortHelp=u"Vista inicial")
+		
 
-# HELP WINDOW ====================================================================
+class FunctionFrame(wx.Frame):
+	def __init__(self,parent,**kwargs):
+		_styles = (wx.CLOSE_BOX|wx.CAPTION)
+		wx.Frame.__init__(self,parent=parent,title=DEFAULT_DIALOG_CAPTION,
+						  size=(200,150), style=_styles)
+		self.LABEL_FONT = wx.Font(10, wx.SWISS, wx.NORMAL, wx.BOLD)
+		self.initCtrls()
+		self.initSizers()
+		
+		self.Centre(True)
+		self.Show()
+		
+	def initSizers(self):
+		self.mainsz = wx.BoxSizer(wx.VERTICAL)
+		self.pfunsz = wx.BoxSizer(wx.HORIZONTAL)
+		self.prangesz = wx.BoxSizer(wx.HORIZONTAL)
+		self.pbuttonsz = wx.BoxSizer(wx.HORIZONTAL)
+		
+		self.pfunsz.Add(self._fun, 1, wx.ALIGN_LEFT|wx.ALL, 5)
+		self.pfunsz.Add(self.fun, 4, wx.ALIGN_LEFT|wx.ALL, 5)
+		self.prangesz.Add(self._a, 1, wx.ALIGN_LEFT|wx.ALL, 5)
+		self.prangesz.Add(self.a, 4, wx.ALIGN_LEFT|wx.ALL, 5)
+		self.prangesz.Add(self._b, 1, wx.ALIGN_LEFT|wx.ALL, 5)
+		self.prangesz.Add(self.b, 4, wx.ALIGN_LEFT|wx.ALL, 5)
+		
+		self.pbuttonsz.Add(self.okbutton, 1, wx.ALIGN_CENTRE|wx.ALL, 5)
+		self.pbuttonsz.Add(self.cancelbutton, 1, wx.ALIGN_CENTRE|wx.ALL, 5)
+		
+		for panel in [self.pfun, self.prange, self.pbutton]:
+			self.mainsz.Add(panel, 1, wx.EXPAND)
+		
+		self.pfun.SetSizer(self.pfunsz)
+		self.prange.SetSizer(self.prangesz)
+		self.pbutton.SetSizer(self.pbuttonsz)
+		self.SetSizer(self.mainsz)
+		
+	def initCtrls(self):
+		self.pfun = wx.Panel(self, -1)
+		self.prange = wx.Panel(self, -1)
+		self.pbutton = wx.Panel(self, -1)
+		self._fun = wx.StaticText(self.pfun, -1, u"f(x)", size=(-1,25))
+		self.fun = wx.TextCtrl(self.pfun, -1, u"", size=(-1,25))
+		self._a = wx.StaticText(self.prange, -1, u"a", size=(-1,25))
+		self.a = wx.TextCtrl(self.prange, -1, u"", size=(50,25))
+		self._b = wx.StaticText(self.prange, -1, u"b", size=(-1,25))
+		self.b = wx.TextCtrl(self.prange, -1, u"", size=(50,25))
+		
+		self.okbutton = wx.Button(self.pbutton, -1, u"Aceptar", size=(-1,25))
+		self.cancelbutton = wx.Button(self.pbutton, -1, u"Cancelar", size=(-1,25))
+		
+		for ctrl in [self._fun,self._a,self._b]:
+			ctrl.SetFont(self.LABEL_FONT)
+		
+		
+		
+	
+class BivariableFunctionFrame(wx.Frame): pass
+	
 
 class AboutDialog(wx.Frame):
 	def __init__(self,parent,*args,**kwargs):
@@ -70,14 +149,13 @@ class AboutDialog(wx.Frame):
 		self.Centre(True)
 		self.Show()
 
+
 class HTMLWindow(html.HtmlWindow):
 	def __init__(self,parent,**kwargs):
 		html.HtmlWindow.__init__(self,parent=parent,**kwargs)
 	
 	def OnLinkClicked(self, link):
 		webbrowser.open(link.GetHref())
-
-
 
 
 class StatusBar(wx.StatusBar):
@@ -110,9 +188,7 @@ class BusyInfo(object):
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.Close()
         return False
-    
 
-#---------------------------------------------------------------------------
 
 class _InfoFrame(wx.Frame):
     def __init__(self, parent, msg, bgColour=None, fgColour=None):
@@ -155,5 +231,10 @@ def test_about():
 	app.MainLoop()
 
 
+def test_function():
+	app = wx.App()
+	fr = FunctionFrame(None)
+	app.MainLoop()
+
 if __name__=='__main__':
-	test_about()
+	test_function()

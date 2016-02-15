@@ -62,6 +62,14 @@ class FigureCanvas(FigureCanvasWxAgg):
 		self.figure = figure
 		self.axes = self.figure.get_axes()[0]
 		
+	def disconnect_all(self):
+		try:
+			self.mpl_disconnect(self.motion)
+			self.mpl_disconnect(self.btpress)
+			self.mpl_disconnect(self.btrelease)
+		except:
+			pass
+		
 	def zoomit(self):
 		self.cline = lines.Line2D([],[], color="#ff00ff", ls="--", lw=2.0)
 		self.btpress = self.mpl_connect("button_press_event", self.on_press)
@@ -84,16 +92,16 @@ class FigureCanvas(FigureCanvasWxAgg):
 		self.draw()
 		
 	def on_press(self,event):
-		print "Press"
 		self.x0 = event.xdata
 		self.y0 = event.ydata
 		self.motion = self.mpl_connect("motion_notify_event", self.on_motion)
 		
 	def on_release(self,event):
-		"Release"
-		self.mpl_disconnect(self.motion)
-		self.mpl_disconnect(self.btpress)
-		self.mpl_disconnect(self.btrelease)
+		self.disconnect_all()
+		try:
+			self.cline.remove() # Delete box
+		except:
+			self.stop_event_loop()
 		min_x = min([self.x0, self.x])
 		max_x = max([self.x0, self.x])
 		min_y = min([self.y0, self.y])

@@ -61,7 +61,7 @@ def OnZoom(event):
 	mot = fig.canvas.mpl_connect("motion_notify_event", OnMotion)
 	
 
-def OnMotion(event):
+def OnMotion(event):pass
 	
 	
 def OnRelease(event):
