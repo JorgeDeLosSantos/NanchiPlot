@@ -80,17 +80,23 @@ class CustomTB(wx.ToolBar):
 		reset_view_bmp, shortHelp=u"Vista inicial")
 		
 
-class FunctionFrame(wx.Frame):
+class FunctionDialog(wx.Dialog):
 	def __init__(self,parent,**kwargs):
-		_styles = (wx.CLOSE_BOX|wx.CAPTION)
-		wx.Frame.__init__(self,parent=parent,title=DEFAULT_DIALOG_CAPTION,
-						  size=(200,150), style=_styles)
+		#_styles = (wx.CLOSE_BOX|wx.CAPTION)
+		wx.Dialog.__init__(self,parent=parent,title=DEFAULT_DIALOG_CAPTION,
+						  size=(200,150))
 		self.LABEL_FONT = wx.Font(10, wx.SWISS, wx.NORMAL, wx.BOLD)
 		self.initCtrls()
 		self.initSizers()
 		
+		# Output properties
+		self.data = ""
+		self.out_fun = ""
+		self.out_a = ""
+		self.out_b = ""
+		
 		self.Centre(True)
-		self.Show()
+		#self.Show()
 		
 	def initSizers(self):
 		self.mainsz = wx.BoxSizer(wx.VERTICAL)
@@ -127,17 +133,99 @@ class FunctionFrame(wx.Frame):
 		self._b = wx.StaticText(self.prange, -1, u"b", size=(-1,25))
 		self.b = wx.TextCtrl(self.prange, -1, u"", size=(50,25))
 		
-		self.okbutton = wx.Button(self.pbutton, -1, u"Aceptar", size=(-1,25))
-		self.cancelbutton = wx.Button(self.pbutton, -1, u"Cancelar", size=(-1,25))
+		self.okbutton = wx.Button(self.pbutton, wx.ID_OK, u"Aceptar", size=(-1,25))
+		self.cancelbutton = wx.Button(self.pbutton, wx.ID_CANCEL, u"Cancelar", size=(-1,25), 
+								style=wx.ID_CANCEL)
 		
 		for ctrl in [self._fun,self._a,self._b]:
 			ctrl.SetFont(self.LABEL_FONT)
+			
+	def GetData(self):
+		self.out_fun = self.fun.GetValue()
+		self.out_a = self.a.GetValue()
+		self.out_b = self.b.GetValue()
+		self.data = (self.out_fun, self.out_a, self.out_b)
+		return self.data
 		
+
+class BivariableFunctionDialog(wx.Dialog):
+	def __init__(self,parent,**kwargs):
+		#_styles = (wx.CLOSE_BOX|wx.CAPTION)
+		wx.Dialog.__init__(self,parent=parent,title=DEFAULT_DIALOG_CAPTION,
+						  size=(220,180))
+		self.LABEL_FONT = wx.Font(10, wx.SWISS, wx.NORMAL, wx.BOLD)
+		self.initCtrls()
+		self.initSizers()
 		
+		# Output properties
+		self.data = ""
+		self.out_fun = ""
+		self.out_x = ""
+		self.out_y = ""
 		
-	
-class BivariableFunctionFrame(wx.Frame): pass
-	
+		self.Centre(True)
+		#self.Show()
+		
+	def initSizers(self):
+		self.mainsz = wx.BoxSizer(wx.VERTICAL)
+		self.pfunsz = wx.BoxSizer(wx.HORIZONTAL)
+		self.prangexsz = wx.BoxSizer(wx.HORIZONTAL)
+		self.prangeysz = wx.BoxSizer(wx.HORIZONTAL)
+		self.pbuttonsz = wx.BoxSizer(wx.HORIZONTAL)
+		
+		self.pfunsz.Add(self._fun, 1, wx.ALIGN_LEFT|wx.ALL, 5)
+		self.pfunsz.Add(self.fun, 4, wx.ALIGN_LEFT|wx.ALL, 5)
+		self.prangexsz.Add(self._x1, 1, wx.ALIGN_LEFT|wx.ALL, 5)
+		self.prangexsz.Add(self.x1, 4, wx.ALIGN_LEFT|wx.ALL, 5)
+		self.prangexsz.Add(self._x2, 1, wx.ALIGN_LEFT|wx.ALL, 5)
+		self.prangexsz.Add(self.x2, 4, wx.ALIGN_LEFT|wx.ALL, 5)
+		self.prangeysz.Add(self._y1, 1, wx.ALIGN_LEFT|wx.ALL, 5)
+		self.prangeysz.Add(self.y1, 4, wx.ALIGN_LEFT|wx.ALL, 5)
+		self.prangeysz.Add(self._y2, 1, wx.ALIGN_LEFT|wx.ALL, 5)
+		self.prangeysz.Add(self.y2, 4, wx.ALIGN_LEFT|wx.ALL, 5)
+		
+		self.pbuttonsz.Add(self.okbutton, 1, wx.ALIGN_CENTRE|wx.ALL, 5)
+		self.pbuttonsz.Add(self.cancelbutton, 1, wx.ALIGN_CENTRE|wx.ALL, 5)
+		
+		for panel in [self.pfun, self.prangex, self.prangey, self.pbutton]:
+			self.mainsz.Add(panel, 1, wx.EXPAND)
+		
+		self.pfun.SetSizer(self.pfunsz)
+		self.prangex.SetSizer(self.prangexsz)
+		self.prangey.SetSizer(self.prangeysz)
+		self.pbutton.SetSizer(self.pbuttonsz)
+		self.SetSizer(self.mainsz)
+		
+	def initCtrls(self):
+		self.pfun = wx.Panel(self, -1)
+		self.prangex = wx.Panel(self, -1)
+		self.prangey = wx.Panel(self, -1)
+		self.pbutton = wx.Panel(self, -1)
+		self._fun = wx.StaticText(self.pfun, -1, u"f(x,y)", size=(-1,25))
+		self.fun = wx.TextCtrl(self.pfun, -1, u"", size=(-1,25))
+		self._x1 = wx.StaticText(self.prangex, -1, u"x1", size=(-1,25))
+		self.x1 = wx.TextCtrl(self.prangex, -1, u"", size=(50,25))
+		self._x2 = wx.StaticText(self.prangex, -1, u"x2", size=(-1,25))
+		self.x2 = wx.TextCtrl(self.prangex, -1, u"", size=(50,25))
+		self._y1 = wx.StaticText(self.prangey, -1, u"y1", size=(-1,25))
+		self.y1 = wx.TextCtrl(self.prangey, -1, u"", size=(50,25))
+		self._y2 = wx.StaticText(self.prangey, -1, u"y2", size=(-1,25))
+		self.y2 = wx.TextCtrl(self.prangey, -1, u"", size=(50,25))
+		
+		self.okbutton = wx.Button(self.pbutton, wx.ID_OK, u"Aceptar", size=(-1,25))
+		self.cancelbutton = wx.Button(self.pbutton, wx.ID_CANCEL, u"Cancelar", size=(-1,25), 
+								style=wx.ID_CANCEL)
+		
+		for ctrl in [self._fun,self._x1, self._x2, self._y1, self._y2]:
+			ctrl.SetFont(self.LABEL_FONT)
+			
+	def GetData(self):
+		self.out_fun = self.fun.GetValue()
+		self.out_x = [self.x1.GetValue(), self.x2.GetValue()]
+		self.out_y = [self.y1.GetValue(), self.y2.GetValue()]
+		self.data = (self.out_fun, self.out_x, self.out_y)
+		return self.data
+
 
 class AboutDialog(wx.Frame):
 	def __init__(self,parent,*args,**kwargs):
@@ -233,7 +321,10 @@ def test_about():
 
 def test_function():
 	app = wx.App()
-	fr = FunctionFrame(None)
+	fr = BivariableFunctionDialog(None)
+	if fr.ShowModal() == wx.ID_OK:
+		print fr.GetData()
+	fr.Destroy()
 	app.MainLoop()
 
 if __name__=='__main__':

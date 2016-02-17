@@ -6,6 +6,7 @@ import wx
 import os
 import numpy as np
 import matplotlib
+from matplotlib.projections.polar import PolarAxes
 matplotlib.use('WXAgg')
 import matplotlib.cm as cm
 import nanchi.setplot as setplot
@@ -98,7 +99,9 @@ class NanchiPlot(wx.Frame):
 		self.Bind(wx.EVT_TOOL, self.OnImport, self.toolbar.import_tool)
 		self.Bind(wx.EVT_TOOL, self.OnLoadImage, self.toolbar.load_image_tool)
 		self.Bind(wx.EVT_TOOL, self.OnFunction, self.toolbar.function_tool)
+		self.Bind(wx.EVT_TOOL, self.OnBivariableFunction, self.toolbar.bivariable_function_tool)
 		self.Bind(wx.EVT_TOOL, self.OnPlot, self.toolbar.plot_tool)
+		self.Bind(wx.EVT_TOOL, self.OnPolar, self.toolbar.polar_tool)
 		self.Bind(wx.EVT_TOOL, self.OnBar, self.toolbar.bar_tool)
 		self.Bind(wx.EVT_TOOL, self.OnScatter, self.toolbar.scatter_tool)
 		self.Bind(wx.EVT_TOOL, self.OnPie, self.toolbar.pie_tool)
@@ -173,11 +176,10 @@ class NanchiPlot(wx.Frame):
 		dlg.Destroy()
 			
 	def OnFunction(self,event):
-		x = np.linspace(0,10)
-		dialog = wx.TextEntryDialog(None,"f(x)",
-		DEFAULT_DIALOG_CAPTION, "x", style=wx.OK|wx.CANCEL)
+		dialog = aux.FunctionDialog(None)
 		if dialog.ShowModal() == wx.ID_OK:
-			fx = dialog.GetValue()
+			fx,a,b = dialog.GetData()
+			x = np.linspace(float(a), float(b), 100)
 			fx = eval(fx)
 			self.data.grid_data.SetArrayData(np.array([x,fx]).transpose())
 			self.data.grid_data.SetColLabelValue(0,"x")
@@ -185,6 +187,20 @@ class NanchiPlot(wx.Frame):
 			self.sb.SetStatusText(SB_ON_CREATE_DATA_FUNCTION)
 		dialog.Destroy()
 		
+	def OnBivariableFunction(self,event):
+		dialog = aux.BivariableFunctionDialog(None)
+		if dialog.ShowModal() == wx.ID_OK:
+			fxy,x,y = dialog.GetData()
+			print fxy,x,y
+			x1,x2 = [float(n) for n in x]
+			y1,y2 = [float(n) for n in y]
+			xx = np.linspace(x1, x2, 100)
+			yy = np.linspace(y1, y2, 100)
+			x,y = np.meshgrid(xx,yy)
+			Z = eval(fxy)
+			self.data.grid_data.SetArrayData(Z)
+			self.sb.SetStatusText(SB_ON_CREATE_DATA_BIVARIABLE_FUNCTION)
+		dialog.Destroy()
 		
 	def OnPlot(self,event):
 		setplot.set_default_params(self.axes,self.figure)
@@ -200,6 +216,19 @@ class NanchiPlot(wx.Frame):
 				clabel = self.data.grid_data.GetColLabelValue(col)
 				self.axes.plot(X[:,col],label=clabel)
 			self.axes.legend()
+		self.canvas.draw()
+		del busy_dlg
+		
+	def OnPolar(self,event):
+		self.axes.set_axes(PolarAxes(self.figure, self.axes.get_position()))
+		setplot.set_default_params(self.axes,self.figure)
+		busy_dlg = aux.BusyInfo("Espere un momento...", self)
+		X = self.data.grid_data.GetArrayData()
+		rows,cols = X.shape
+		if cols == 2: # Common case
+			self.axes.plot(X[:,0],X[:,1])
+		elif cols == 1:
+			self.axes.plot(X[:,0])
 		self.canvas.draw()
 		del busy_dlg
 		

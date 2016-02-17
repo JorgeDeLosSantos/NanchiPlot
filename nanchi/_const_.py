@@ -50,5 +50,6 @@ SB_ON_IMPORT_IMAGE_CANCEL = "Imagen no importada..."
 SB_ON_IMPORT_DATA = "Datos importados de %s"
 SB_ON_IMPORT_DATA_FAIL = "Error al cargar el archivo %s"
 SB_ON_CREATE_DATA_FUNCTION = "Datos definidos a partir de f(x)"
+SB_ON_CREATE_DATA_BIVARIABLE_FUNCTION = "Datos definidos a partir de f(x,y)"
 
 
