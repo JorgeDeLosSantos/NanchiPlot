@@ -129,7 +129,7 @@ class NanchiPlot(wx.Frame):
 		"""
 		Archivo -> Exportar imagen -> (Atajo) Ctrl + S
 		"""
-		wldc = "PNG (*.png)|*.png"
+		wldc = "PNG (*.png)|*.png|PDF (*.pdf)|*.pdf|EPS (*.eps)|*.eps|JPG (*.jpg)|*jpg"
 		dlg=wx.FileDialog(self, "Guardar", os.getcwd(), style=wx.SAVE, wildcard=wldc)
 		if dlg.ShowModal() == wx.ID_OK:
 			self.figure.savefig(dlg.GetPath())
