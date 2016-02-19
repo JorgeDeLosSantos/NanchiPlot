@@ -41,7 +41,8 @@ def nearest_point(point,array):
 	for x,y in array:
 		d.append(np.sqrt((xp-x)**2 + (yp-y)**2))
 	return np.argmin(d)
-		
+
+
 def OnPutText(event):
 	cx = event.mouseevent.xdata
 	cy = event.mouseevent.ydata
@@ -68,7 +69,7 @@ def OnRelease(event):
 	global mot
 	fig.canvas.mpl_disconnect(mot)
 
-mot = []
+mot = 
 bp = fig.canvas.mpl_connect("button_press_event", OnZoom)
 br = fig.canvas.mpl_connect("button_release_event", OnRelease)
 
