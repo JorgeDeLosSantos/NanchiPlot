@@ -6,13 +6,13 @@ import wx
 import os
 import numpy as np
 import matplotlib
-from matplotlib.projections.polar import PolarAxes
 matplotlib.use('WXAgg')
 import matplotlib.cm as cm
 import nanchi.setplot as setplot
 import nanchi.iodata as io
 import nanchi.uibase as ui
 import nanchi.uiaux as aux
+import nanchi.image as image
 from nanchi._const_ import *
 
 
@@ -51,17 +51,34 @@ class NanchiPlot(wx.Frame):
 		importar = m_archivo.Append(-1, "Importar datos... \tCtrl+I")
 		salir = m_archivo.Append(-1, "Salir \tCtrl+Q")
 		
+		m_imagen = wx.Menu()
+		filtros = wx.Menu()
+		sobel = wx.MenuItem(filtros, -1, "Sobel")
+		filtros.AppendItem(sobel)
+		roberts = wx.MenuItem(filtros, -1, "Roberts")
+		filtros.AppendItem(roberts)
+		prewitt = wx.MenuItem(filtros, -1, "Prewitt")
+		filtros.AppendItem(prewitt)
+		m_imagen.AppendMenu(-1, "Filtros", filtros)
+		
 		m_ayuda = wx.Menu()
 		ayuda = m_ayuda.Append(-1, "Ayuda")
 		acerca_de = m_ayuda.Append(-1, "Acerca de...")
 		
+		
 		menu_bar = wx.MenuBar()
 		menu_bar.Append(m_archivo, "Archivo")
+		menu_bar.Append(m_imagen, "Imagen")
 		menu_bar.Append(m_ayuda, "Ayuda")
 		self.SetMenuBar(menu_bar)
 		
 		self.Bind(wx.EVT_MENU, self.OnSave, guardar)
 		self.Bind(wx.EVT_MENU, self.OnImport, importar)
+		
+		self.Bind(wx.EVT_MENU, self.OnSobel, sobel)
+		self.Bind(wx.EVT_MENU, self.OnRoberts, roberts)
+		self.Bind(wx.EVT_MENU, self.OnPrewitt, prewitt)
+		
 		self.Bind(wx.EVT_MENU, self.OnAbout, acerca_de)
 		self.Bind(wx.EVT_MENU, self.OnHelp, ayuda)
 		self.Bind(wx.EVT_MENU, self.OnExit, salir)
@@ -101,7 +118,7 @@ class NanchiPlot(wx.Frame):
 		self.Bind(wx.EVT_TOOL, self.OnFunction, self.toolbar.function_tool)
 		self.Bind(wx.EVT_TOOL, self.OnBivariableFunction, self.toolbar.bivariable_function_tool)
 		self.Bind(wx.EVT_TOOL, self.OnPlot, self.toolbar.plot_tool)
-		self.Bind(wx.EVT_TOOL, self.OnPolar, self.toolbar.polar_tool)
+		#self.Bind(wx.EVT_TOOL, self.OnPolar, self.toolbar.polar_tool)
 		self.Bind(wx.EVT_TOOL, self.OnBar, self.toolbar.bar_tool)
 		self.Bind(wx.EVT_TOOL, self.OnScatter, self.toolbar.scatter_tool)
 		self.Bind(wx.EVT_TOOL, self.OnPie, self.toolbar.pie_tool)
@@ -215,22 +232,14 @@ class NanchiPlot(wx.Frame):
 			for col in range(cols):
 				clabel = self.data.grid_data.GetColLabelValue(col)
 				self.axes.plot(X[:,col],label=clabel)
-			self.axes.legend()
 		self.canvas.draw()
 		del busy_dlg
 		
 	def OnPolar(self,event):
-		self.axes.set_axes(PolarAxes(self.figure, self.axes.get_position()))
-		setplot.set_default_params(self.axes,self.figure)
-		busy_dlg = aux.BusyInfo("Espere un momento...", self)
-		X = self.data.grid_data.GetArrayData()
-		rows,cols = X.shape
-		if cols == 2: # Common case
-			self.axes.plot(X[:,0],X[:,1])
-		elif cols == 1:
-			self.axes.plot(X[:,0])
-		self.canvas.draw()
-		del busy_dlg
+		"""
+		Implementación pendiente...
+		"""
+		pass
 		
 	def OnBar(self,event):
 		self.axes.cla()
@@ -281,6 +290,18 @@ class NanchiPlot(wx.Frame):
 		rows,cols = X.shape
 		self.axes.contourf(X)
 		self.canvas.draw()
+		
+	# Operaciones con imágenes ============================
+	def OnSobel(self,event):
+		cx = self.data.grid_data.GetArrayData()
+		xmod = image.sobel(cx)
+		self.data.grid_data.SetArrayData(xmod)
+		
+	def OnPrewitt(self,event):
+		pass
+		
+	def OnRoberts(self,event):
+		pass
 		
 	def OnZoomBox(self,event):
 		self.canvas.zoomit()
