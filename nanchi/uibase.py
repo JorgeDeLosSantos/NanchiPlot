@@ -27,11 +27,11 @@ class NanchiNoteBook(aui.AuiNotebook):
 		
 		self.graphs = GraphPanel(self)
 		self.data = DataPanel(self)
-		self.setup = SetupPanel(self)
+		#self.setup = SetupPanel(self)
 
 		self.AddPage(self.graphs, u"Gráficas")
 		self.AddPage(self.data, u"Datos")
-		self.AddPage(self.setup, u"Configurar")
+		#self.AddPage(self.setup, u"Configurar")
 
 		self.axes = self.graphs.axes
 		self.figure = self.graphs.figure
@@ -160,31 +160,67 @@ class GraphPanel(wx.Panel):
 	
 	def OnRightClick(self,event):
 		if event.button == 3:
-			pum = wx.Menu()
-			intext = wx.MenuItem(pum, -1, u"Insertar texto/anotación")
-			pum.AppendItem(intext)
-			axbackg = wx.MenuItem(pum, -1, u"Color de fondo")
-			pum.AppendItem(axbackg)
-			pum.AppendSeparator()
-			xlabel = wx.MenuItem(pum, -1, u"Etiqueta X")
-			pum.AppendItem(xlabel)
-			ylabel = wx.MenuItem(pum, -1, u"Etiqueta Y")
-			pum.AppendItem(ylabel)
-			pum.AppendSeparator()
-			zoom_box = wx.MenuItem(pum, -1, u"Zoom Box")
-			pum.AppendItem(zoom_box)
-			
-			# Binds
-			self.Bind(wx.EVT_MENU, self.OnText, intext)
-			self.Bind(wx.EVT_MENU, self.OnBackground, axbackg)
-			self.Bind(wx.EVT_MENU, self.OnXLabel, xlabel)
-			self.Bind(wx.EVT_MENU, self.OnYLabel, ylabel)
-			self.Bind(wx.EVT_MENU, self.OnZoom, zoom_box)
-			# Show
-			self.PopupMenu(pum)
-			pum.Destroy()
+			self.InitPopUpMenu()
 		else:
 			pass
+			
+
+	def InitPopUpMenu(self):
+		pum = wx.Menu()
+		
+		gs = wx.Menu()
+		_gs_cont = wx.MenuItem(gs, -1, u"-")
+		gs.AppendItem(_gs_cont)
+		_gs_dashed = wx.MenuItem(gs, -1, u"--")
+		gs.AppendItem(_gs_dashed)
+		_gs_dotted = wx.MenuItem(gs, -1, u"dotted")
+		gs.AppendItem(_gs_dotted)
+		pum.AppendMenu(-1, "Estilo de rejilla", gs)
+		gridcolor = wx.MenuItem(pum, -1, u"Color de rejilla")
+		pum.AppendItem(gridcolor)
+		
+		pum.AppendSeparator()
+		axbackg = wx.MenuItem(pum, -1, u"Color de fondo")
+		pum.AppendItem(axbackg)
+		aspax = wx.Menu()
+		_aspax_auto = wx.MenuItem(aspax, -1, u"auto")
+		aspax.AppendItem(_aspax_auto)		
+		_aspax_equal = wx.MenuItem(aspax, -1, u"equal")
+		aspax.AppendItem(_aspax_equal)
+		pum.AppendMenu(-1, "Aspecto del axes", aspax)
+		
+		pum.AppendSeparator()
+		xlabel = wx.MenuItem(pum, -1, u"Etiqueta X")
+		pum.AppendItem(xlabel)
+		ylabel = wx.MenuItem(pum, -1, u"Etiqueta Y")
+		pum.AppendItem(ylabel)
+		title = wx.MenuItem(pum, -1, u"Insertar título")
+		pum.AppendItem(title)
+		intext = wx.MenuItem(pum, -1, u"Insertar texto/anotación")
+		pum.AppendItem(intext)
+		
+		pum.AppendSeparator()
+		zoom_box = wx.MenuItem(pum, -1, u"Zoom Box")
+		pum.AppendItem(zoom_box)
+		
+		# Binds
+		self.Bind(wx.EVT_MENU, self.OnText, intext)
+		self.Bind(wx.EVT_MENU, self.OnBackground, axbackg)
+		self.Bind(wx.EVT_MENU, self.OnGridColor, gridcolor)
+		self.Bind(wx.EVT_MENU, self.OnXLabel, xlabel)
+		self.Bind(wx.EVT_MENU, self.OnYLabel, ylabel)
+		self.Bind(wx.EVT_MENU, self.OnTitle, title)
+		self.Bind(wx.EVT_MENU, self.OnZoom, zoom_box)
+		self.Bind(wx.EVT_MENU, self.OnGridStyle, _gs_cont)
+		self.Bind(wx.EVT_MENU, self.OnGridStyle, _gs_dashed)	
+		self.Bind(wx.EVT_MENU, self.OnGridStyle, _gs_dotted)
+		self.Bind(wx.EVT_MENU, self.OnAxesAspect, _aspax_equal)
+		self.Bind(wx.EVT_MENU, self.OnAxesAspect, _aspax_auto)
+		
+		# Show
+		self.PopupMenu(pum)
+		pum.Destroy()
+			
 			
 	def OnText(self,event):
 		self.TEXT_EVT = self.canvas.mpl_connect("button_press_event", self.set_text)
@@ -210,6 +246,26 @@ class GraphPanel(wx.Panel):
 		dlg.Destroy()
 		self.canvas.draw()
 		
+	def OnAxesAspect(self,event):
+		aspect = event.GetEventObject().GetLabel(event.GetId())
+		self.axes.set_aspect(aspect)
+		self.canvas.draw()
+		
+		
+	def OnGridColor(self,event):
+		dlg = wx.ColourDialog(self)
+		if dlg.ShowModal() == wx.ID_OK:
+			color = dlg.GetColourData().Colour
+			r,g,b = color.Red(),color.Green(),color.Blue()
+			self.axes.grid(color=rgb2hex(r,g,b))
+		dlg.Destroy()
+		self.canvas.draw()
+		
+	def OnGridStyle(self,event):
+		_gs = event.GetEventObject().GetLabel(event.GetId())
+		self.axes.grid(ls=_gs)
+		self.canvas.draw()
+		
 	def OnXLabel(self,event):
 		dialog = wx.TextEntryDialog(self,
 		"Inserte la etiqueta en X",
@@ -225,6 +281,15 @@ class GraphPanel(wx.Panel):
 		NANCHI_MAIN_CAPTION, "", style=wx.OK|wx.CANCEL)
 		if dialog.ShowModal() == wx.ID_OK:
 			self.axes.set_ylabel(dialog.GetValue())
+			self.canvas.draw()
+		dialog.Destroy()
+		
+	def OnTitle(self,event):
+		dialog = wx.TextEntryDialog(self,
+		u"Inserte el título",
+		NANCHI_MAIN_CAPTION, "", style=wx.OK|wx.CANCEL)
+		if dialog.ShowModal() == wx.ID_OK:
+			self.axes.set_title(dialog.GetValue())
 			self.canvas.draw()
 		dialog.Destroy()
 		
