@@ -2,6 +2,7 @@
 import wx
 import wx.html as html
 import webbrowser
+import uibase as ui
 from _const_ import *
 
 class CustomTB(wx.ToolBar):
@@ -18,7 +19,7 @@ class CustomTB(wx.ToolBar):
 		load_image_bmp = wx.Bitmap(PATH_LOAD_IMAGE_ICON)
 		
 		plot_bmp = wx.Bitmap(PATH_PLOT_ICON)
-		polar_bmp = wx.Bitmap(PATH_POLAR_ICON)
+		#~ polar_bmp = wx.Bitmap(PATH_POLAR_ICON)
 		bar_bmp = wx.Bitmap(PATH_BAR_ICON)
 		scatter_bmp = wx.Bitmap(PATH_SCATTER_ICON)
 		pie_bmp = wx.Bitmap(PATH_PIE_ICON)
@@ -43,12 +44,15 @@ class CustomTB(wx.ToolBar):
 		bivariable_function_bmp, shortHelp=u"Generar datos de función bivariable...")
 		
 		self.AddSeparator()
+		self.AddSeparator()
+		self.AddSeparator()
+		self.AddSeparator()
 		
 		self.plot_tool = self.AddLabelTool(-1, u"Líneas", 
 		plot_bmp, shortHelp=u"Líneas")
 		
-		self.polar_tool = self.AddLabelTool(-1, u"Polar", 
-		polar_bmp, shortHelp=u"Polar")
+		#~ self.polar_tool = self.AddLabelTool(-1, u"Polar", 
+		#~ polar_bmp, shortHelp=u"Polar")
 		
 		self.bar_tool = self.AddLabelTool(-1, "Barras", 
 		bar_bmp, shortHelp=u"Barras")
@@ -300,6 +304,94 @@ class _InfoFrame(wx.Frame):
         self.Center()
 
 
+class LogCtrl(wx.TextCtrl):
+	def __init__(self,parent,**kwargs):
+		wx.TextCtrl.__init__(self, parent=parent, id=wx.ID_ANY,
+							 style=wx.TE_MULTILINE, **kwargs)
+		self.font = wx.Font(10, wx.MODERN, wx.NORMAL, wx.BOLD)
+		self.SetFont(self.font)
+		self.SetForegroundColour("#5555dd")
+		
+	def write(self,string):
+		self.cvalue = self.GetValue()
+		_nvalue = "%s\n>> %s"%(self.cvalue, string)
+		self.SetValue(_nvalue)
+	
+
+class ImportDialog(wx.Dialog):
+	def __init__(self,parent,**kwargs):
+		wx.Dialog.__init__(self,parent=parent,title=DEFAULT_DIALOG_CAPTION,
+						  size=(800,600))
+		self.LABEL_FONT = wx.Font(10, wx.SWISS, wx.NORMAL, wx.BOLD)
+		self.initCtrls()
+		self.initSizers()		
+		
+		self.Centre(True)
+
+	def initSizers(self):
+		self.mainsz = wx.BoxSizer(wx.VERTICAL)
+		self.panelsz = wx.BoxSizer(wx.HORIZONTAL)
+		self.plogsz = wx.BoxSizer(wx.HORIZONTAL)
+		self.pctrlssz = wx.BoxSizer(wx.VERTICAL)
+		self.pbuttonsz = wx.BoxSizer(wx.HORIZONTAL)
+		
+		#
+		self.pctrlssz.Add(self._dlm, 0, wx.EXPAND|wx.ALL, 5)
+		self.pctrlssz.Add(self.dlm, 0, wx.EXPAND|wx.ALL, 5)
+		self.pctrlssz.Add(self._skiprows, 0, wx.EXPAND|wx.ALL, 5)
+		self.pctrlssz.Add(self.skiprows, 0, wx.EXPAND|wx.ALL, 5)
+		
+		self.panelsz.Add(self.fctrl, 1, wx.EXPAND|wx.ALL, 5)
+		self.panelsz.Add(self.pctrls, 1, wx.EXPAND|wx.ALL, 5)
+		self.panelsz.Add(self.grid, 2, wx.EXPAND|wx.ALL, 5)
+		
+		self.plogsz.Add(self.log, 1, wx.EXPAND|wx.ALL, 5)
+		
+		self.pbuttonsz.Add(self.okbutton, 1, wx.ALIGN_CENTRE|wx.ALL, 5)
+		self.pbuttonsz.Add(self.cancelbutton, 1, wx.ALIGN_CENTRE|wx.ALL, 5)
+		
+		self.mainsz.Add(self.panel, 5, wx.EXPAND|wx.ALL, 5)
+		self.mainsz.Add(self.plog, 1, wx.EXPAND|wx.ALL, 5)
+		self.mainsz.Add(self.pbutton, 1, wx.EXPAND|wx.ALL, 5)
+		
+		self.pctrls.SetSizer(self.pctrlssz)
+		self.panel.SetSizer(self.panelsz)
+		self.plog.SetSizer(self.plogsz)
+		self.pbutton.SetSizer(self.pbuttonsz)
+		self.SetSizer(self.mainsz)
+		
+	def initCtrls(self):
+		self.panel = wx.Panel(self, -1)
+		self.plog = wx.Panel(self, -1)
+		self.pbutton = wx.Panel(self, -1)
+		self.pctrls = wx.Panel(self.panel, -1)
+		
+		self.fctrl = wx.FileCtrl(self.panel, -1)
+		self.grid = ui.DataGrid(self.panel, (10,10))
+		
+		# Controles conf.
+		self._dlm = wx.StaticText(self.pctrls, -1, u"Delimitador", size=(-1,25))
+		self.dlm = wx.TextCtrl(self.pctrls, -1, u",", size=(-1,25))
+		self._skiprows = wx.StaticText(self.pctrls, -1, u"Leer a partir de fila:", size=(-1,25))
+		self.skiprows = wx.SpinCtrl(self.pctrls, -1, min=1, max=100)
+		
+		# Log 
+		self.log = LogCtrl(self.plog)
+		
+		# Botones
+		self.okbutton = wx.Button(self.pbutton, wx.ID_OK, u"Aceptar", size=(-1,25))
+		self.cancelbutton = wx.Button(self.pbutton, wx.ID_CANCEL, u"Cancelar", size=(-1,25), 
+								style=wx.ID_CANCEL)
+		
+		self.Bind(wx.EVT_SPINCTRL, self.OnSpin)
+		
+	def OnSpin(self,event):
+		self.log.write("Valor actual: %s"%(self.skiprows.GetValue(),))
+			
+	def GetData(self):
+		self.data = self.fctrl.GetPath()
+		return self.data
+
 
 def test_toolbar():
 	app = wx.App()
@@ -327,5 +419,14 @@ def test_function():
 	fr.Destroy()
 	app.MainLoop()
 
+
+def test_import():
+	app = wx.App()
+	fr = ImportDialog(None)
+	if fr.ShowModal() == wx.ID_OK:
+		print fr.GetData()
+	fr.Destroy()
+	app.MainLoop()
+
 if __name__=='__main__':
-	test_function()
+	test_import()
