@@ -3,20 +3,23 @@ import numpy as np
 import numpy.linalg as la
 import matplotlib.pyplot as plt
 
-def read_txt(filename,delimiter=None,dtype="float"):
+def read_txt(filename,delimiter=None,dtype="float",**kwargs):
 	dlms = [","," ","\t"]
 	X = None
-	if delimiter is None:
+	if (delimiter is None):
 		for dlm in dlms:
 			try:
-				X = np.loadtxt(filename,delimiter=dlm,dtype=dtype)
+				X = np.loadtxt(filename,delimiter=dlm,dtype=dtype,**kwargs)
 				return X
 			except:
 				pass
+	else:
+		X = np.loadtxt(filename,delimiter=dlm,dtype=dtype,**kwargs)
 	return X
 	
-def read_csv():
-	pass
+def read_csv(filename,dtype="float"):
+	X = np.loadtxt(filename, delimiter=",", dtype=dtype)
+	return X
 
 def write_txt():
 	pass
@@ -50,4 +53,6 @@ def gray2rgb(gray):
 	pass
 
 if __name__=='__main__':
-	pass
+	#X = read_txt("data/data_with_comments.txt",skiprows=3)
+	X = read_csv("data/contour_data.txt")
+	print X
