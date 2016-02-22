@@ -14,6 +14,27 @@ Librerías requeridas
 * NumPy
 
 
+Probando LaTeX:
+
+.. math::
+	
+	a^2 + b^2 = c^2 - \int_0^x\,\,f(x) dx
+
+Con esto tenemos :math:`\alpha+\beta^3 = \sqrt{x}`
+
+
+Probando código:
+
+.. code:: python
+
+	import math
+
+	def fun(x):
+		return x**2
+
+	class ABC(object):
+		pass
+
 
 Más información...
 ------------------
