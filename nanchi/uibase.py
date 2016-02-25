@@ -168,6 +168,21 @@ class GraphPanel(wx.Panel):
 	def InitPopUpMenu(self):
 		pum = wx.Menu()
 		
+		ls = wx.Menu() # Line Style
+		_ls_cont = wx.MenuItem(ls, -1, u"-")
+		ls.AppendItem(_ls_cont)
+		_ls_dashed = wx.MenuItem(ls, -1, u"--")
+		ls.AppendItem(_ls_dashed)
+		_ls_dotted = wx.MenuItem(ls, -1, u"dotted")
+		ls.AppendItem(_ls_dotted)
+		pum.AppendMenu(-1, u"Estilo de línea", ls)
+		linecolor = wx.MenuItem(pum, -1, u"Color de línea")
+		pum.AppendItem(linecolor)
+		linewidth = wx.MenuItem(pum, -1, u"Grosor de línea")
+		pum.AppendItem(linewidth)
+		
+		pum.AppendSeparator()
+		
 		gs = wx.Menu()
 		_gs_cont = wx.MenuItem(gs, -1, u"-")
 		gs.AppendItem(_gs_cont)
@@ -217,6 +232,13 @@ class GraphPanel(wx.Panel):
 		self.Bind(wx.EVT_MENU, self.OnAxesAspect, _aspax_equal)
 		self.Bind(wx.EVT_MENU, self.OnAxesAspect, _aspax_auto)
 		
+		# Lines
+		self.Bind(wx.EVT_MENU, self.OnLineStyle, _ls_cont)
+		self.Bind(wx.EVT_MENU, self.OnLineStyle, _ls_dashed)	
+		self.Bind(wx.EVT_MENU, self.OnLineStyle, _ls_dotted)
+		self.Bind(wx.EVT_MENU, self.OnLineColor, linecolor)
+		self.Bind(wx.EVT_MENU, self.OnLineWidth, linewidth)
+		
 		# Show
 		self.PopupMenu(pum)
 		pum.Destroy()
@@ -251,7 +273,6 @@ class GraphPanel(wx.Panel):
 		self.axes.set_aspect(aspect)
 		self.canvas.draw()
 		
-		
 	def OnGridColor(self,event):
 		dlg = wx.ColourDialog(self)
 		if dlg.ShowModal() == wx.ID_OK:
@@ -265,6 +286,42 @@ class GraphPanel(wx.Panel):
 		_gs = event.GetEventObject().GetLabel(event.GetId())
 		self.axes.grid(ls=_gs)
 		self.canvas.draw()
+		
+	def OnLineColor(self,event):
+		self.LINE_COLOR_EVT = self.canvas.mpl_connect("pick_event", self.set_line_color)
+		
+	def set_line_color(self,event):
+		dlg = wx.ColourDialog(self)
+		if dlg.ShowModal() == wx.ID_OK:
+			color = dlg.GetColourData().Colour
+			r,g,b = color.Red(),color.Green(),color.Blue()
+			event.artist.set_color(rgb2hex(r,g,b))
+		dlg.Destroy()
+		self.canvas.draw()
+		self.canvas.mpl_disconnect(self.LINE_COLOR_EVT)
+		
+	def OnLineStyle(self,event):
+		self.LINE_STYLE_EVT = self.canvas.mpl_connect("pick_event", self.set_line_style)
+		self._ls = event.GetEventObject().GetLabel(event.GetId())
+		
+	def set_line_style(self,event):
+		event.artist.set_linestyle(linestyle=self._ls)
+		self.canvas.mpl_disconnect(self.LINE_STYLE_EVT)
+		self.canvas.draw()
+		
+	def OnLineWidth(self,event):
+		self.LINE_WIDTH_EVT = self.canvas.mpl_connect("pick_event", self.set_line_width)
+		
+		
+	def set_line_width(self,event):
+		self.canvas.mpl_disconnect(self.LINE_WIDTH_EVT)
+		dlg = wx.TextEntryDialog(self, u"Inserte un grosor de línea", NANCHI_MAIN_CAPTION)
+		if dlg.ShowModal()==wx.ID_OK:
+			_lw = float(dlg.GetValue())
+			event.artist.set_linewidth(_lw)
+		dlg.Destroy()
+		self.canvas.draw()
+		
 		
 	def OnXLabel(self,event):
 		dialog = wx.TextEntryDialog(self,
@@ -296,7 +353,6 @@ class GraphPanel(wx.Panel):
 	def OnZoom(self,event):
 		self.canvas.zoomit()
 		
-
 
 class GraphWindow(wx.Frame):
 	def __init__(self,parent,title,*args,**kwargs):
