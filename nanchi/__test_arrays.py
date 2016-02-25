@@ -69,7 +69,7 @@ def OnRelease(event):
 	global mot
 	fig.canvas.mpl_disconnect(mot)
 
-mot = 
+
 bp = fig.canvas.mpl_connect("button_press_event", OnZoom)
 br = fig.canvas.mpl_connect("button_release_event", OnRelease)
 

@@ -206,7 +206,7 @@ class BivariableFunctionDialog(wx.Dialog):
 		self.prangey = wx.Panel(self, -1)
 		self.pbutton = wx.Panel(self, -1)
 		self._fun = wx.StaticText(self.pfun, -1, u"f(x,y)", size=(-1,25))
-		self.fun = wx.TextCtrl(self.pfun, -1, u"x**3 + x*y**2", size=(-1,25))
+		self.fun = wx.TextCtrl(self.pfun, -1, u"(x*y)/(x**2+y**2)", size=(-1,25))
 		self._x1 = wx.StaticText(self.prangex, -1, u"x1", size=(-1,25))
 		self.x1 = wx.TextCtrl(self.prangex, -1, u"-10", size=(50,25))
 		self._x2 = wx.StaticText(self.prangex, -1, u"x2", size=(-1,25))

@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 # 
 # Author: Jorge De Los Santos
+# E-mail: delossantosmfq@gmail.com
 # Version: 0.1.0-dev
+#
+
 import wx
 import os
 import numpy as np
@@ -60,6 +63,8 @@ class NanchiPlot(wx.Frame):
 		prewitt = wx.MenuItem(filtros, -1, "Prewitt")
 		filtros.AppendItem(prewitt)
 		m_imagen.AppendMenu(-1, "Filtros", filtros)
+		binarizar = m_imagen.Append(-1, "Binarizar")
+		
 		
 		m_ayuda = wx.Menu()
 		ayuda = m_ayuda.Append(-1, "Ayuda")
@@ -78,6 +83,7 @@ class NanchiPlot(wx.Frame):
 		self.Bind(wx.EVT_MENU, self.OnSobel, sobel)
 		self.Bind(wx.EVT_MENU, self.OnRoberts, roberts)
 		self.Bind(wx.EVT_MENU, self.OnPrewitt, prewitt)
+		self.Bind(wx.EVT_MENU, self.OnBinarize, binarizar)
 		
 		self.Bind(wx.EVT_MENU, self.OnAbout, acerca_de)
 		self.Bind(wx.EVT_MENU, self.OnHelp, ayuda)
@@ -225,13 +231,13 @@ class NanchiPlot(wx.Frame):
 		X = self.data.grid_data.GetArrayData()
 		rows,cols = X.shape
 		if cols == 2: # Common case
-			self.axes.plot(X[:,0],X[:,1])
+			self.axes.plot(X[:,0],X[:,1], picker=True)
 		elif cols == 1:
-			self.axes.plot(X[:,0])
+			self.axes.plot(X[:,0], picker=True)
 		elif cols > 2:
 			for col in range(cols):
-				clabel = self.data.grid_data.GetColLabelValue(col)
-				self.axes.plot(X[:,col],label=clabel)
+				#clabel = self.data.grid_data.GetColLabelValue(col)
+				self.axes.plot(X[:,col], picker=True)
 		self.canvas.draw()
 		del busy_dlg
 		
@@ -298,17 +304,27 @@ class NanchiPlot(wx.Frame):
 		self.data.grid_data.SetArrayData(xmod)
 		
 	def OnPrewitt(self,event):
-		pass
+		cx = self.data.grid_data.GetArrayData()
+		xmod = image.prewitt(cx)
+		self.data.grid_data.SetArrayData(xmod)
 		
 	def OnRoberts(self,event):
-		pass
+		cx = self.data.grid_data.GetArrayData()
+		xmod = image.roberts(cx)
+		self.data.grid_data.SetArrayData(xmod)
+		
+	def OnBinarize(self,event):
+		cx = self.data.grid_data.GetArrayData()
+		xmod = image.binarize(cx)
+		self.data.grid_data.SetArrayData(xmod)
 		
 	def OnZoomBox(self,event):
 		self.canvas.zoomit()
 		
 	def OnResetView(self,event):
-		self.axes.relim()
+		#self.axes.relim()
 		self.axes.autoscale()
+		self.axes.set_aspect("auto")
 		self.canvas.disconnect_all()
 		self.canvas.draw()
 		
