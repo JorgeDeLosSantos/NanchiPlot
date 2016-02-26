@@ -6,17 +6,15 @@ import wx.lib.scrolledpanel as scrolled
 import os
 import numpy as np
 import matplotlib
-#matplotlib.use('WXAgg')
 
 import matplotlib.pyplot as plt
 #from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
 from uimpl import FigureCanvas
 from matplotlib.figure import Figure
 
-import pickle 
-
 import setplot
 import uimpl
+import uiaux as aux
 from util import isempty, rgb2hex
 from _const_ import *  # String & Constants values
 
@@ -215,6 +213,12 @@ class GraphPanel(wx.Panel):
 		pum.AppendItem(intext)
 		
 		pum.AppendSeparator()
+		setxtick = wx.MenuItem(pum, -1, u"Modificar xticks")
+		pum.AppendItem(setxtick)
+		setytick = wx.MenuItem(pum, -1, u"Modificar yticks")
+		pum.AppendItem(setytick)
+		
+		pum.AppendSeparator()
 		zoom_box = wx.MenuItem(pum, -1, u"Zoom Box")
 		pum.AppendItem(zoom_box)
 		
@@ -238,6 +242,10 @@ class GraphPanel(wx.Panel):
 		self.Bind(wx.EVT_MENU, self.OnLineStyle, _ls_dotted)
 		self.Bind(wx.EVT_MENU, self.OnLineColor, linecolor)
 		self.Bind(wx.EVT_MENU, self.OnLineWidth, linewidth)
+		
+		# Ticks
+		self.Bind(wx.EVT_MENU, self.OnXTick, setxtick)
+		self.Bind(wx.EVT_MENU, self.OnYTick, setytick)
 		
 		# Show
 		self.PopupMenu(pum)
@@ -349,6 +357,25 @@ class GraphPanel(wx.Panel):
 			self.axes.set_title(dialog.GetValue())
 			self.canvas.draw()
 		dialog.Destroy()
+		
+	def OnXTick(self,event):
+		dlg = aux.TickDialog(self, self.axes, "x")
+		if dlg.ShowModal() == wx.ID_OK:
+			ticks,labels = dlg.GetData()
+			self.axes.set_xticks(ticks)
+			self.axes.set_xticklabels(labels)
+		dlg.Destroy()
+		self.canvas.draw()
+		
+	def OnYTick(self,event):
+		dlg = aux.TickDialog(self, self.axes, "y")
+		if dlg.ShowModal() == wx.ID_OK:
+			ticks,labels = dlg.GetData()
+			self.axes.set_yticks(ticks)
+			self.axes.set_yticklabels(labels)
+		dlg.Destroy()
+		self.canvas.draw()
+		
 		
 	def OnZoom(self,event):
 		self.canvas.zoomit()
