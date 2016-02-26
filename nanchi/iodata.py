@@ -21,8 +21,8 @@ def read_csv(filename,dtype="float"):
 	X = np.loadtxt(filename, delimiter=",", dtype=dtype)
 	return X
 
-def write_txt():
-	pass
+def write_txt(filename, array, delimiter=",", fmt="%0.4f"):
+	np.savetxt(filename, array, delimiter=delimiter, fmt=fmt )
 
 def write_csv():
 	pass
@@ -42,6 +42,10 @@ def imread(filename):
 		raise ValueError
 	return X
 	
+	
+def imsave(filename,array):
+	plt.imsave(filename, array, cmap=plt.cm.gray)
+
 	
 def rgb2gray(rgb):
 	"""

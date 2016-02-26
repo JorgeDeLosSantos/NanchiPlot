@@ -26,6 +26,14 @@ Las opciones de graficado disponibles son:
  
 Actualmente en fase de desarrollo inicial. **(0.1.0)-dev**
 
+## Screenshots
+
+![](docs\source\_contents\img\screen_01.png)
+![](docs\source\_contents\img\screen_02.png)
+![](docs\source\_contents\img\screen_03.png)
+![](docs\source\_contents\img\screen_04.png)
+![](docs\source\_contents\img\screen_05.png)
+
 
 ## Más información
 
