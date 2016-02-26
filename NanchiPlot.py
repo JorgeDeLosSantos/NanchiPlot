@@ -50,8 +50,13 @@ class NanchiPlot(wx.Frame):
 		Crear la barra de Menús
 		"""
 		m_archivo = wx.Menu()
-		guardar = m_archivo.Append(-1, "Exportar imagen... \tCtrl+S")
-		importar = m_archivo.Append(-1, "Importar datos... \tCtrl+I")
+		guardar = m_archivo.Append(-1, "Guardar imagen... \tCtrl+S")
+		exportar_img = m_archivo.Append(-1, "Exportar datos como imagen...")
+		exportar_txt = m_archivo.Append(-1, "Exportar datos como ASCII...")
+		m_archivo.AppendSeparator()
+		importar_datos = m_archivo.Append(-1, "Importar datos... \tCtrl+I")
+		importar_imagen = m_archivo.Append(-1, "Importar imagen...")
+		m_archivo.AppendSeparator()
 		salir = m_archivo.Append(-1, "Salir \tCtrl+Q")
 		
 		m_imagen = wx.Menu()
@@ -78,7 +83,11 @@ class NanchiPlot(wx.Frame):
 		self.SetMenuBar(menu_bar)
 		
 		self.Bind(wx.EVT_MENU, self.OnSave, guardar)
-		self.Bind(wx.EVT_MENU, self.OnImport, importar)
+		self.Bind(wx.EVT_MENU, self.OnExportASCII, exportar_txt)
+		self.Bind(wx.EVT_MENU, self.OnExportImage, exportar_img)
+		
+		self.Bind(wx.EVT_MENU, self.OnImport, importar_datos)
+		self.Bind(wx.EVT_MENU, self.OnLoadImage, importar_imagen)
 		
 		self.Bind(wx.EVT_MENU, self.OnSobel, sobel)
 		self.Bind(wx.EVT_MENU, self.OnRoberts, roberts)
@@ -150,13 +159,32 @@ class NanchiPlot(wx.Frame):
 		
 	def OnSave(self,event):
 		"""
-		Archivo -> Exportar imagen -> (Atajo) Ctrl + S
+		Archivo -> Guardar imagen -> (Atajo) Ctrl + S
 		"""
 		wldc = "PNG (*.png)|*.png|PDF (*.pdf)|*.pdf|EPS (*.eps)|*.eps|JPG (*.jpg)|*jpg"
 		dlg=wx.FileDialog(self, "Guardar", os.getcwd(), style=wx.SAVE, wildcard=wldc)
 		if dlg.ShowModal() == wx.ID_OK:
 			self.figure.savefig(dlg.GetPath())
 		dlg.Destroy()
+		
+	def OnExportASCII(self,event):
+		data = self.data.grid_data.GetArrayData()
+		wldc = "Archivo TXT (*.txt)|*.txt|DAT (*.dat)|*.dat"
+		dlg=wx.FileDialog(self, "Guardar", os.getcwd(), style=wx.SAVE, wildcard=wldc)
+		if dlg.ShowModal() == wx.ID_OK:
+			fname = dlg.GetPath()
+			io.write_txt(fname, data)
+		dlg.Destroy()
+		
+	def OnExportImage(self,event):
+		data = self.data.grid_data.GetArrayData()
+		wldc = "PNG (*.png)|*.png|PDF (*.pdf)|*.pdf|JPG (*.jpg)|*jpg"
+		dlg=wx.FileDialog(self, "Guardar", os.getcwd(), style=wx.SAVE, wildcard=wldc)
+		if dlg.ShowModal() == wx.ID_OK:
+			fname = dlg.GetPath()
+			io.imsave(fname, data)
+		dlg.Destroy()
+	
 		
 	def OnImport(self,event):
 		"""
@@ -214,7 +242,6 @@ class NanchiPlot(wx.Frame):
 		dialog = aux.BivariableFunctionDialog(None)
 		if dialog.ShowModal() == wx.ID_OK:
 			fxy,x,y = dialog.GetData()
-			print fxy,x,y
 			x1,x2 = [float(n) for n in x]
 			y1,y2 = [float(n) for n in y]
 			xx = np.linspace(x1, x2, 100)
@@ -248,16 +275,16 @@ class NanchiPlot(wx.Frame):
 		pass
 		
 	def OnBar(self,event):
-		self.axes.cla()
+		setplot.set_default_params(self.axes,self.figure)
 		X = self.data.grid_data.GetArrayData()
 		rows,cols = X.shape
 		if cols == 1: # Common case
 			x = range(len(X[:,0]))
-			self.axes.bar(x,X[:,0])
+			self.axes.bar(x,X[:,0], align="center", picker=True)
 		self.canvas.draw()
 		
 	def OnScatter(self,event):
-		self.axes.cla()
+		setplot.set_default_params(self.axes,self.figure)
 		X = self.data.grid_data.GetArrayData()
 		rows,cols = X.shape
 		if cols == 2: # Common case
@@ -267,31 +294,32 @@ class NanchiPlot(wx.Frame):
 		self.canvas.draw()
 		
 	def OnPie(self,event):
-		self.axes.cla()
+		setplot.set_default_params(self.axes,self.figure)
 		X = self.data.grid_data.GetArrayData()
 		rows,cols = X.shape
 		if cols == 1:
 			self.axes.pie(X[:,0])
+			self.axes.set_aspect("equal")
 		else:
 			pass
 		self.canvas.draw()
 		
 	def OnImage(self,event):
-		self.axes.cla()
+		setplot.set_default_params(self.axes,self.figure)
 		X = self.data.grid_data.GetArrayData()
 		rows,cols = X.shape
 		self.axes.imshow(X, cmap=cm.gray)
 		self.canvas.draw()
 		
 	def OnContour(self,event):
-		self.axes.cla()
+		setplot.set_default_params(self.axes,self.figure)
 		X = self.data.grid_data.GetArrayData()
 		rows,cols = X.shape
 		self.axes.contour(X)
 		self.canvas.draw()
 		
 	def OnContourf(self,event):
-		self.axes.cla()
+		setplot.set_default_params(self.axes,self.figure)
 		X = self.data.grid_data.GetArrayData()
 		rows,cols = X.shape
 		self.axes.contourf(X)
