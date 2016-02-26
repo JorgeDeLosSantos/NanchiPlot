@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
+import matplotlib.pyplot as plt
 import wx
 import wx.html as html
+import wx.grid as wxgrid
 import webbrowser
 import uibase as ui
 from _const_ import *
+from util import isempty
+
 
 class CustomTB(wx.ToolBar):
 	def __init__(self,parent,**kwargs):
@@ -393,6 +397,143 @@ class ImportDialog(wx.Dialog):
 		return self.data
 
 
+class TickDialog(wx.Dialog):
+	def __init__(self,parent,axes,xy,**kwargs):
+		wx.Dialog.__init__(self,parent=parent,title=DEFAULT_DIALOG_CAPTION,
+						  size=(200,400))
+		#~ self.LABEL_FONT = wx.Font(10, wx.SWISS, wx.NORMAL, wx.BOLD)
+		self.xy = xy
+		self.ctick = axes.get_xticks() if xy=="x" else axes.get_yticks()
+		self.axes = axes
+		self.initCtrls()
+		self.initSizers()
+		self.initConfig()
+		self.Centre(True)
+		
+	def initCtrls(self):
+		self.panel = wx.Panel(self, -1)
+		self.pbutton = wx.Panel(self, -1)
+
+		self.grid = TickGrid(self.panel)
+		
+		self.okbt = wx.Button(self.pbutton, wx.ID_OK, u"Aceptar")
+		self.cancelbt =	wx.Button(self.pbutton, wx.ID_CANCEL, u"Cancelar")
+		
+	def initSizers(self):
+		self.sz = wx.BoxSizer(wx.VERTICAL)
+		self.panelsz = wx.BoxSizer(wx.VERTICAL)
+		self.pbuttonsz = wx.BoxSizer(wx.HORIZONTAL)
+		
+		self.panelsz.Add(self.grid, 1, wx.EXPAND|wx.ALL, 5)
+		
+		self.pbuttonsz.Add(self.okbt, 1, wx.EXPAND|wx.ALL, 5)
+		self.pbuttonsz.Add(self.cancelbt, 1, wx.EXPAND|wx.ALL, 5)
+		
+		self.sz.Add(self.panel, 8, wx.EXPAND|wx.ALL, 5)
+		self.sz.Add(self.pbutton, 1, wx.EXPAND|wx.ALL, 5)
+		
+		self.SetSizer(self.sz)
+		self.panel.SetSizer(self.panelsz)
+		self.pbutton.SetSizer(self.pbuttonsz)
+		
+	def initConfig(self):
+		nrows = len(self.ctick)
+		self.grid.UpdateGridSize(nrows,2)
+		for ii in range(nrows):
+			self.grid.SetCellValue(ii,0,str(self.ctick[ii]))
+			self.grid.SetCellValue(ii,1,str(self.ctick[ii]))
+		
+	def GetData(self):
+		data = zip(*self.grid.GetArrayData())
+		ticks = [float(xt) for xt in data[0]]
+		labels = data[1]
+		return ticks,labels
+
+
+class TickGrid(wxgrid.Grid):
+	def __init__(self,parent,**kwargs):
+		wxgrid.Grid.__init__(self,parent=parent,id=-1,**kwargs)
+		gridsize = (2,2)
+		rows = int(gridsize[0])
+		cols = int(gridsize[1])
+		self.CreateGrid(rows,cols)
+		self.SetRowLabelSize(0)
+		self.SetColLabelValue(0, "Tick")
+		self.SetColLabelValue(1, "Etiqueta")
+		self.Bind(wxgrid.EVT_GRID_CELL_CHANGE, self.OnCellEdit)
+		self.Bind(wxgrid.EVT_GRID_CELL_RIGHT_CLICK, self.OnRightClick)
+		
+	def GetArrayData(self):
+		nrows = self.GetNumberRows()
+		ncols = self.GetNumberCols()
+		X = []
+		for i in range(nrows):
+			row = []
+			for j in range(ncols):
+				cval = self.GetCellValue(i,j)
+				if not isempty(cval):
+					row.append(cval)
+				else:
+					row.append("")
+			X.append(row)
+		return X
+		
+	def UpdateGridSize(self,rows,cols):
+		self.ClearGrid()
+		ccols = self.GetNumberCols()
+		crows = self.GetNumberRows()
+		
+		if rows > crows:
+			self.AppendRows(rows-crows)
+		elif rows < crows:
+			self.DeleteRows(0,crows-rows)
+			
+		if cols > ccols:
+			self.AppendCols(cols-ccols)
+		elif cols < ccols:
+			self.DeleteCols(0,ccols-cols)
+			
+	def GetSelectedRows(self):
+		srows = []
+		top_left = self.GetSelectionBlockTopLeft()
+		bottom_right = self.GetSelectionBlockBottomRight()
+		if not isempty(bottom_right) and not isempty(top_left):
+			max_row = bottom_right[0][0]
+			min_row = top_left[0][0]
+			srows = range(min_row,max_row+1)
+		return srows
+		
+	def OnCellEdit(self,event):
+		pass
+		
+	def OnRightClick(self,event):
+		pum = wx.Menu()
+		addrow = wx.MenuItem(pum, -1, "Agregar fila...")
+		pum.AppendItem(addrow)
+		
+		pum.AppendSeparator()
+		
+		delrows = wx.MenuItem(pum, -1, "Eliminar filas")
+		pum.AppendItem(delrows)
+		
+		
+		# Binds
+		pum.Bind(wx.EVT_MENU, self.del_rows, delrows)
+		pum.Bind(wx.EVT_MENU, self.add_row, addrow)
+
+		# Show 
+		self.PopupMenu(pum)
+		pum.Destroy()
+
+	def del_rows(self,event):
+		rows = self.GetSelectedRows()
+		self.DeleteRows(rows[0],len(rows))
+		
+	def add_row(self,event):
+		self.AppendRows(1)
+
+
+
 def test_toolbar():
 	app = wx.App()
 	fr = wx.Frame(None, -1, "Hi !!!", size=(800,600))
@@ -427,6 +568,18 @@ def test_import():
 		print fr.GetData()
 	fr.Destroy()
 	app.MainLoop()
+	
+	
+def test_tick():
+	f = plt.figure()
+	ax = f.add_subplot(111)
+	app = wx.App()
+	fr = TickDialog(None,ax,"x")
+	if fr.ShowModal() == wx.ID_OK:
+		print fr.GetData()
+	fr.Destroy()
+	app.MainLoop()
+
 
 if __name__=='__main__':
-	test_import()
+	test_tick()
