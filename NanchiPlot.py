@@ -104,9 +104,12 @@ class NanchiPlot(wx.Frame):
 		"""
 		self.mainsz = wx.BoxSizer(wx.VERTICAL)
 		self.panelsz = wx.BoxSizer(wx.HORIZONTAL)
+		
 		self.mainsz.Add(self.toolbar, 0, wx.EXPAND)
-		self.panelsz.Add(self.notebook, 4, wx.EXPAND|wx.ALL, 2)
+		self.panelsz.Add(self.notebook, 1, wx.EXPAND|wx.ALL, 2)
+		self.panelsz.Add(self.axestoolbar, 0, wx.EXPAND|wx.ALL, 2)
 		self.mainsz.Add(self.mainpanel, 1, wx.EXPAND)
+		
 		self.mainpanel.SetSizer(self.panelsz)
 		self.SetSizer(self.mainsz)
 		
@@ -121,13 +124,18 @@ class NanchiPlot(wx.Frame):
 		"""
 		Inicializar la barra de herramientas
 		"""
-		self.toolbar = aux.CustomTB(self)
+		self.toolbar = aux.MainToolbar(self)
 		self.toolbar.Realize()
+		
+		self.axestoolbar = aux.AxesToolbar(self.mainpanel)
+		self.axestoolbar.Realize()
 		
 	def initEvents(self):
 		"""
 		Inicializar (conexión de ) eventos
 		"""
+		self.graphs = self.notebook.graphs
+		
 		self.Bind(wx.EVT_TOOL, self.OnImport, self.toolbar.import_tool)
 		self.Bind(wx.EVT_TOOL, self.OnLoadImage, self.toolbar.load_image_tool)
 		self.Bind(wx.EVT_TOOL, self.OnFunction, self.toolbar.function_tool)
@@ -140,8 +148,13 @@ class NanchiPlot(wx.Frame):
 		self.Bind(wx.EVT_TOOL, self.OnImage, self.toolbar.image_tool)
 		self.Bind(wx.EVT_TOOL, self.OnContour, self.toolbar.contour_tool)
 		self.Bind(wx.EVT_TOOL, self.OnContourf, self.toolbar.contourf_tool)
-		self.Bind(wx.EVT_TOOL, self.OnZoomBox, self.toolbar.zoom_box_tool)
-		self.Bind(wx.EVT_TOOL, self.OnResetView, self.toolbar.reset_view_tool)
+		
+		
+		self.Bind(wx.EVT_TOOL, self.OnZoomBox, self.axestoolbar.zoom_box_tool)
+		self.Bind(wx.EVT_TOOL, self.OnResetView, self.axestoolbar.reset_view_tool)
+		
+		self.Bind(wx.EVT_TOOL, self.graphs.OnLineColor, self.axestoolbar.line_color_tool)
+		
 		
 	def OnExit(self,event):
 		"""
@@ -278,9 +291,11 @@ class NanchiPlot(wx.Frame):
 		setplot.set_default_params(self.axes,self.figure)
 		X = self.data.grid_data.GetArrayData()
 		rows,cols = X.shape
+		wf = 0.6
 		if cols == 1: # Common case
 			x = range(len(X[:,0]))
-			self.axes.bar(x,X[:,0], align="center", picker=True)
+			self.axes.bar(x,X[:,0], width=0.6 ,align="center")
+			self.axes.set_xlim(0 - wf, x[-1] + wf)
 		self.canvas.draw()
 		
 	def OnScatter(self,event):
@@ -298,12 +313,12 @@ class NanchiPlot(wx.Frame):
 		X = self.data.grid_data.GetArrayData()
 		rows,cols = X.shape
 		if cols == 1:
-			self.axes.pie(X[:,0])
+			_ , self.pie_labels = self.axes.pie(X[:,0])
 			self.axes.set_aspect("equal")
 		else:
 			pass
 		self.canvas.draw()
-		
+
 	def OnImage(self,event):
 		setplot.set_default_params(self.axes,self.figure)
 		X = self.data.grid_data.GetArrayData()
