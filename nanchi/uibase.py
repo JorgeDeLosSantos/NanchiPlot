@@ -258,12 +258,17 @@ class GraphPanel(wx.Panel):
 	def set_text(self,event):
 		cx = event.xdata
 		cy = event.ydata
-		dialog = wx.TextEntryDialog(self,
-		"Inserte el texto",
+		dialog = wx.TextEntryDialog(self,"Inserte el texto",
 		NANCHI_MAIN_CAPTION, "", style=wx.OK|wx.CANCEL)
 		if dialog.ShowModal() == wx.ID_OK:
-			self.axes.text(cx, cy, unicode(dialog.GetValue()))
-			self.canvas.draw()
+			if not cx is None and not cy is None:
+				self.axes.text(cx, cy, unicode(dialog.GetValue()))
+				self.canvas.draw()
+			else:
+				msg = wx.MessageDialog(self,u"Seleccione una posición dentro del axes",
+				caption=DEFAULT_DIALOG_CAPTION, style=wx.ICON_ERROR|wx.OK)
+				msg.ShowModal()
+				msg.Destroy()
 		dialog.Destroy()
 		self.canvas.mpl_disconnect(self.TEXT_EVT)
 		
