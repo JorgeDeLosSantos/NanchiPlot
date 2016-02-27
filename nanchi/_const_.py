@@ -41,8 +41,16 @@ PATH_PIE_ICON = path.join(IMGS_PATH, "pie_icon_32x32.png")
 PATH_IMAGE_ICON = path.join(IMGS_PATH, "image_icon_32x32.png")
 PATH_CONTOUR_ICON = path.join(IMGS_PATH, "contour_icon_32x32.png")
 PATH_CONTOURF_ICON = path.join(IMGS_PATH, "contourf_icon_32x32.png")
-PATH_ZOOM_BOX_ICON = path.join(IMGS_PATH, "zoom_box_icon_32x32.png")
-PATH_RESET_VIEW_ICON = path.join(IMGS_PATH, "reset_view_icon_32x32.png")
+
+
+PATH_ZOOM_BOX_ICON = path.join(IMGS_PATH, "zoom_box_icon_24x24.png")
+PATH_RESET_VIEW_ICON = path.join(IMGS_PATH, "reset_view_icon_24x24.png")
+PATH_GRID_STYLE_ICON = path.join(IMGS_PATH, "grid_style_icon_24x24.png")
+PATH_GRID_COLOR_ICON = path.join(IMGS_PATH, "grid_color_icon_24x24.png")
+PATH_LINE_STYLE_ICON = path.join(IMGS_PATH, "line_style_icon_24x24.png")
+PATH_LINE_COLOR_ICON = path.join(IMGS_PATH, "line_color_icon_24x24.png")
+PATH_TEXT_ICON = path.join(IMGS_PATH, "text_icon_24x24.png")
+
 
 # Documentation path
 PATH_HTML_DOCUMENTATION = r"docs\build\html\index.html"
