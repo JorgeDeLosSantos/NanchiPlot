@@ -3,13 +3,14 @@ import matplotlib.pyplot as plt
 import wx
 import wx.html as html
 import wx.grid as wxgrid
+import  wx.lib.floatbar as wxfb
 import webbrowser
 import uibase as ui
 from _const_ import *
 from util import isempty
 
 
-class CustomTB(wx.ToolBar):
+class MainToolbar(wx.ToolBar):
 	def __init__(self,parent,**kwargs):
 		wx.ToolBar.__init__(self,parent=parent,**kwargs)
 		tbsize = (32,32)
@@ -31,8 +32,8 @@ class CustomTB(wx.ToolBar):
 		contour_bmp = wx.Bitmap(PATH_CONTOUR_ICON)
 		contourf_bmp = wx.Bitmap(PATH_CONTOURF_ICON)
 		
-		zoom_box_bmp = wx.Bitmap(PATH_ZOOM_BOX_ICON)
-		reset_view_bmp = wx.Bitmap(PATH_RESET_VIEW_ICON)
+		#~ zoom_box_bmp = wx.Bitmap(PATH_ZOOM_BOX_ICON)
+		#~ reset_view_bmp = wx.Bitmap(PATH_RESET_VIEW_ICON)
 		
 		# Toolbar components
 		self.import_tool = self.AddLabelTool(-1, "Importar datos...", 
@@ -75,11 +76,33 @@ class CustomTB(wx.ToolBar):
 		
 		self.contourf_tool = self.AddLabelTool(-1, "Contorno relleno", 
 		contourf_bmp, shortHelp=u"Contorno relleno")
+		#~ 
+		#~ self.AddSeparator()
+		#~ self.AddSeparator()
+		#~ self.AddSeparator()
+		#~ self.AddSeparator()
+		#~ 
+		#~ self.zoom_box_tool = self.AddLabelTool(-1, "Zoom Box", 
+		#~ zoom_box_bmp, shortHelp=u"Zoom Box")
+		#~ 
+		#~ self.reset_view_tool = self.AddLabelTool(-1, "Reset view", 
+		#~ reset_view_bmp, shortHelp=u"Vista inicial")
 		
-		self.AddSeparator()
-		self.AddSeparator()
-		self.AddSeparator()
-		self.AddSeparator()
+
+class AxesToolbar(wx.ToolBar):
+	def __init__(self,parent,**kwargs):
+		wx.ToolBar.__init__(self,parent=parent,style=wx.TB_VERTICAL,**kwargs)
+		tbsize = (24,24)
+		self.SetToolBitmapSize(tbsize)
+		
+		# Bitmaps
+		zoom_box_bmp = wx.Bitmap(PATH_ZOOM_BOX_ICON)
+		reset_view_bmp = wx.Bitmap(PATH_RESET_VIEW_ICON)
+		grid_color_bmp = wx.Bitmap(PATH_GRID_COLOR_ICON)
+		grid_style_bmp = wx.Bitmap(PATH_GRID_STYLE_ICON)
+		line_color_bmp = wx.Bitmap(PATH_LINE_COLOR_ICON)
+		line_style_bmp = wx.Bitmap(PATH_LINE_STYLE_ICON)
+		
 		
 		self.zoom_box_tool = self.AddLabelTool(-1, "Zoom Box", 
 		zoom_box_bmp, shortHelp=u"Zoom Box")
@@ -87,6 +110,18 @@ class CustomTB(wx.ToolBar):
 		self.reset_view_tool = self.AddLabelTool(-1, "Reset view", 
 		reset_view_bmp, shortHelp=u"Vista inicial")
 		
+		self.grid_color_tool = self.AddLabelTool(-1, "Color de rejilla", 
+		grid_color_bmp, shortHelp=u"Color de rejilla")
+		
+		self.grid_style_tool = self.AddLabelTool(-1, "Estilo de rejilla", 
+		grid_style_bmp, shortHelp=u"Estilo de rejilla")
+		
+		self.line_color_tool = self.AddLabelTool(-1, u"Color de línea", 
+		line_color_bmp, shortHelp=u"Color de línea")
+		
+		self.line_style_tool = self.AddLabelTool(-1, u"Estilo de línea", 
+		line_style_bmp, shortHelp=u"Estilo de línea")
+	
 
 class FunctionDialog(wx.Dialog):
 	def __init__(self,parent,**kwargs):
@@ -579,7 +614,20 @@ def test_tick():
 		print fr.GetData()
 	fr.Destroy()
 	app.MainLoop()
+	
+	
+
+def test_axestoolbar():
+	app = wx.App()
+	fr = wx.Frame(None, -1, "Hi !!!", size=(800,600))
+	sz = wx.BoxSizer(wx.VERTICAL)
+	tb = AxesToolbar(fr)
+	sz.Add(tb, 0, wx.EXPAND)
+	fr.SetSizer(sz)
+	tb.Realize()
+	fr.Show()
+	app.MainLoop()	
 
 
 if __name__=='__main__':
-	test_tick()
+	test_axestoolbar()
