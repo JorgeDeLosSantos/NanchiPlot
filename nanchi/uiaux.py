@@ -102,6 +102,11 @@ class AxesToolbar(wx.ToolBar):
 		grid_style_bmp = wx.Bitmap(PATH_GRID_STYLE_ICON)
 		line_color_bmp = wx.Bitmap(PATH_LINE_COLOR_ICON)
 		line_style_bmp = wx.Bitmap(PATH_LINE_STYLE_ICON)
+		line_width_bmp = wx.Bitmap(PATH_LINE_WIDTH_ICON)
+		text_bmp = wx.Bitmap(PATH_TEXT_ICON)
+		move_text_bmp = wx.Bitmap(PATH_MOVE_TEXT_ICON)
+		move_line_bmp = wx.Bitmap(PATH_MOVE_LINE_ICON)
+		
 		
 		
 		self.zoom_box_tool = self.AddLabelTool(-1, "Zoom Box", 
@@ -110,17 +115,38 @@ class AxesToolbar(wx.ToolBar):
 		self.reset_view_tool = self.AddLabelTool(-1, "Reset view", 
 		reset_view_bmp, shortHelp=u"Vista inicial")
 		
+		self.AddSeparator()
+		
 		self.grid_color_tool = self.AddLabelTool(-1, "Color de rejilla", 
 		grid_color_bmp, shortHelp=u"Color de rejilla")
 		
 		self.grid_style_tool = self.AddLabelTool(-1, "Estilo de rejilla", 
 		grid_style_bmp, shortHelp=u"Estilo de rejilla")
 		
+		self.AddSeparator()
+		
 		self.line_color_tool = self.AddLabelTool(-1, u"Color de línea", 
 		line_color_bmp, shortHelp=u"Color de línea")
 		
 		self.line_style_tool = self.AddLabelTool(-1, u"Estilo de línea", 
 		line_style_bmp, shortHelp=u"Estilo de línea")
+		
+		self.line_style_tool = self.AddLabelTool(-1, u"Grosor de línea", 
+		line_width_bmp, shortHelp=u"Grosor de línea")
+		
+		self.AddSeparator()
+		
+		self.text_tool = self.AddLabelTool(-1, u"Texto", 
+		text_bmp, shortHelp=u"Insertar texto/anotación")
+		
+		self.AddSeparator()
+		
+		self.move_line_tool = self.AddLabelTool(-1, u"Mover línea", 
+		move_line_bmp, shortHelp=u"Mover línea")
+		
+		self.text_tool = self.AddLabelTool(-1, u"Mover texto", 
+		move_text_bmp, shortHelp=u"Mover texto")
+		
 	
 
 class FunctionDialog(wx.Dialog):
@@ -274,7 +300,7 @@ class AboutDialog(wx.Frame):
 	def __init__(self,parent,*args,**kwargs):
 		_styles = wx.CAPTION|wx.CLOSE_BOX
 		wx.Frame.__init__(self,parent=parent,title=NANCHI_MAIN_CAPTION,
-		size=(350,200), style=_styles)
+		size=(350,220), style=_styles)
 		self.winhtml = HTMLWindow(self)
 		self.winhtml.LoadPage("nanchi/help/about.html")
 		self.Centre(True)
