@@ -28,16 +28,16 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.98975522"
-     inkscape:cx="36.673303"
-     inkscape:cy="18.600232"
+     inkscape:cx="14.542416"
+     inkscape:cy="14.610305"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:grid-bbox="true"
      inkscape:document-units="px"
      inkscape:window-width="1366"
-     inkscape:window-height="706"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
+     inkscape:window-height="705"
+     inkscape:window-x="-4"
+     inkscape:window-y="-4"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata2990">
@@ -47,7 +47,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -58,16 +58,28 @@
      transform="translate(0,-8)">
     <text
        xml:space="preserve"
-       style="font-size:13.58061218px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000080;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana Bold"
-       x="15.173027"
-       y="21.23983"
+       style="font-size:19.88413048px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000080;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana Bold"
+       x="11.555769"
+       y="29.153481"
        id="text2985"
        sodipodi:linespacing="125%"
-       transform="scale(0.76089042,1.3142497)"><tspan
+       transform="scale(1.114062,0.89761611)"><tspan
          sodipodi:role="line"
          id="tspan2987"
-         x="15.173027"
-         y="21.23983"
-         style="font-style:normal;font-weight:normal;fill:#000080;-inkscape-font-specification:Verdana">TXT</tspan></text>
+         x="11.555769"
+         y="29.153481"
+         style="font-style:normal;font-weight:normal;fill:#000080;font-family:Times New Roman;-inkscape-font-specification:Times New Roman" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:31.79977989000000000px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000080;fill-opacity:1;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times New Roman"
+       x="11.56377"
+       y="30.960005"
+       id="text2984"
+       sodipodi:linespacing="125%"
+       transform="scale(1.0240843,0.97648211)"><tspan
+         sodipodi:role="line"
+         id="tspan2986"
+         x="11.56377"
+         y="30.960005">T</tspan></text>
   </g>
 </svg>
