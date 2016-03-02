@@ -8,8 +8,7 @@ import numpy as np
 import matplotlib
 
 import matplotlib.pyplot as plt
-#from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
-from uimpl import FigureCanvas
+from uimpl import FigureCanvas # Customized canvas
 from matplotlib.figure import Figure
 
 import setplot
@@ -213,10 +212,10 @@ class GraphPanel(wx.Panel):
 		pum.AppendItem(intext)
 		
 		pum.AppendSeparator()
-		setxtick = wx.MenuItem(pum, -1, u"Modificar xticks")
-		pum.AppendItem(setxtick)
-		setytick = wx.MenuItem(pum, -1, u"Modificar yticks")
-		pum.AppendItem(setytick)
+		setxticks = wx.MenuItem(pum, -1, u"Modificar xticks")
+		pum.AppendItem(setxticks)
+		setyticks = wx.MenuItem(pum, -1, u"Modificar yticks")
+		pum.AppendItem(setyticks)
 		
 		pum.AppendSeparator()
 		zoom_box = wx.MenuItem(pum, -1, u"Zoom Box")
@@ -244,8 +243,8 @@ class GraphPanel(wx.Panel):
 		self.Bind(wx.EVT_MENU, self.OnLineWidth, linewidth)
 		
 		# Ticks
-		self.Bind(wx.EVT_MENU, self.OnXTick, setxtick)
-		self.Bind(wx.EVT_MENU, self.OnYTick, setytick)
+		self.Bind(wx.EVT_MENU, self.OnXTicks, setxticks)
+		self.Bind(wx.EVT_MENU, self.OnYTicks, setyticks)
 		
 		# Show
 		self.PopupMenu(pum)
@@ -259,10 +258,10 @@ class GraphPanel(wx.Panel):
 		cx = event.xdata
 		cy = event.ydata
 		dialog = wx.TextEntryDialog(self,"Inserte el texto",
-		NANCHI_MAIN_CAPTION, "", style=wx.OK|wx.CANCEL)
+		NANCHI_MAIN_CAPTION, u"", style=wx.OK|wx.CANCEL)
 		if dialog.ShowModal() == wx.ID_OK:
 			if not cx is None and not cy is None:
-				self.axes.text(cx, cy, unicode(dialog.GetValue()))
+				self.axes.text(cx, cy, unicode(dialog.GetValue()), picker=True)
 				self.canvas.draw()
 			else:
 				msg = wx.MessageDialog(self,u"Seleccione una posición dentro del axes",
@@ -337,7 +336,7 @@ class GraphPanel(wx.Panel):
 		
 		
 	def OnXLabel(self,event):
-		dialog = wx.TextEntryDialog(self,
+		dialog = wx.TextEntryDialog(None,
 		"Inserte la etiqueta en X",
 		NANCHI_MAIN_CAPTION, "", style=wx.OK|wx.CANCEL)
 		if dialog.ShowModal() == wx.ID_OK:
@@ -363,7 +362,7 @@ class GraphPanel(wx.Panel):
 			self.canvas.draw()
 		dialog.Destroy()
 		
-	def OnXTick(self,event):
+	def OnXTicks(self,event):
 		dlg = aux.TickDialog(self, self.axes, "x")
 		if dlg.ShowModal() == wx.ID_OK:
 			ticks,labels = dlg.GetData()
@@ -372,7 +371,7 @@ class GraphPanel(wx.Panel):
 		dlg.Destroy()
 		self.canvas.draw()
 		
-	def OnYTick(self,event):
+	def OnYTicks(self,event):
 		dlg = aux.TickDialog(self, self.axes, "y")
 		if dlg.ShowModal() == wx.ID_OK:
 			ticks,labels = dlg.GetData()
@@ -412,10 +411,30 @@ class GraphPanel(wx.Panel):
 		self.axes.autoscale_view(True,True,True)
 		self.canvas.draw()
 		
+
+	def OnMoveText(self,event):
+		self.MOVE_TEXT_EVT = self.canvas.mpl_connect("pick_event", self.move_text)
 		
+	def move_text(self,event):
+		self._selected_text = event.artist
+		self._mpl_mt_motion = self.canvas.mpl_connect("motion_notify_event", self._mt_motion)
+		self._mpl_mt_release = self.canvas.mpl_connect("button_release_event", self._mt_release)
 	
-	
+	def _mt_motion(self,event):
+		cx = event.xdata
+		cy = event.ydata
+		self._selected_text.set_position((cx,cy))
+		self.canvas.draw()
 		
+	def _mt_release(self,event):
+		self.canvas.mpl_disconnect(self._mpl_mt_motion)
+		self.canvas.mpl_disconnect(self._mpl_mt_release)
+		self.canvas.mpl_disconnect(self.MOVE_TEXT_EVT)
+		self.axes.relim()
+		self.axes.autoscale_view(True,True,True)
+		self.canvas.draw()
+
+
 
 class GraphWindow(wx.Frame):
 	def __init__(self,parent,title,*args,**kwargs):
