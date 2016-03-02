@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
-# 
-# Author: Jorge De Los Santos
+#
+# NanchiPlot 0.1.0-dev
+# License: MIT License
+# Author: Pedro Jorge De Los Santos
 # E-mail: delossantosmfq@gmail.com
-# Version: 0.1.0-dev
+# Code: https://github.com/JorgeDeLosSantos/NanchiPlot
 #
 
 import wx
@@ -153,7 +155,24 @@ class NanchiPlot(wx.Frame):
 		self.Bind(wx.EVT_TOOL, self.OnZoomBox, self.axestoolbar.zoom_box_tool)
 		self.Bind(wx.EVT_TOOL, self.OnResetView, self.axestoolbar.reset_view_tool)
 		
+		self.Bind(wx.EVT_TOOL, self.graphs.OnBackground, self.axestoolbar.axes_color_tool)
+		self.Bind(wx.EVT_TOOL, self.graphs.OnGridColor, self.axestoolbar.grid_color_tool)
+		self.Bind(wx.EVT_TOOL, self.graphs.OnGridStyle, self.axestoolbar.grid_style_tool)
+		
 		self.Bind(wx.EVT_TOOL, self.graphs.OnLineColor, self.axestoolbar.line_color_tool)
+		self.Bind(wx.EVT_TOOL, self.graphs.OnLineWidth, self.axestoolbar.line_width_tool)
+		self.Bind(wx.EVT_TOOL, self.graphs.OnLineStyle, self.axestoolbar.line_style_tool)
+		
+		self.Bind(wx.EVT_TOOL, self.graphs.OnXLabel, self.axestoolbar.xlabel_tool)
+		self.Bind(wx.EVT_TOOL, self.graphs.OnYLabel, self.axestoolbar.ylabel_tool)
+		
+		self.Bind(wx.EVT_TOOL, self.graphs.OnXTicks, self.axestoolbar.xticks_tool)
+		self.Bind(wx.EVT_TOOL, self.graphs.OnYTicks, self.axestoolbar.yticks_tool)
+		
+		self.Bind(wx.EVT_TOOL, self.graphs.OnMoveLine, self.axestoolbar.move_line_tool)
+		self.Bind(wx.EVT_TOOL, self.graphs.OnMoveText, self.axestoolbar.move_text_tool)
+		
+		self.Bind(wx.EVT_TOOL, self.graphs.OnText, self.axestoolbar.text_tool)
 		
 		
 	def OnExit(self,event):
