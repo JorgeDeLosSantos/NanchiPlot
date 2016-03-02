@@ -381,9 +381,40 @@ class GraphPanel(wx.Panel):
 		dlg.Destroy()
 		self.canvas.draw()
 		
-		
 	def OnZoom(self,event):
 		self.canvas.zoomit()
+		
+	def OnMoveLine(self,event):
+		self.MOVE_LINE_EVT = self.canvas.mpl_connect("pick_event", self.move_line)
+		
+	def move_line(self,event):
+		self._selected_line = event.artist
+		self._p0 = (event.mouseevent.xdata, event.mouseevent.ydata)
+		self._xdata0 = self._selected_line.get_xdata()
+		self._ydata0 = self._selected_line.get_ydata()
+		self._mpl_ml_motion = self.canvas.mpl_connect("motion_notify_event", self._ml_motion)
+		self._mpl_ml_release = self.canvas.mpl_connect("button_release_event", self._ml_release)
+	
+	def _ml_motion(self,event):
+		cx = event.xdata
+		cy = event.ydata
+		deltax = cx - self._p0[0]
+		deltay = cy - self._p0[1]
+		self._selected_line.set_xdata(self._xdata0 + deltax)
+		self._selected_line.set_ydata(self._ydata0 + deltay)
+		self.canvas.draw()
+		
+	def _ml_release(self,event):
+		self.canvas.mpl_disconnect(self._mpl_ml_motion)
+		self.canvas.mpl_disconnect(self._mpl_ml_release)
+		self.canvas.mpl_disconnect(self.MOVE_LINE_EVT)
+		self.axes.relim()
+		self.axes.autoscale_view(True,True,True)
+		self.canvas.draw()
+		
+		
+	
+	
 		
 
 class GraphWindow(wx.Frame):
