@@ -94,15 +94,23 @@ class AxesToolbar(wx.ToolBar):
 		wx.ToolBar.__init__(self,parent=parent,style=wx.TB_VERTICAL,**kwargs)
 		tbsize = (24,24)
 		self.SetToolBitmapSize(tbsize)
+		self.SetBackgroundColour("#eeeeff")
 		
 		# Bitmaps
 		zoom_box_bmp = wx.Bitmap(PATH_ZOOM_BOX_ICON)
 		reset_view_bmp = wx.Bitmap(PATH_RESET_VIEW_ICON)
+		axes_color_bmp = wx.Bitmap(PATH_AXES_COLOR_ICON)
 		grid_color_bmp = wx.Bitmap(PATH_GRID_COLOR_ICON)
 		grid_style_bmp = wx.Bitmap(PATH_GRID_STYLE_ICON)
 		line_color_bmp = wx.Bitmap(PATH_LINE_COLOR_ICON)
 		line_style_bmp = wx.Bitmap(PATH_LINE_STYLE_ICON)
 		line_width_bmp = wx.Bitmap(PATH_LINE_WIDTH_ICON)
+		
+		xlabel_bmp = wx.Bitmap(PATH_XLABEL_ICON)
+		ylabel_bmp = wx.Bitmap(PATH_YLABEL_ICON)
+		xticks_bmp = wx.Bitmap(PATH_XTICKS_ICON)
+		yticks_bmp = wx.Bitmap(PATH_YTICKS_ICON)
+		
 		text_bmp = wx.Bitmap(PATH_TEXT_ICON)
 		move_text_bmp = wx.Bitmap(PATH_MOVE_TEXT_ICON)
 		move_line_bmp = wx.Bitmap(PATH_MOVE_LINE_ICON)
@@ -116,6 +124,9 @@ class AxesToolbar(wx.ToolBar):
 		reset_view_bmp, shortHelp=u"Vista inicial")
 		
 		self.AddSeparator()
+		
+		self.axes_color_tool = self.AddLabelTool(-1, "Axes color", 
+		axes_color_bmp, shortHelp=u"Axes color")
 		
 		self.grid_color_tool = self.AddLabelTool(-1, "Color de rejilla", 
 		grid_color_bmp, shortHelp=u"Color de rejilla")
@@ -131,7 +142,7 @@ class AxesToolbar(wx.ToolBar):
 		self.line_style_tool = self.AddLabelTool(-1, u"Estilo de línea", 
 		line_style_bmp, shortHelp=u"Estilo de línea")
 		
-		self.line_style_tool = self.AddLabelTool(-1, u"Grosor de línea", 
+		self.line_width_tool = self.AddLabelTool(-1, u"Grosor de línea", 
 		line_width_bmp, shortHelp=u"Grosor de línea")
 		
 		self.AddSeparator()
@@ -141,10 +152,24 @@ class AxesToolbar(wx.ToolBar):
 		
 		self.AddSeparator()
 		
+		self.xlabel_tool = self.AddLabelTool(-1, u"XLabel", 
+		xlabel_bmp, shortHelp=u"Modificar XLabel")
+		
+		self.ylabel_tool = self.AddLabelTool(-1, u"YLabel", 
+		ylabel_bmp, shortHelp=u"Modificar YLabel")
+		
+		self.xticks_tool = self.AddLabelTool(-1, u"XTicks", 
+		xticks_bmp, shortHelp=u"Modificar XTikcs")
+		
+		self.yticks_tool = self.AddLabelTool(-1, u"YTicks", 
+		yticks_bmp, shortHelp=u"Modificar YTikcs")
+		
+		self.AddSeparator()
+		
 		self.move_line_tool = self.AddLabelTool(-1, u"Mover línea", 
 		move_line_bmp, shortHelp=u"Mover línea")
 		
-		self.text_tool = self.AddLabelTool(-1, u"Mover texto", 
+		self.move_text_tool = self.AddLabelTool(-1, u"Mover texto", 
 		move_text_bmp, shortHelp=u"Mover texto")
 		
 	
@@ -641,7 +666,6 @@ def test_tick():
 	fr.Destroy()
 	app.MainLoop()
 	
-	
 
 def test_axestoolbar():
 	app = wx.App()
@@ -656,4 +680,4 @@ def test_axestoolbar():
 
 
 if __name__=='__main__':
-	test_axestoolbar()
+	test_tick()
