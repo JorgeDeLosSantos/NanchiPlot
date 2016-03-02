@@ -336,18 +336,20 @@ class GraphPanel(wx.Panel):
 		
 		
 	def OnXLabel(self,event):
+		current_label = unicode(self.axes.get_xlabel())
 		dialog = wx.TextEntryDialog(None,
 		"Inserte la etiqueta en X",
-		NANCHI_MAIN_CAPTION, "", style=wx.OK|wx.CANCEL)
+		NANCHI_MAIN_CAPTION, current_label, style=wx.OK|wx.CANCEL)
 		if dialog.ShowModal() == wx.ID_OK:
 			self.axes.set_xlabel(dialog.GetValue())
 			self.canvas.draw()
 		dialog.Destroy()
 		
 	def OnYLabel(self,event):
+		current_label = unicode(self.axes.get_ylabel())
 		dialog = wx.TextEntryDialog(self,
 		"Inserte la etiqueta en Y",
-		NANCHI_MAIN_CAPTION, "", style=wx.OK|wx.CANCEL)
+		NANCHI_MAIN_CAPTION, current_label, style=wx.OK|wx.CANCEL)
 		if dialog.ShowModal() == wx.ID_OK:
 			self.axes.set_ylabel(dialog.GetValue())
 			self.canvas.draw()

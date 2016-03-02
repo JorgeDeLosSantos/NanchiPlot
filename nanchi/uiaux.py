@@ -490,6 +490,7 @@ class TickDialog(wx.Dialog):
 		#~ self.LABEL_FONT = wx.Font(10, wx.SWISS, wx.NORMAL, wx.BOLD)
 		self.xy = xy
 		self.ctick = axes.get_xticks() if xy=="x" else axes.get_yticks()
+		self.clabel = axes.get_xticklabels() if xy=="x" else axes.get_yticklabels()
 		self.axes = axes
 		self.initCtrls()
 		self.initSizers()
@@ -527,7 +528,11 @@ class TickDialog(wx.Dialog):
 		self.grid.UpdateGridSize(nrows,2)
 		for ii in range(nrows):
 			self.grid.SetCellValue(ii,0,str(self.ctick[ii]))
-			self.grid.SetCellValue(ii,1,str(self.ctick[ii]))
+			label = self.clabel[ii].get_text()
+			if not label:
+				self.grid.SetCellValue(ii,1,str(self.ctick[ii]))
+			else:
+				self.grid.SetCellValue(ii,1,label)
 		
 	def GetData(self):
 		data = zip(*self.grid.GetArrayData())

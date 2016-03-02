@@ -45,12 +45,19 @@ PATH_CONTOURF_ICON = path.join(IMGS_PATH, "contourf_icon_32x32.png")
 
 PATH_ZOOM_BOX_ICON = path.join(IMGS_PATH, "zoom_box_icon_24x24.png")
 PATH_RESET_VIEW_ICON = path.join(IMGS_PATH, "reset_view_icon_24x24.png")
+PATH_AXES_COLOR_ICON = path.join(IMGS_PATH, "axes_color_icon_24x24.png")
 PATH_GRID_STYLE_ICON = path.join(IMGS_PATH, "grid_style_icon_24x24.png")
 PATH_GRID_COLOR_ICON = path.join(IMGS_PATH, "grid_color_icon_24x24.png")
 PATH_LINE_STYLE_ICON = path.join(IMGS_PATH, "line_style_icon_24x24.png")
 PATH_LINE_COLOR_ICON = path.join(IMGS_PATH, "line_color_icon_24x24.png")
 PATH_LINE_WIDTH_ICON = path.join(IMGS_PATH, "line_width_icon_24x24.png")
 PATH_TEXT_ICON = path.join(IMGS_PATH, "text_icon_24x24.png")
+
+PATH_XLABEL_ICON = path.join(IMGS_PATH, "xlabel_icon_24x24.png")
+PATH_YLABEL_ICON = path.join(IMGS_PATH, "ylabel_icon_24x24.png")
+PATH_XTICKS_ICON = path.join(IMGS_PATH, "xticks_icon_24x24.png")
+PATH_YTICKS_ICON = path.join(IMGS_PATH, "yticks_icon_24x24.png")
+
 PATH_MOVE_TEXT_ICON = path.join(IMGS_PATH, "move_text_icon_24x24.png")
 PATH_MOVE_LINE_ICON = path.join(IMGS_PATH, "move_line_icon_24x24.png")
 
