@@ -11,14 +11,14 @@ import wx
 import os
 import numpy as np
 import matplotlib
-matplotlib.use('WXAgg')
-import matplotlib.cm as cm
-import nanchi.setplot as setplot
-import nanchi.iodata as io
-import nanchi.uibase as ui
-import nanchi.uiaux as aux
-import nanchi.image as image
-from nanchi._const_ import *
+matplotlib.use('WXAgg') # wxPython backend
+import matplotlib.cm as cm # Colormap
+import nanchi.setplot as setplot # Axes & Figure props
+import nanchi.iodata as io # Read & Write data
+import nanchi.uibase as ui # Base interfaces
+import nanchi.uiaux as aux # Auxiliar interfaces
+import nanchi.image as image # Image operations
+from nanchi._const_ import * # Constants
 
 
 class NanchiPlot(wx.Frame):
