@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 import matplotlib.pyplot as plt
+import numpy as np
 import wx
 import wx.html as html
 import wx.grid as wxgrid
 import  wx.lib.floatbar as wxfb
 import webbrowser
 import uibase as ui
+import iodata as io
 from _const_ import *
 from util import isempty
 
@@ -403,18 +405,20 @@ class LogCtrl(wx.TextCtrl):
         self.SetForegroundColour("#5555dd")
         
     def write(self,string):
-        self.cvalue = self.GetValue()
-        _nvalue = "%s\n>> %s"%(self.cvalue, string)
+        #self.cvalue = self.GetValue()
+        #_nvalue = "%s\n>> %s"%(self.cvalue, string)
+        _nvalue = "$ %s"%(string)
         self.SetValue(_nvalue)
     
 
 class ImportDialog(wx.Dialog):
     def __init__(self,parent,**kwargs):
         wx.Dialog.__init__(self,parent=parent,title=DEFAULT_DIALOG_CAPTION,
-                          size=(800,600))
+                          size=(700,400))
         self.LABEL_FONT = wx.Font(10, wx.SWISS, wx.NORMAL, wx.BOLD)
+        self.VALUE_FONT = wx.Font(12, wx.SWISS, wx.NORMAL, wx.BOLD)
         self.initCtrls()
-        self.initSizers()        
+        self.initSizers()
         
         self.Centre(True)
 
@@ -430,6 +434,7 @@ class ImportDialog(wx.Dialog):
         self.pctrlssz.Add(self.dlm, 0, wx.EXPAND|wx.ALL, 5)
         self.pctrlssz.Add(self._skiprows, 0, wx.EXPAND|wx.ALL, 5)
         self.pctrlssz.Add(self.skiprows, 0, wx.EXPAND|wx.ALL, 5)
+        self.pctrlssz.Add(self.preview, 0, wx.ALIGN_CENTRE|wx.ALL, 10)
         
         self.panelsz.Add(self.fctrl, 1, wx.EXPAND|wx.ALL, 5)
         self.panelsz.Add(self.pctrls, 1, wx.EXPAND|wx.ALL, 5)
@@ -442,7 +447,7 @@ class ImportDialog(wx.Dialog):
         
         self.mainsz.Add(self.panel, 5, wx.EXPAND|wx.ALL, 5)
         self.mainsz.Add(self.plog, 1, wx.EXPAND|wx.ALL, 5)
-        self.mainsz.Add(self.pbutton, 1, wx.EXPAND|wx.ALL, 5)
+        self.mainsz.Add(self.pbutton, 0, wx.ALIGN_CENTRE|wx.ALL, 5)
         
         self.pctrls.SetSizer(self.pctrlssz)
         self.panel.SetSizer(self.panelsz)
@@ -456,32 +461,64 @@ class ImportDialog(wx.Dialog):
         self.pbutton = wx.Panel(self, -1)
         self.pctrls = wx.Panel(self.panel, -1)
         
-        self.fctrl = wx.FileCtrl(self.panel, -1)
-        self.grid = ui.DataGrid(self.panel, (10,10))
+        wc = IMPORT_DIALOG_WILDCARD
+        
+        self.fctrl = wx.FileCtrl(self.panel, -1, wildCard=wc)
+        self.grid = ui.DataGrid(self.panel, (10,1))
         
         # Controles conf.
         self._dlm = wx.StaticText(self.pctrls, -1, u"Delimitador", size=(-1,25))
         self.dlm = wx.TextCtrl(self.pctrls, -1, u",", size=(-1,25))
+        self.dlm.SetFont(self.VALUE_FONT)
         self._skiprows = wx.StaticText(self.pctrls, -1, u"Leer a partir de fila:", size=(-1,25))
         self.skiprows = wx.SpinCtrl(self.pctrls, -1, min=1, max=100)
+        self.preview = wx.Button(self.pctrls, -1, u"Vista previa")
         
         # Log 
         self.log = LogCtrl(self.plog)
         
         # Botones
-        self.okbutton = wx.Button(self.pbutton, wx.ID_OK, u"Aceptar", size=(-1,25))
-        self.cancelbutton = wx.Button(self.pbutton, wx.ID_CANCEL, u"Cancelar", size=(-1,25), 
-                                style=wx.ID_CANCEL)
+        self.okbutton = wx.Button(self.pbutton, wx.ID_OK, u"Aceptar", size=(100,25))
+        self.cancelbutton = wx.Button(self.pbutton, wx.ID_CANCEL, u"Cancelar", 
+                                      size=(100,25), style=wx.ID_CANCEL)
         
-        self.Bind(wx.EVT_SPINCTRL, self.OnSpin)
+        self.Bind(wx.EVT_BUTTON, self.OnPreview, self.preview)
         
-    def OnSpin(self,event):
-        self.log.write("Valor actual: %s"%(self.skiprows.GetValue(),))
-            
-    def GetData(self):
-        self.data = self.fctrl.GetPath()
-        return self.data
+    def OnPreview(self,event):
+        self.grid.SetArrayData(np.array(([[],[]])))
+        filename = self.fctrl.GetPath()
+        delimiter = self.dlm.GetValue()
+        skipr = self.skiprows.GetValue()
+        mps = 100 # max preview size
+        try:
+            data = io.read_txt(filename, delimiter=delimiter, skiprows=skipr)
+            if not data is None:
+                if data.shape[0]>mps and data.shape[1]>mps:
+                    self.grid.SetArrayData(data[:mps,:mps])
+                elif data.shape[0]>mps and data.shape[1]<mps:
+                    self.grid.SetArrayData(data[:mps,:])
+                elif data.shape[0]<mps and data.shape[1]>mps:
+                    self.grid.SetArrayData(data[:,:mps])
+                else:
+                    self.grid.SetArrayData(data)
+            else:
+                self.log.write("No se han podido leer los datos")
+        except Exception as exc:
+            self.log.write(exc)
 
+    def GetData(self):
+        filename = self.fctrl.GetPath()
+        delimiter = self.dlm.GetValue()
+        skiprows = self.skiprows.GetValue()
+        try:
+            data = io.read_txt(filename, delimiter=delimiter, skiprows=skiprows)
+            if not data is None:
+                return data
+            else:
+                self.log.write("No se han podido leer los datos")
+        except Exception as exc:
+            self.log.write(exc)
+        
 
 class TickDialog(wx.Dialog):
     def __init__(self,parent,axes,xy,**kwargs):
@@ -699,4 +736,4 @@ def test_axestoolbar():
 
 
 if __name__=='__main__':
-    test_tick()
+    test_import()
