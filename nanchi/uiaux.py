@@ -78,17 +78,6 @@ class MainToolbar(wx.ToolBar):
         
         self.contourf_tool = self.AddLabelTool(-1, "Contorno relleno", 
         contourf_bmp, shortHelp=u"Contorno relleno")
-        #~ 
-        #~ self.AddSeparator()
-        #~ self.AddSeparator()
-        #~ self.AddSeparator()
-        #~ self.AddSeparator()
-        #~ 
-        #~ self.zoom_box_tool = self.AddLabelTool(-1, "Zoom Box", 
-        #~ zoom_box_bmp, shortHelp=u"Zoom Box")
-        #~ 
-        #~ self.reset_view_tool = self.AddLabelTool(-1, "Reset view", 
-        #~ reset_view_bmp, shortHelp=u"Vista inicial")
         
 
 class AxesToolbar(wx.ToolBar):
@@ -400,22 +389,20 @@ class LogCtrl(wx.TextCtrl):
     def __init__(self,parent,**kwargs):
         wx.TextCtrl.__init__(self, parent=parent, id=wx.ID_ANY,
                              style=wx.TE_MULTILINE, **kwargs)
-        self.font = wx.Font(10, wx.MODERN, wx.NORMAL, wx.BOLD)
+        self.font = wx.Font(9, wx.MODERN, wx.NORMAL, wx.BOLD)
         self.SetFont(self.font)
-        self.SetForegroundColour("#5555dd")
+        self.SetForegroundColour("#ff5050")
         
     def write(self,string):
-        #self.cvalue = self.GetValue()
-        #_nvalue = "%s\n>> %s"%(self.cvalue, string)
-        _nvalue = "$ %s"%(string)
+        _nvalue = ">>> %s"%(string)
         self.SetValue(_nvalue)
     
 
 class ImportDialog(wx.Dialog):
     def __init__(self,parent,**kwargs):
         wx.Dialog.__init__(self,parent=parent,title=DEFAULT_DIALOG_CAPTION,
-                          size=(700,400))
-        self.LABEL_FONT = wx.Font(10, wx.SWISS, wx.NORMAL, wx.BOLD)
+                          size=(800,500))
+        self.LABEL_FONT = wx.Font(10, wx.SWISS, wx.NORMAL, wx.NORMAL)
         self.VALUE_FONT = wx.Font(12, wx.SWISS, wx.NORMAL, wx.BOLD)
         self.initCtrls()
         self.initSizers()
@@ -465,6 +452,8 @@ class ImportDialog(wx.Dialog):
         
         self.fctrl = wx.FileCtrl(self.panel, -1, wildCard=wc)
         self.grid = ui.DataGrid(self.panel, (10,1))
+        self.grid.SetRowLabelSize(0)
+        self.grid.SetColLabelSize(0)
         
         # Controles conf.
         self._dlm = wx.StaticText(self.pctrls, -1, u"Delimitador", size=(-1,25))
@@ -473,6 +462,11 @@ class ImportDialog(wx.Dialog):
         self._skiprows = wx.StaticText(self.pctrls, -1, u"Leer a partir de fila:", size=(-1,25))
         self.skiprows = wx.SpinCtrl(self.pctrls, -1, min=1, max=100)
         self.preview = wx.Button(self.pctrls, -1, u"Vista previa")
+        
+        # Set labels
+        for label in [self._dlm, self._skiprows]:
+            label.SetFont(self.LABEL_FONT)
+            label.SetForegroundColour("#556655")
         
         # Log 
         self.log = LogCtrl(self.plog)
@@ -501,8 +495,13 @@ class ImportDialog(wx.Dialog):
                     self.grid.SetArrayData(data[:,:mps])
                 else:
                     self.grid.SetArrayData(data)
+                infostr = u"Vista previa de datos leídos de %s\nTamaño: (%g,%g)"%(
+                                                            filename,
+                                                            data.shape[0],
+                                                            data.shape[1])
+                self.log.write(infostr)
             else:
-                self.log.write("No se han podido leer los datos")
+                self.log.write(u"No se han podido leer los datos")
         except Exception as exc:
             self.log.write(exc)
 
@@ -676,6 +675,52 @@ class TickGrid(wxgrid.Grid):
 
 
 
+class LineStyleDialog(wx.Dialog):
+    def __init__(self,parent,**kwargs):
+        wx.Dialog.__init__(self,parent=parent,title=DEFAULT_DIALOG_CAPTION,
+                          size=(200,120))
+        self.LABEL_FONT = wx.Font(10, wx.SWISS, wx.NORMAL, wx.BOLD)
+        self.initCtrls()
+        self.initSizers()
+        self.Centre(True)
+        
+    def initCtrls(self):
+        self.panel = wx.Panel(self, -1)
+        self.pbutton = wx.Panel(self, -1)
+        
+        self._label = wx.StaticText(self.panel, -1, u"Seleccione un estilo de línea")
+        self._lstyles = "-|--|:|-.".split("|")
+        self.options = wx.ComboBox(self.panel, -1, choices=self._lstyles)
+        self.options.SetFont(self.LABEL_FONT)
+        
+        self.okbt = wx.Button(self.pbutton, wx.ID_OK, u"Aceptar")
+        self.cancelbt =    wx.Button(self.pbutton, wx.ID_CANCEL, u"Cancelar")
+        
+    def initSizers(self):
+        self.sz = wx.BoxSizer(wx.VERTICAL)
+        self.panelsz = wx.BoxSizer(wx.VERTICAL)
+        self.pbuttonsz = wx.BoxSizer(wx.HORIZONTAL)
+        
+        self.panelsz.Add(self._label, 1, wx.EXPAND|wx.ALL, 2)
+        self.panelsz.Add(self.options, 1, wx.EXPAND|wx.ALL, 2)
+        
+        self.pbuttonsz.Add(self.okbt, 1, wx.EXPAND|wx.ALL, 3)
+        self.pbuttonsz.Add(self.cancelbt, 1, wx.EXPAND|wx.ALL, 3)
+        
+        self.sz.Add(self.panel, 2, wx.EXPAND|wx.ALL, 2)
+        self.sz.Add(self.pbutton, 1, wx.EXPAND|wx.ALL, 2)
+        
+        self.SetSizer(self.sz)
+        self.panel.SetSizer(self.panelsz)
+        self.pbutton.SetSizer(self.pbuttonsz)
+
+    def GetData(self):
+        _ls = self.options.GetValue()
+        if not _ls in self._lstyles:
+            _ls = "-"
+        return _ls
+
+
 def test_toolbar():
     app = wx.App()
     fr = wx.Frame(None, -1, "Hi !!!", size=(800,600))
@@ -735,5 +780,15 @@ def test_axestoolbar():
     app.MainLoop()    
 
 
+def test_linestyle():
+    app = wx.App()
+    fr = LineStyleDialog(None)
+    if fr.ShowModal() == wx.ID_OK:
+        print fr.GetData()
+    fr.Destroy()
+    app.MainLoop()
+    
+
+
 if __name__=='__main__':
-    test_import()
+    test_linestyle()
