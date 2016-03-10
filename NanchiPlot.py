@@ -229,14 +229,10 @@ class NanchiPlot(wx.Frame):
         
         Importa datos de un fichero de texto plano
         """
-        path = ""
-        wildcard = "*.txt"
-        dlg = wx.FileDialog(self, message="Seleccione un archivo",
-        defaultDir=os.getcwd(), wildcard=wildcard, style=wx.OPEN)
+        dlg = aux.ImportDialog(None)
         if dlg.ShowModal() == wx.ID_OK:
             busy_dlg = aux.BusyInfo("Espere un momento...", self)
-            path = dlg.GetPath()
-            data = io.read_txt(path)
+            data = dlg.GetData()
             if data is None:
                 self.sb.SetStatusText(SB_ON_IMPORT_DATA_FAIL%(path))
                 del busy_dlg

@@ -11,10 +11,11 @@ def read_txt(filename,delimiter=None,dtype="float",**kwargs):
             try:
                 X = np.loadtxt(filename,delimiter=dlm,dtype=dtype,**kwargs)
                 return X
-            except:
-                pass
+            except: pass
     else:
-        X = np.loadtxt(filename,delimiter=dlm,dtype=dtype,**kwargs)
+        try:
+            X = np.loadtxt(filename,delimiter=delimiter,dtype=dtype,**kwargs)
+        except: pass
     return X
     
 def read_csv(filename,dtype="float"):
