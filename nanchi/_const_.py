@@ -76,7 +76,7 @@ SB_ON_CREATE_DATA_BIVARIABLE_FUNCTION = "Datos definidos a partir de f(x,y)"
 
 
 #Import dialog
-IMPORT_DIALOG_WILDCARD = "Todos los archivos (*.*)|*.*| Archivo TXT (*.txt)|*.txt|DAT (*.dat)|*.dat"
+IMPORT_DIALOG_WILDCARD = "Todos los archivos (*.*)|*.*|Archivos TXT (*.txt)|*.txt|Archivos DAT (*.dat)|*.dat"
 
 
 

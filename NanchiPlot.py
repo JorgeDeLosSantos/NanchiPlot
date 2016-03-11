@@ -6,7 +6,6 @@
 # E-mail: delossantosmfq@gmail.com
 # Code: https://github.com/JorgeDeLosSantos/NanchiPlot
 #
-
 import wx
 import os
 import numpy as np
@@ -67,11 +66,9 @@ class NanchiPlot(wx.Frame):
         m_imagen.AppendMenu(-1, "Filtros", filtros)
         binarizar = m_imagen.Append(-1, "Binarizar")
         
-        
         m_ayuda = wx.Menu()
         ayuda = m_ayuda.Append(-1, "Ayuda")
         acerca_de = m_ayuda.Append(-1, "Acerca de...")
-        
         
         menu_bar = wx.MenuBar()
         menu_bar.Append(m_archivo, "Archivo")

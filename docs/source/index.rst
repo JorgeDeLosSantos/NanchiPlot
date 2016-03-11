@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Bienvenido a la documentación de NanchiPlot
-===========================================
+Bienvenido a la documentación de NanchiPlot 0.1.0
+=================================================
 
 NanchiPlot es un mini-software de graficado, que utiliza Matplotlib como base y wxPython como librería de controles gráficos.
 
@@ -17,4 +17,21 @@ las celdas destinadas para tal propósito.
    :maxdepth: 2
 
    _contents/basic.rst
+   _contents/gui.rst
+   _contents/tutorial.rst
    _contents/screenshots.rst
+
+
+Más información...
+------------------
+
+**Repositorio del proyecto**
+
+http://github.com/JorgeDeLosSantos/NanchiPlot
+
+::
+
+	E-mail: delossantosmfq@gmail.com
+	Twitter: @pjdlsl
+	GitHub: @JorgeDeLosSantos
+

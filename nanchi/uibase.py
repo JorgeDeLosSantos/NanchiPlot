@@ -317,11 +317,14 @@ class GraphPanel(wx.Panel):
         self.canvas.mpl_disconnect(self.LINE_COLOR_EVT)
         
     def OnLineStyle(self,event):
-        self.LINE_STYLE_EVT = self.canvas.mpl_connect("pick_event", self.set_line_style)
-        self._ls = event.GetEventObject().GetLabel(event.GetId())
+        dlg = aux.LineStyleDialog(None)
+        if dlg.ShowModal() == wx.ID_OK:
+            self._ls = dlg.GetData()
+            self.LINE_STYLE_EVT = self.canvas.mpl_connect("pick_event", self.set_line_style)
+        dlg.Destroy()
         
     def set_line_style(self,event):
-        event.artist.set_linestyle(linestyle=self._ls)
+        event.artist.set_linestyle(self._ls)
         self.canvas.mpl_disconnect(self.LINE_STYLE_EVT)
         self.canvas.draw()
         

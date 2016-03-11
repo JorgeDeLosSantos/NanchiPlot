@@ -12,41 +12,22 @@ Librerías requeridas
 * wxPython 
 * Matplotlib
 * NumPy
+* Scikit-image (Opcional para el procesamiento de imágenes)
 
 
-Probando LaTeX:
+Instalación
+-----------
 
-.. math::
-	
-	a^2 + b^2 = c^2 - \int_0^x\,\,f(x) dx
+.. note::
 
-Con esto tenemos :math:`\alpha+\beta^3 = \sqrt{x}`
-
-
-Probando código:
-
-.. code:: python
-
-	import math
-
-	def fun(x):
-		return x**2
-
-	class ABC(object):
-		pass
+	Instrucciones de instalación para la versión de desarrollo.
 
 
-Más información...
-------------------
-
-**Repositorio del proyecto**
-
-http://github.com/JorgeDeLosSantos/NanchiPlot
-
-**Desarrollador**
+Clone el repositorio de GitHub:
 
 ::
 
-	Pedro Jorge De Los Santos
-	delossantosmfq@gmail.com
-	labdls.blogspot.mx
+	$ git clone https://github.com/JorgeDeLosSantos
+
+
+Ejecute el archivo NanchiPlot.py
