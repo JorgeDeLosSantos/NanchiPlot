@@ -212,7 +212,7 @@ class FunctionDialog(wx.Dialog):
         self.prange = wx.Panel(self, -1)
         self.pbutton = wx.Panel(self, -1)
         self._fun = wx.StaticText(self.pfun, -1, u"f(x)", size=(-1,25))
-        self.fun = wx.TextCtrl(self.pfun, -1, u"x**2", size=(-1,25))
+        self.fun = wx.TextCtrl(self.pfun, -1, u"15*x^2-x^3", size=(-1,25))
         self._a = wx.StaticText(self.prange, -1, u"a", size=(-1,25))
         self.a = wx.TextCtrl(self.prange, -1, u"0", size=(50,25))
         self._b = wx.StaticText(self.prange, -1, u"b", size=(-1,25))
@@ -226,7 +226,7 @@ class FunctionDialog(wx.Dialog):
             ctrl.SetFont(self.LABEL_FONT)
             
     def GetData(self):
-        self.out_fun = self.fun.GetValue()
+        self.out_fun = self.fun.GetValue().replace("^","**")
         self.out_a = self.a.GetValue()
         self.out_b = self.b.GetValue()
         self.data = (self.out_fun, self.out_a, self.out_b)
@@ -287,7 +287,7 @@ class BivariableFunctionDialog(wx.Dialog):
         self.prangey = wx.Panel(self, -1)
         self.pbutton = wx.Panel(self, -1)
         self._fun = wx.StaticText(self.pfun, -1, u"f(x,y)", size=(-1,25))
-        self.fun = wx.TextCtrl(self.pfun, -1, u"(x*y)/(x**2+y**2)", size=(-1,25))
+        self.fun = wx.TextCtrl(self.pfun, -1, u"(x*y)/(x^2+y^2)", size=(-1,25))
         self._x1 = wx.StaticText(self.prangex, -1, u"x1", size=(-1,25))
         self.x1 = wx.TextCtrl(self.prangex, -1, u"-10", size=(50,25))
         self._x2 = wx.StaticText(self.prangex, -1, u"x2", size=(-1,25))
@@ -305,7 +305,7 @@ class BivariableFunctionDialog(wx.Dialog):
             ctrl.SetFont(self.LABEL_FONT)
             
     def GetData(self):
-        self.out_fun = self.fun.GetValue()
+        self.out_fun = self.fun.GetValue().replace("^","**")
         self.out_x = [self.x1.GetValue(), self.x2.GetValue()]
         self.out_y = [self.y1.GetValue(), self.y2.GetValue()]
         self.data = (self.out_fun, self.out_x, self.out_y)
