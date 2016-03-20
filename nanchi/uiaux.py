@@ -101,6 +101,7 @@ class AxesToolbar(wx.ToolBar):
         ylabel_bmp = wx.Bitmap(PATH_YLABEL_ICON)
         xticks_bmp = wx.Bitmap(PATH_XTICKS_ICON)
         yticks_bmp = wx.Bitmap(PATH_YTICKS_ICON)
+        pie_labels_bmp = wx.Bitmap(PATH_PIE_LABELS_ICON)
         
         text_bmp = wx.Bitmap(PATH_TEXT_ICON)
         move_text_bmp = wx.Bitmap(PATH_MOVE_TEXT_ICON)
@@ -150,10 +151,13 @@ class AxesToolbar(wx.ToolBar):
         ylabel_bmp, shortHelp=u"Modificar YLabel")
         
         self.xticks_tool = self.AddLabelTool(-1, u"XTicks", 
-        xticks_bmp, shortHelp=u"Modificar XTikcs")
+        xticks_bmp, shortHelp=u"Modificar XTicks")
         
         self.yticks_tool = self.AddLabelTool(-1, u"YTicks", 
-        yticks_bmp, shortHelp=u"Modificar YTikcs")
+        yticks_bmp, shortHelp=u"Modificar YTicks")
+        
+        self.pie_labels_tool = self.AddLabelTool(-1, u"Pie Labels", 
+        pie_labels_bmp, shortHelp=u"Pie Labels")
         
         self.AddSeparator()
         
@@ -721,6 +725,59 @@ class LineStyleDialog(wx.Dialog):
         return _ls
 
 
+class PieLabelsDialog(wx.Dialog):
+    def __init__(self,parent,labels,**kwargs):
+        wx.Dialog.__init__(self,parent=parent,title=DEFAULT_DIALOG_CAPTION,
+                          size=(200,300))
+        self.labels = labels
+        self.initCtrls()
+        self.initSizers()
+        self.initConfig()
+        self.Centre(True)
+        
+    def initCtrls(self):
+        self.panel = wx.Panel(self, -1)
+        self.pbutton = wx.Panel(self, -1)
+
+        self.grid = wxgrid.Grid(self.panel)
+        
+        self.okbt = wx.Button(self.pbutton, wx.ID_OK, u"Aceptar")
+        self.cancelbt =    wx.Button(self.pbutton, wx.ID_CANCEL, u"Cancelar")
+        
+    def initSizers(self):
+        self.sz = wx.BoxSizer(wx.VERTICAL)
+        self.panelsz = wx.BoxSizer(wx.VERTICAL)
+        self.pbuttonsz = wx.BoxSizer(wx.HORIZONTAL)
+        
+        self.panelsz.Add(self.grid, 1, wx.EXPAND|wx.ALL, 5)
+        
+        self.pbuttonsz.Add(self.okbt, 1, wx.EXPAND|wx.ALL, 5)
+        self.pbuttonsz.Add(self.cancelbt, 1, wx.EXPAND|wx.ALL, 5)
+        
+        self.sz.Add(self.panel, 8, wx.EXPAND|wx.ALL, 5)
+        self.sz.Add(self.pbutton, 1, wx.EXPAND|wx.ALL, 5)
+        
+        self.SetSizer(self.sz)
+        self.panel.SetSizer(self.panelsz)
+        self.pbutton.SetSizer(self.pbuttonsz)
+        
+    def initConfig(self):
+        _rows = len(self.labels)
+        self.grid.CreateGrid(_rows,1)
+        self.grid.SetRowLabelSize(0)
+        self.grid.SetColLabelSize(0)
+        self.grid.SetColSize(0,160)
+        for ii in range(_rows):
+            self.grid.SetCellValue(ii,0,str(self.labels[ii].get_text()))
+            
+        
+    def GetData(self):
+        for k,ii in enumerate(range(len(self.labels))):
+            val = self.grid.GetCellValue(ii,0)
+            self.labels[k].set_text(val)
+        return self.labels
+
+
 def test_toolbar():
     app = wx.App()
     fr = wx.Frame(None, -1, "Hi !!!", size=(800,600))
@@ -788,7 +845,18 @@ def test_linestyle():
     fr.Destroy()
     app.MainLoop()
     
+def test_pie():
+    f = plt.figure()
+    ax = f.add_subplot(111)
+    _, lbl = ax.pie([1,2,3])
+    app = wx.App()
+    fr = PieLabelsDialog(None, lbl)
+    if fr.ShowModal() == wx.ID_OK:
+        print fr.GetData()
+    fr.Destroy()
+    app.MainLoop()
+    
 
 
 if __name__=='__main__':
-    test_linestyle()
+    test_pie()
