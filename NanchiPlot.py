@@ -256,6 +256,7 @@ class NanchiPlot(wx.Frame):
         dlg.Destroy()
             
     def OnFunction(self,event):
+        from numpy import (sin,cos,tan,log,exp)
         dialog = aux.FunctionDialog(None)
         if dialog.ShowModal() == wx.ID_OK:
             fx,a,b = dialog.GetData()
@@ -268,6 +269,7 @@ class NanchiPlot(wx.Frame):
         dialog.Destroy()
         
     def OnBivariableFunction(self,event):
+        from numpy import (sin,cos,tan,log,exp)
         dialog = aux.BivariableFunctionDialog(None)
         if dialog.ShowModal() == wx.ID_OK:
             fxy,x,y = dialog.GetData()
