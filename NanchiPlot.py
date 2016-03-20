@@ -170,6 +170,8 @@ class NanchiPlot(wx.Frame):
         self.Bind(wx.EVT_TOOL, self.graphs.OnXTicks, self.axestoolbar.xticks_tool)
         self.Bind(wx.EVT_TOOL, self.graphs.OnYTicks, self.axestoolbar.yticks_tool)
         
+        self.Bind(wx.EVT_TOOL, self.OnPieLabels, self.axestoolbar.pie_labels_tool)
+        
         self.Bind(wx.EVT_TOOL, self.graphs.OnMoveLine, self.axestoolbar.move_line_tool)
         self.Bind(wx.EVT_TOOL, self.graphs.OnMoveText, self.axestoolbar.move_text_tool)
         
@@ -331,12 +333,22 @@ class NanchiPlot(wx.Frame):
         X = self.data.grid_data.GetArrayData()
         rows,cols = X.shape
         if cols == 1:
-            _ , self.pie_labels = self.axes.pie(X[:,0])
+            _ , self.pie_labels = self.axes.pie(X[:,0], labels=X[:,0])
             self.axes.set_aspect("equal")
         else:
             pass
         self.canvas.draw()
-
+        
+    def OnPieLabels(self,event):
+        if hasattr(self,"pie_labels"):
+            dlg = aux.PieLabelsDialog(None,self.pie_labels)
+            if dlg.ShowModal() == wx.ID_OK:
+                dlg.GetData()
+            dlg.Destroy()
+        else:
+            self.sb.SetStatusText(u"No hay gráfica de pastel disponible")
+        self.canvas.draw()
+        
     def OnImage(self,event):
         setplot.set_default_params(self.axes,self.figure)
         X = self.data.grid_data.GetArrayData()
