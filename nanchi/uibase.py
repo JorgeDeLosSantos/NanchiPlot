@@ -22,17 +22,17 @@ class NanchiNoteBook(aui.AuiNotebook):
         _styles = aui.AUI_NB_TOP | aui.AUI_NB_TAB_SPLIT | aui.AUI_NB_TAB_MOVE
         aui.AuiNotebook.__init__(self, parent=parent, style=_styles)
         
+        # Graph Panel
         self.graphs = GraphPanel(self)
         self.data = DataPanel(self)
         #self.setup = SetupPanel(self)
-
-        self.AddPage(self.graphs, u"Gráficas")
-        self.AddPage(self.data, u"Datos")
-        #self.AddPage(self.setup, u"Configurar")
-
         self.axes = self.graphs.axes
         self.figure = self.graphs.figure
         self.canvas = self.graphs.canvas
+        
+        self.AddPage(self.graphs, u"Gráficas")
+        self.AddPage(self.data, u"Datos")
+        #self.AddPage(self.setup, u"Configurar")
 
         self.Bind(aui.EVT_AUINOTEBOOK_PAGE_CHANGED, self.OnPageChanged)
 
@@ -390,6 +390,23 @@ class GraphPanel(wx.Panel):
         dlg.Destroy()
         self.canvas.draw()
         
+    def OnLineLabel(self,event):
+        self.LINE_LABEL_EVT = self.canvas.mpl_connect("pick_event", self.set_line_label)
+        
+    def set_line_label(self,event):
+        self.canvas.mpl_disconnect(self.LINE_LABEL_EVT)
+        dlg = wx.TextEntryDialog(self, u"Inserte una etiqueta", NANCHI_MAIN_CAPTION)
+        if dlg.ShowModal()==wx.ID_OK:
+            _label = dlg.GetValue()
+            event.artist.set_label(_label)
+        dlg.Destroy()
+        self.canvas.draw()
+        
+    def OnShowLegend(self,event):
+        self.axes.legend(loc="best")
+        self.canvas.draw()
+        
+        
     def OnPieLabels(self,event):
         pass
         
@@ -501,6 +518,12 @@ class DataGrid(grid.Grid):
         cols = int(gridsize[1])
         self.CreateGrid(rows,cols)
         self.SetRowLabelSize(20)
+        
+        # Para graficar desde rejilla
+        if isinstance(self.GetParent(),DataPanel):
+            self.axes = self.GetParent().GetParent().graphs.axes
+            self.canvas = self.GetParent().GetParent().graphs.canvas
+        
         self.Bind(grid.EVT_GRID_CELL_CHANGE, self.OnCellEdit)
         self.Bind(grid.EVT_GRID_CELL_RIGHT_CLICK, self.OnRightClick)
         
@@ -546,6 +569,19 @@ class DataGrid(grid.Grid):
                 else:
                     X[i][j] = np.nan
         return X
+        
+    def GetSelectedData(self):
+        scols = self.GetSelectedCols()
+        srows = self.GetSelectedRows()
+        X = np.zeros((len(srows),len(scols)))
+        for ii,row in enumerate(srows):
+            for jj,col in enumerate(scols):
+                try:
+                    X[ii][jj] = self.GetCellValue(row,col)
+                except ValueError:
+                    X[ii][jj] = np.nan
+        return X
+                
         
     def GetSelectedCols(self):
         scols = []
@@ -602,7 +638,11 @@ class DataGrid(grid.Grid):
         pum.AppendSeparator()
         randomfill = wx.MenuItem(pum, -1, "Rellenar columnas aleatoriamente")
         pum.AppendItem(randomfill)
-        
+        pum.AppendSeparator()
+        plot = wx.MenuItem(pum, -1, u"Graficar líneas")
+        pum.AppendItem(plot)
+        bar = wx.MenuItem(pum, -1, u"Graficar barras")
+        pum.AppendItem(bar)
         
         # Binds
         pum.Bind(wx.EVT_MENU, self.del_rows, delrows)
@@ -611,6 +651,9 @@ class DataGrid(grid.Grid):
         pum.Bind(wx.EVT_MENU, self.add_col, addcol)
         pum.Bind(wx.EVT_MENU, self.edit_collabel, editcollabel)
         pum.Bind(wx.EVT_MENU, self.random_fill, randomfill)
+        
+        pum.Bind(wx.EVT_MENU, self.plot, plot)
+        pum.Bind(wx.EVT_MENU, self.bar, bar)
         # Show 
         self.PopupMenu(pum)
         pum.Destroy()
@@ -645,15 +688,26 @@ class DataGrid(grid.Grid):
             for col in cols:
                 val = str(np.random.rand())
                 self.SetCellValue(ii,col,val)
+                
+    def plot(self,event):
+        data = self.GetSelectedData()
+        self.axes.plot(data)
+        self.canvas.draw()
+        
+    def bar(self,event):
+        X = self.GetSelectedData()
+        x = range(len(X[:,0]))
+        self.axes.bar(x,X[:,0], width=0.6 ,align="center")
+        self.canvas.draw()
+        
 
         
 if __name__=='__main__':
     app = wx.App()
     fr = GraphWindow(None,"Hi",size=(600,400))
     sz = wx.BoxSizer(wx.VERTICAL)
-    p = NanchiNoteBook(fr)
-    #p = DataPanel(fr)
-    sz.Add(p, 1, wx.EXPAND|wx.ALL, 5)
+    dp = DataPanel(fr)
+    sz.Add(dp, 1, wx.EXPAND)
     fr.SetSizer(sz)
     fr.Show()
     app.MainLoop()
