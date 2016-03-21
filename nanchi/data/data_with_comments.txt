@@ -1,6 +1,5 @@
 Este es un archivo con comentarios
-Bla bla
-Bla bla
+Use "Leer a partir de..." con 2 como valor asignado.
 0.0000 1.0000 0.0000 0.0000
 0.2041 0.9792 0.2027 -0.3998
 0.4082 0.9179 0.3969 -0.7830
