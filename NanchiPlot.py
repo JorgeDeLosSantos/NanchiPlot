@@ -164,6 +164,9 @@ class NanchiPlot(wx.Frame):
         self.Bind(wx.EVT_TOOL, self.graphs.OnLineWidth, self.axestoolbar.line_width_tool)
         self.Bind(wx.EVT_TOOL, self.graphs.OnLineStyle, self.axestoolbar.line_style_tool)
         
+        self.Bind(wx.EVT_TOOL, self.graphs.OnLineLabel, self.axestoolbar.line_label_tool)
+        self.Bind(wx.EVT_TOOL, self.graphs.OnShowLegend, self.axestoolbar.show_legend_tool)
+        
         self.Bind(wx.EVT_TOOL, self.graphs.OnXLabel, self.axestoolbar.xlabel_tool)
         self.Bind(wx.EVT_TOOL, self.graphs.OnYLabel, self.axestoolbar.ylabel_tool)
         

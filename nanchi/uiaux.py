@@ -96,6 +96,8 @@ class AxesToolbar(wx.ToolBar):
         line_color_bmp = wx.Bitmap(PATH_LINE_COLOR_ICON)
         line_style_bmp = wx.Bitmap(PATH_LINE_STYLE_ICON)
         line_width_bmp = wx.Bitmap(PATH_LINE_WIDTH_ICON)
+        line_label_bmp = wx.Bitmap(PATH_LINE_LABEL_ICON)
+        show_legend_bmp = wx.Bitmap(PATH_SHOW_LEGEND_ICON)
         
         xlabel_bmp = wx.Bitmap(PATH_XLABEL_ICON)
         ylabel_bmp = wx.Bitmap(PATH_YLABEL_ICON)
@@ -136,6 +138,12 @@ class AxesToolbar(wx.ToolBar):
         
         self.line_width_tool = self.AddLabelTool(-1, u"Grosor de línea", 
         line_width_bmp, shortHelp=u"Grosor de línea")
+        
+        self.line_label_tool = self.AddLabelTool(-1, u"Etiqueta de línea", 
+        line_label_bmp, shortHelp=u"Etiqueta de línea")
+        
+        self.show_legend_tool = self.AddLabelTool(-1, u"Mostrar leyendas", 
+        show_legend_bmp, shortHelp=u"Mostrar leyendas")
         
         self.AddSeparator()
         

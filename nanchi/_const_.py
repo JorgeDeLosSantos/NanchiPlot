@@ -51,6 +51,8 @@ PATH_GRID_COLOR_ICON = path.join(IMGS_PATH, "grid_color_icon_24x24.png")
 PATH_LINE_STYLE_ICON = path.join(IMGS_PATH, "line_style_icon_24x24.png")
 PATH_LINE_COLOR_ICON = path.join(IMGS_PATH, "line_color_icon_24x24.png")
 PATH_LINE_WIDTH_ICON = path.join(IMGS_PATH, "line_width_icon_24x24.png")
+PATH_LINE_LABEL_ICON = path.join(IMGS_PATH, "line_label_icon_24x24.png")
+PATH_SHOW_LEGEND_ICON = path.join(IMGS_PATH, "show_legend_icon_24x24.png")
 PATH_TEXT_ICON = path.join(IMGS_PATH, "text_icon_24x24.png")
 
 PATH_XLABEL_ICON = path.join(IMGS_PATH, "xlabel_icon_24x24.png")
