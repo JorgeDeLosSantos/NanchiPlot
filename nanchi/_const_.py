@@ -57,6 +57,7 @@ PATH_XLABEL_ICON = path.join(IMGS_PATH, "xlabel_icon_24x24.png")
 PATH_YLABEL_ICON = path.join(IMGS_PATH, "ylabel_icon_24x24.png")
 PATH_XTICKS_ICON = path.join(IMGS_PATH, "xticks_icon_24x24.png")
 PATH_YTICKS_ICON = path.join(IMGS_PATH, "yticks_icon_24x24.png")
+PATH_PIE_LABELS_ICON = path.join(IMGS_PATH, "pie_labels_icon_24x24.png")
 
 PATH_MOVE_TEXT_ICON = path.join(IMGS_PATH, "move_text_icon_24x24.png")
 PATH_MOVE_LINE_ICON = path.join(IMGS_PATH, "move_line_icon_24x24.png")

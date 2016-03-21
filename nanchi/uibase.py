@@ -390,6 +390,9 @@ class GraphPanel(wx.Panel):
         dlg.Destroy()
         self.canvas.draw()
         
+    def OnPieLabels(self,event):
+        pass
+        
     def OnZoom(self,event):
         self.sb.SetStatusText(u"Arrastre el cursor para seleccionar una región")
         self.canvas.zoomit()
@@ -535,7 +538,11 @@ class DataGrid(grid.Grid):
             for j in range(ncols):
                 cval = self.GetCellValue(i,j)
                 if not isempty(cval):
-                    X[i][j] = float(cval)
+                    try:
+                        X[i][j] = float(cval)
+                    except:
+                        # Revisar valores devueltos
+                        X[i][j] = np.nan
                 else:
                     X[i][j] = np.nan
         return X

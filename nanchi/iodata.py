@@ -15,7 +15,8 @@ def read_txt(filename,delimiter=None,dtype="float",**kwargs):
     else:
         try:
             X = np.loadtxt(filename,delimiter=delimiter,dtype=dtype,**kwargs)
-        except: pass
+        except:
+            X = np.genfromtxt(filename, delimiter=delimiter, dtype=np.str_)
     return X
     
 def read_csv(filename,dtype="float"):
