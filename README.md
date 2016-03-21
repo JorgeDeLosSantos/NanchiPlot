@@ -79,11 +79,11 @@ Actualmente en fase de desarrollo inicial. **(0.1.0)-dev**
 
 ## Screenshots
 
-![](docs/source/_contents/img/screen_01.PNG)
-![](docs/source/_contents/img/screen_02.PNG)
-![](docs/source/_contents/img/screen_03.PNG)
-![](docs/source/_contents/img/screen_04.PNG)
-![](docs/source/_contents/img/screen_05.PNG)
+![](docs/source/_contents/img/screenshots/screen_01.PNG)
+![](docs/source/_contents/img/screenshots/screen_02.PNG)
+![](docs/source/_contents/img/screenshots/screen_03.PNG)
+![](docs/source/_contents/img/screenshots/screen_04.PNG)
+![](docs/source/_contents/img/screenshots/screen_05.PNG)
 
 
 ## Más información
