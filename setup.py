@@ -2,7 +2,7 @@
 import site
 import os.path
 import glob
-from distutils.core import setup
+from setuptools import setup, find_packages
 
 MODULE_NAME = "nanchi"
 
@@ -23,11 +23,10 @@ setup(
     author='Pedro Jorge De Los Santos',
     author_email='delossantosmfq@gmail.com',
     license = "MIT",
-    keywords=["FEA","Abaqus","Postprocessing"],
-    install_requires=["matplotlib"],
-    url='https://github.com/JorgeDeLosSantos/pyqus',
-    packages=['nanchi'],
+    keywords=["Plotting"],
+    install_requires=["matplotlib","wxpython","numpy"],
+    url='https://github.com/JorgeDeLosSantos/NanchiPlot',
+    packages=find_packages(),
     scripts = ['nanchi_script.py','nanchi.bat'],
-    include_package_data=True,
     package_data={"nanchi": PACK_DATA}
 )

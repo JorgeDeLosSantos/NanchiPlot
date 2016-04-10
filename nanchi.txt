@@ -1,2 +1,0 @@
-<nanchi.uiaux.StatusBar; proxy of <Swig Object of type 'wxStatusBar *' at 0xe1e2840> >
-<nanchi.uiaux.StatusBar; proxy of <Swig Object of type 'wxStatusBar *' at 0x589e0f0> >
