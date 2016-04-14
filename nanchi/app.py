@@ -12,14 +12,13 @@ import numpy as np
 import matplotlib
 matplotlib.use('WXAgg') # wxPython backend
 import matplotlib.cm as cm # Colormap
-import nanchi.setplot as setplot # Axes & Figure props
-import nanchi.iodata as io # Read & Write data
-import nanchi.uibase as ui # Base interfaces
-import nanchi.uiaux as aux # Auxiliar interfaces
-import nanchi.uitoolbar as tb
-import nanchi.image as image # Image operations
-from nanchi._const_ import * # Constants
-
+import setplot as setplot # Axes & Figure props
+import iodata as io # Read & Write data
+import uibase as ui # Base interfaces
+import uiaux as aux # Auxiliar interfaces
+import uitoolbar as tb
+import image as image # Image operations
+from _const_ import * # Constants
 
 class NanchiPlot(wx.Frame):
     def __init__(self,parent):
@@ -102,8 +101,10 @@ class NanchiPlot(wx.Frame):
         
         self.mainsz.Add(self.toolbar, 0, wx.EXPAND)
         self.panelsz.Add(self.notebook, 1, wx.EXPAND|wx.ALL, 2)
-        self.panelsz.Add(self.axestoolbar, 0, wx.EXPAND|wx.ALL, 2)
-        self.panelsz.Add(self.linetoolbar, 0, wx.EXPAND|wx.ALL, 2)
+		
+        self.panelsz.Add(self.axestoolbar, 0, wx.EXPAND|wx.ALL) # Quitando el borde
+        self.panelsz.Add(self.linetoolbar, 0, wx.EXPAND|wx.ALL) # Quitando el borde
+		
         self.mainsz.Add(self.mainpanel, 1, wx.EXPAND)
         
         self.mainpanel.SetSizer(self.panelsz)
@@ -177,6 +178,11 @@ class NanchiPlot(wx.Frame):
         
         self.Bind(wx.EVT_TOOL, self.graphs.OnLineLabel, self.linetoolbar.line_label_tool)
         self.Bind(wx.EVT_TOOL, self.graphs.OnShowLegend, self.linetoolbar.show_legend_tool)
+        
+        self.Bind(wx.EVT_TOOL, self.OnPieLabels, self.linetoolbar.pie_labels_tool)
+        
+        self.Bind(wx.EVT_TOOL, self.graphs.OnMoveLine, self.linetoolbar.move_line_tool)
+        self.Bind(wx.EVT_TOOL, self.graphs.OnMoveText, self.linetoolbar.move_text_tool)
         
         self.Bind(wx.EVT_TOOL, self.OnPieLabels, self.linetoolbar.pie_labels_tool)
         
@@ -409,7 +415,23 @@ class NanchiPlot(wx.Frame):
         aux.AboutDialog(None)
 
 
-if __name__=='__main__':
-    app = wx.App(False)
-    frame = NanchiPlot(None)
+class App(wx.App):
+    """
+    Override OnInit
+    """
+    def OnInit(self):
+        print("Hi")
+        frame = NanchiPlot(None)
+        return True
+        
+
+
+def run():
+    REDIRECT = True
+    LOG_FILE = "nanchi.log"
+    app = App(REDIRECT, filename=LOG_FILE)
     app.MainLoop()
+
+
+if __name__=='__main__':
+    run()

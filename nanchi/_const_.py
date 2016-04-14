@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import os.path as path
+import site
 
-#
 VERSION = "0.1.0-dev"
 NANCHI_MAIN_CAPTION = "NanchiPlot %s"%(VERSION)
 
@@ -27,7 +27,9 @@ DEFAULT_DIALOG_CAPTION = NANCHI_MAIN_CAPTION
 LINE_STYLES = "'-' | '--' | '-.' | ':' | 'None' ".split("|")
 
 # Icons & Images dirs
-IMGS_PATH = "nanchi/img"
+cdir, _  = path.split(path.abspath(__file__))
+
+IMGS_PATH = path.join(cdir, u"img")
 PATH_NANCHI_LOGO = path.join(IMGS_PATH,"nanchi_logo.png")
 PATH_IMPORT_ICON = path.join(IMGS_PATH, "import_icon_32x32.png")
 PATH_LOAD_IMAGE_ICON = path.join(IMGS_PATH, "load_image_icon_32x32.png")

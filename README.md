@@ -85,7 +85,6 @@ Actualmente en fase de desarrollo inicial. **(0.1.0)-dev**
 ![](docs/source/_contents/img/screenshots/screen_04.PNG)
 ![](docs/source/_contents/img/screenshots/screen_05.PNG)
 
-
 ## Más información
 
 ```
