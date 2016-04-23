@@ -420,18 +420,15 @@ class App(wx.App):
     Override OnInit
     """
     def OnInit(self):
-        print("Hi")
         frame = NanchiPlot(None)
         return True
         
-
 
 def run():
     REDIRECT = True
     LOG_FILE = "nanchi.log"
     app = App(REDIRECT, filename=LOG_FILE)
     app.MainLoop()
-
 
 if __name__=='__main__':
     run()
