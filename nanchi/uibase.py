@@ -30,9 +30,9 @@ class NanchiNoteBook(aui.AuiNotebook):
         self.figure = self.graphs.figure
         self.canvas = self.graphs.canvas
         
-        self.AddPage(self.graphs, u"Gráficas")
-        self.AddPage(self.data, u"Datos")
-        #self.AddPage(self.setup, u"Configurar")
+        self.AddPage(self.graphs, u"Graphs")
+        self.AddPage(self.data, u"Data")
+        #self.AddPage(self.setup, u"Settings")
 
         self.Bind(aui.EVT_AUINOTEBOOK_PAGE_CHANGED, self.OnPageChanged)
 
@@ -43,90 +43,6 @@ class NanchiNoteBook(aui.AuiNotebook):
         #self.axes.set_ylabel(gp["ylabel"])
         #self.canvas.draw() # Draw canvas 
         
-
-
-class SetupPanel(wx.Panel):
-    def __init__(self,parent,*args,**kwargs):
-        wx.Panel.__init__(self,parent,*args,**kwargs)
-        # Fonts
-        self.COMBO_BOX_FONT = wx.Font(10, wx.SWISS, wx.NORMAL, wx.BOLD)
-        
-        self.initCtrls()
-        self.initSizers()
-        
-    def initCtrls(self):
-        self.plabels = wx.Panel(self, -1, style=wx.BORDER_SIMPLE)
-        self.pstyles = wx.Panel(self, -1, style=wx.BORDER_SIMPLE)
-        self.pbuttons = wx.Panel(self, -1, style=wx.BORDER_SIMPLE)
-        
-        # Labels controls
-        self._xlabel = wx.StaticText(self.plabels, -1, "Etiqueta X")
-        self._ylabel = wx.StaticText(self.plabels, -1, "Etiqueta Y")
-        self.xlabel = wx.TextCtrl(self.plabels, -1)
-        self.ylabel = wx.TextCtrl(self.plabels, -1)
-        
-        # Styles controls
-        self._line_style = wx.StaticText(self.pstyles, -1, u"Estilo de línea")
-        self.line_style = wx.ComboBox(self.pstyles, -1, choices=LINE_STYLES, 
-                                      size=(80,-1), value="'-'")
-        self.line_style.SetFont(self.COMBO_BOX_FONT)
-        
-        self._line_color = wx.StaticText(self.pstyles, -1, u"Color de línea")
-        self.line_color = wx.ColourPickerCtrl(self.pstyles, -1, col=LINE_COLOR)
-        
-        self._line_width = wx.StaticText(self.pstyles, -1, u"Grosor de línea")
-        self.line_width = wx.SpinCtrl(self.pstyles, -1, min=1, max=20, 
-                                      initial=1, size=(60,-1))
-        
-        self._grid_color = wx.StaticText(self.pstyles, -1, u"Color de rejilla")
-        self.grid_color = wx.ColourPickerCtrl(self.pstyles, -1, col=GRID_COLOR)
-        
-        # Buttons for save or discard changes
-        self.save_changes = wx.Button(self.pbuttons, -1, "Aplicar cambios")
-        self.default_values = wx.Button(self.pbuttons, -1, "Valores predeterminados")
-        
-        self.Bind(wx.EVT_BUTTON, self.OnSaveChanges, self.save_changes)
-        
-    def initSizers(self):
-        self.mainsz = wx.BoxSizer(wx.VERTICAL)
-        self.szplabels = wx.GridBagSizer(10,10)
-        self.szpstyles = wx.GridBagSizer(10,10)
-        self.szpbuttons = wx.BoxSizer(wx.HORIZONTAL)
-        
-        self.szplabels.Add(self._xlabel, (0,0), flag=wx.ALL, border=5)
-        self.szplabels.Add(self.xlabel, (0,1), flag=wx.ALL, border=5)
-        self.szplabels.Add(self._ylabel, (0,2), flag=wx.ALL, border=5)
-        self.szplabels.Add(self.ylabel, (0,3), flag=wx.ALL, border=5)
-        self.szplabels.AddGrowableRow(0)
-        
-        self.szpstyles.Add(self._line_style, (0,0), flag=wx.ALL, border=5)
-        self.szpstyles.Add(self.line_style, (0,1), flag=wx.ALL, border=5)
-        self.szpstyles.Add(self._line_color, (0,2), flag=wx.ALL, border=5)
-        self.szpstyles.Add(self.line_color, (0,3), flag=wx.ALL, border=5)
-        self.szpstyles.Add(self._line_width, (0,4), flag=wx.ALL, border=5)
-        self.szpstyles.Add(self.line_width, (0,5), flag=wx.ALL, border=5)
-        self.szpstyles.Add(self._grid_color, (1,0), flag=wx.ALL, border=5)
-        self.szpstyles.Add(self.grid_color, (1,1), flag=wx.ALL, border=5)
-        
-        self.szpbuttons.Add(self.save_changes, 0, wx.ALIGN_CENTER|wx.ALL, 5)
-        self.szpbuttons.Add(self.default_values, 0, wx.ALIGN_CENTER|wx.ALL, 5)
-        
-        self.mainsz.Add(self.plabels, 3, wx.EXPAND|wx.ALL, 5)
-        self.mainsz.Add(self.pstyles, 3, wx.EXPAND|wx.ALL, 5)
-        self.mainsz.Add(self.pbuttons, 1, wx.EXPAND|wx.ALL, 5)
-        
-        self.plabels.SetSizer(self.szplabels)
-        self.pstyles.SetSizer(self.szpstyles)
-        self.pbuttons.SetSizer(self.szpbuttons)
-        self.SetSizer(self.mainsz)
-
-    def OnSaveChanges(self,event):
-        pass
-        #xlabel = self.xlabel.GetValue()
-        #ylabel = self.ylabel.GetValue()
-        #graph_properties = {"xlabel":xlabel,"ylabel":ylabel}
-        #pickle.dump(graph_properties, open('graph_properties.dat',"wb"))
-
 
 class GraphPanel(wx.Panel):
     def __init__(self,parent,*args,**kwargs):
@@ -142,13 +58,13 @@ class GraphPanel(wx.Panel):
         
         # Status bar from NanchiPlot App
         self.sb = self.GetParent().GetParent().GetParent().GetStatusBar()
-        print self.sb
+        #print self.sb # debug
         
-        # Configurar sizeR
+        # Configurar sizer
         self.SetSizer(self.mainsz)
         
     def initCanvas(self):
-        # Crear figure & axes
+        # Creating Figure & Axes
         self.figure = Figure()
         self.axes = self.figure.add_subplot(111)
         self.canvas = FigureCanvas(self, -1, self.figure)
@@ -170,27 +86,15 @@ class GraphPanel(wx.Panel):
         pum = wx.Menu()
         
         ls = wx.Menu() # Line Style
-        _ls_cont = wx.MenuItem(ls, -1, u"-")
-        ls.AppendItem(_ls_cont)
-        _ls_dashed = wx.MenuItem(ls, -1, u"--")
-        ls.AppendItem(_ls_dashed)
-        _ls_dotted = wx.MenuItem(ls, -1, u"dotted")
-        ls.AppendItem(_ls_dotted)
-        pum.AppendMenu(-1, u"Estilo de línea", ls)
-        linecolor = wx.MenuItem(pum, -1, u"Color de línea")
+        pum.AppendMenu(-1, u"Line style", ls)
+        linecolor = wx.MenuItem(pum, -1, u"Line color")
         pum.AppendItem(linecolor)
-        linewidth = wx.MenuItem(pum, -1, u"Grosor de línea")
+        linewidth = wx.MenuItem(pum, -1, u"Line width")
         pum.AppendItem(linewidth)
         
         pum.AppendSeparator()
         
         gs = wx.Menu()
-        _gs_cont = wx.MenuItem(gs, -1, u"-")
-        gs.AppendItem(_gs_cont)
-        _gs_dashed = wx.MenuItem(gs, -1, u"--")
-        gs.AppendItem(_gs_dashed)
-        _gs_dotted = wx.MenuItem(gs, -1, u"dotted")
-        gs.AppendItem(_gs_dotted)
         pum.AppendMenu(-1, "Estilo de rejilla", gs)
         gridcolor = wx.MenuItem(pum, -1, u"Color de rejilla")
         pum.AppendItem(gridcolor)
@@ -233,16 +137,11 @@ class GraphPanel(wx.Panel):
         self.Bind(wx.EVT_MENU, self.OnYLabel, ylabel)
         self.Bind(wx.EVT_MENU, self.OnTitle, title)
         self.Bind(wx.EVT_MENU, self.OnZoom, zoom_box)
-        self.Bind(wx.EVT_MENU, self.OnGridStyle, _gs_cont)
-        self.Bind(wx.EVT_MENU, self.OnGridStyle, _gs_dashed)    
-        self.Bind(wx.EVT_MENU, self.OnGridStyle, _gs_dotted)
+        
         self.Bind(wx.EVT_MENU, self.OnAxesAspect, _aspax_equal)
         self.Bind(wx.EVT_MENU, self.OnAxesAspect, _aspax_auto)
         
         # Lines
-        self.Bind(wx.EVT_MENU, self.OnLineStyle, _ls_cont)
-        self.Bind(wx.EVT_MENU, self.OnLineStyle, _ls_dashed)    
-        self.Bind(wx.EVT_MENU, self.OnLineStyle, _ls_dotted)
         self.Bind(wx.EVT_MENU, self.OnLineColor, linecolor)
         self.Bind(wx.EVT_MENU, self.OnLineWidth, linewidth)
         

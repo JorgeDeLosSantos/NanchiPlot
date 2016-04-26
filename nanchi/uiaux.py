@@ -165,7 +165,7 @@ class AboutDialog(wx.Frame):
         wx.Frame.__init__(self,parent=parent,title=NANCHI_MAIN_CAPTION,
         size=(350,220), style=_styles)
         self.winhtml = HTMLWindow(self)
-        self.winhtml.LoadPage("nanchi/help/about.html")
+        self.winhtml.LoadPage(PATH_ABOUT_HTML)
         self.Centre(True)
         self.Show()
 

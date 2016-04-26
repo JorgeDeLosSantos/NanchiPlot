@@ -45,54 +45,55 @@ class NanchiPlot(wx.Frame):
         
     def initMenu(self):
         """
-        Crear la barra de Menús
+        Creating Menu bar
         """
-        m_archivo = wx.Menu()
-        guardar = m_archivo.Append(-1, "Guardar imagen... \tCtrl+S")
-        exportar_img = m_archivo.Append(-1, "Exportar datos como imagen...")
-        exportar_txt = m_archivo.Append(-1, "Exportar datos como ASCII...")
-        m_archivo.AppendSeparator()
-        importar_datos = m_archivo.Append(-1, "Importar datos... \tCtrl+I")
-        importar_imagen = m_archivo.Append(-1, "Importar imagen...")
-        m_archivo.AppendSeparator()
-        salir = m_archivo.Append(-1, "Salir \tCtrl+Q")
+        m_file = wx.Menu()
+        save = m_file.Append(-1, "Save image... \tCtrl+S")
+        export_img = m_file.Append(-1, "Export data as image...")
+        export_txt = m_file.Append(-1, "Export data as ASCII...")
+        m_file.AppendSeparator()
+        import_data = m_file.Append(-1, "Import data... \tCtrl+I")
+        import_image = m_file.Append(-1, "Import image...")
+        m_file.AppendSeparator()
+        _exit = m_file.Append(-1, "Quit \tCtrl+Q")
         
-        m_imagen = wx.Menu()
-        filtros = wx.Menu()
-        sobel = wx.MenuItem(filtros, -1, "Sobel")
-        filtros.AppendItem(sobel)
-        roberts = wx.MenuItem(filtros, -1, "Roberts")
-        filtros.AppendItem(roberts)
-        prewitt = wx.MenuItem(filtros, -1, "Prewitt")
-        filtros.AppendItem(prewitt)
-        m_imagen.AppendMenu(-1, "Filtros", filtros)
-        binarizar = m_imagen.Append(-1, "Binarizar")
+        # Not support for image in 0.1.0 version
+        #~ m_image = wx.Menu()
+        #~ filters = wx.Menu()
+        #~ sobel = wx.MenuItem(filters, -1, "Sobel")
+        #~ filters.AppendItem(sobel)
+        #~ roberts = wx.MenuItem(filters, -1, "Roberts")
+        #~ filters.AppendItem(roberts)
+        #~ prewitt = wx.MenuItem(filters, -1, "Prewitt")
+        #~ filters.AppendItem(prewitt)
+        #~ m_image.AppendMenu(-1, "Filters", filters)
+        #~ binarizar = m_image.Append(-1, "Binarize")
         
-        m_ayuda = wx.Menu()
-        ayuda = m_ayuda.Append(-1, "Ayuda")
-        acerca_de = m_ayuda.Append(-1, "Acerca de...")
+        m_help = wx.Menu()
+        _help = m_help.Append(-1, "Help")
+        about = m_help.Append(-1, "About...")
         
         menu_bar = wx.MenuBar()
-        menu_bar.Append(m_archivo, "Archivo")
-        menu_bar.Append(m_imagen, "Imagen")
-        menu_bar.Append(m_ayuda, "Ayuda")
+        menu_bar.Append(m_file, "File")
+        #~ menu_bar.Append(m_image, "Imagen")
+        menu_bar.Append(m_help, "Help")
         self.SetMenuBar(menu_bar)
         
-        self.Bind(wx.EVT_MENU, self.OnSave, guardar)
-        self.Bind(wx.EVT_MENU, self.OnExportASCII, exportar_txt)
-        self.Bind(wx.EVT_MENU, self.OnExportImage, exportar_img)
+        self.Bind(wx.EVT_MENU, self.OnSave, save)
+        self.Bind(wx.EVT_MENU, self.OnExportASCII, export_txt)
+        self.Bind(wx.EVT_MENU, self.OnExportImage, export_img)
         
-        self.Bind(wx.EVT_MENU, self.OnImport, importar_datos)
-        self.Bind(wx.EVT_MENU, self.OnLoadImage, importar_imagen)
+        self.Bind(wx.EVT_MENU, self.OnImport, import_data)
+        self.Bind(wx.EVT_MENU, self.OnLoadImage, import_image)
         
-        self.Bind(wx.EVT_MENU, self.OnSobel, sobel)
-        self.Bind(wx.EVT_MENU, self.OnRoberts, roberts)
-        self.Bind(wx.EVT_MENU, self.OnPrewitt, prewitt)
-        self.Bind(wx.EVT_MENU, self.OnBinarize, binarizar)
+        #~ self.Bind(wx.EVT_MENU, self.OnSobel, sobel)
+        #~ self.Bind(wx.EVT_MENU, self.OnRoberts, roberts)
+        #~ self.Bind(wx.EVT_MENU, self.OnPrewitt, prewitt)
+        #~ self.Bind(wx.EVT_MENU, self.OnBinarize, binarize)
         
-        self.Bind(wx.EVT_MENU, self.OnAbout, acerca_de)
-        self.Bind(wx.EVT_MENU, self.OnHelp, ayuda)
-        self.Bind(wx.EVT_MENU, self.OnExit, salir)
+        self.Bind(wx.EVT_MENU, self.OnAbout, about)
+        self.Bind(wx.EVT_MENU, self.OnHelp, _help)
+        self.Bind(wx.EVT_MENU, self.OnExit, _exit)
         
     def initSizers(self):
         """
@@ -114,7 +115,7 @@ class NanchiPlot(wx.Frame):
         
     def initCtrls(self):
         """
-        Inicializar los controles básicos
+        Init basic controls
         """
         # Status bar
         self.SB_FONT = wx.Font(10, wx.SWISS, wx.NORMAL, wx.NORMAL)
@@ -130,7 +131,7 @@ class NanchiPlot(wx.Frame):
         
     def initToolBar(self):
         """
-        Inicializar las barras de herramientas
+        Init tool bar
         """
         self.toolbar = tb.MainToolbar(self)
         self.toolbar.Realize()
@@ -143,7 +144,7 @@ class NanchiPlot(wx.Frame):
         
     def initEvents(self):
         """
-        Inicializar (conexión de ) eventos
+        Init events
         """
         self.graphs = self.notebook.graphs
         
@@ -206,22 +207,27 @@ class NanchiPlot(wx.Frame):
         
         Abre la documentación en HTML
         """
-        os.startfile(PATH_HTML_DOCUMENTATION)
+        try:
+            os.startfile(PATH_DOCUMENTATION_HTML)
+        except WindowsError:
+            """ Not exist file"""
+            pass
+            
         
     def OnSave(self,event):
         """
-        Archivo -> Guardar imagen -> (Atajo) Ctrl + S
+        File -> Save image... -> (Short-Cut) Ctrl + S
         """
         wldc = "PNG (*.png)|*.png|PDF (*.pdf)|*.pdf|EPS (*.eps)|*.eps|JPG (*.jpg)|*jpg"
-        dlg=wx.FileDialog(self, "Guardar", os.getcwd(), style=wx.SAVE, wildcard=wldc)
+        dlg=wx.FileDialog(self, "Save", os.getcwd(), style=wx.SAVE, wildcard=wldc)
         if dlg.ShowModal() == wx.ID_OK:
             self.figure.savefig(dlg.GetPath())
         dlg.Destroy()
         
     def OnExportASCII(self,event):
         data = self.data.grid_data.GetArrayData()
-        wldc = "Archivo TXT (*.txt)|*.txt|DAT (*.dat)|*.dat"
-        dlg=wx.FileDialog(self, "Guardar", os.getcwd(), style=wx.SAVE, wildcard=wldc)
+        wldc = "TXT File (*.txt)|*.txt|DAT (*.dat)|*.dat"
+        dlg=wx.FileDialog(self, "Save", os.getcwd(), style=wx.SAVE, wildcard=wldc)
         if dlg.ShowModal() == wx.ID_OK:
             fname = dlg.GetPath()
             io.write_txt(fname, data)
@@ -230,7 +236,7 @@ class NanchiPlot(wx.Frame):
     def OnExportImage(self,event):
         data = self.data.grid_data.GetArrayData()
         wldc = "PNG (*.png)|*.png|PDF (*.pdf)|*.pdf|JPG (*.jpg)|*jpg"
-        dlg=wx.FileDialog(self, "Guardar", os.getcwd(), style=wx.SAVE, wildcard=wldc)
+        dlg=wx.FileDialog(self, "Save", os.getcwd(), style=wx.SAVE, wildcard=wldc)
         if dlg.ShowModal() == wx.ID_OK:
             fname = dlg.GetPath()
             io.imsave(fname, data)
@@ -239,14 +245,11 @@ class NanchiPlot(wx.Frame):
         
     def OnImport(self,event):
         """
-        Archivo -> Importar datos -> (Atajo) Ctrl + I
-        Toolbar -> Importar datos
-        
-        Importa datos de un fichero de texto plano
+        Import data
         """
         dlg = aux.ImportDialog(None)
         if dlg.ShowModal() == wx.ID_OK:
-            busy_dlg = aux.BusyInfo("Espere un momento...", self)
+            busy_dlg = aux.BusyInfo("Wait a moment...", self)
             data = dlg.GetData()
             if data is None:
                 self.sb.SetStatusText(SB_ON_IMPORT_DATA_FAIL%(path))
@@ -260,10 +263,10 @@ class NanchiPlot(wx.Frame):
     def OnLoadImage(self,event):
         path = ""
         wildcard = "*.png"
-        dlg = wx.FileDialog(self, message="Seleccione una imagen",
+        dlg = wx.FileDialog(self, message="Select an image",
         defaultDir=os.getcwd(), wildcard=wildcard, style=wx.OPEN)
         if dlg.ShowModal() == wx.ID_OK:
-            busy_dlg = aux.BusyInfo("Espere un momento...", self)
+            busy_dlg = aux.BusyInfo("Wait a moment...", self)
             path = dlg.GetPath()
             data = io.imread(path)
             self.data.grid_data.SetArrayData(data)
@@ -303,7 +306,7 @@ class NanchiPlot(wx.Frame):
         
     def OnPlot(self,event):
         setplot.set_default_params(self.axes,self.figure)
-        busy_dlg = aux.BusyInfo("Espere un momento...", self)
+        busy_dlg = aux.BusyInfo("Wait a moment...", self)
         X = self.data.grid_data.GetArrayData()
         rows,cols = X.shape
         if cols == 2: # Common case
@@ -319,7 +322,7 @@ class NanchiPlot(wx.Frame):
         
     def OnPolar(self,event):
         """
-        Implementación pendiente...
+        Unavailable
         """
         pass
         
@@ -362,7 +365,7 @@ class NanchiPlot(wx.Frame):
                 dlg.GetData()
             dlg.Destroy()
         else:
-            self.sb.SetStatusText(u"No hay gráfica de pastel disponible")
+            self.sb.SetStatusText(u"Pie plots unavailables")
         self.canvas.draw()
         
     def OnImage(self,event):
@@ -386,7 +389,7 @@ class NanchiPlot(wx.Frame):
         self.axes.contourf(X)
         self.canvas.draw()
         
-    # Operaciones con imágenes ============================
+    # Image operations ============================
     def OnSobel(self,event):
         cx = self.data.grid_data.GetArrayData()
         xmod = image.sobel(cx)
@@ -424,13 +427,12 @@ class App(wx.App):
     def OnInit(self):
         frame = NanchiPlot(None)
         return True
-        
 
 def run():
-    REDIRECT = True
+    REDIRECT = False
     LOG_FILE = "nanchi.log"
-    app = App(REDIRECT, filename=LOG_FILE)
+    app = App(REDIRECT)
     app.MainLoop()
 
 if __name__=='__main__':
-    run()
+    run() # Run app
