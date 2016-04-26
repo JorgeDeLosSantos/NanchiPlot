@@ -6,6 +6,8 @@
 # E-mail: delossantosmfq@gmail.com
 # Code: https://github.com/JorgeDeLosSantos/NanchiPlot
 #
+#~ from __future__ import absolute_import
+
 import wx
 import os
 import numpy as np

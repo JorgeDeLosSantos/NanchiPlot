@@ -24,7 +24,7 @@ setup(
     author_email='delossantosmfq@gmail.com',
     license = "MIT",
     keywords=["Plotting"],
-    install_requires=["matplotlib","wxpython","numpy"],
+    install_requires=["matplotlib","numpy"], # Also required wxPython
     url='https://github.com/JorgeDeLosSantos/NanchiPlot',
     packages=find_packages(),
     scripts = ['nanchi_script.py','nanchi.bat'],
