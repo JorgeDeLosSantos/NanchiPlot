@@ -20,6 +20,7 @@ import uitoolbar as tb
 import image as image # Image operations
 from _const_ import * # Constants
 
+
 class NanchiPlot(wx.Frame):
     def __init__(self,parent):
         wx.Frame.__init__(self,parent,title=NANCHI_MAIN_CAPTION,size=(800,600))
