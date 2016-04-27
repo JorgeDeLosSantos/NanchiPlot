@@ -68,7 +68,8 @@ PATH_MOVE_LINE_ICON = path.join(IMGS_PATH, "move_line_icon_24x24.png")
 
 
 # Documentation path
-PATH_HTML_DOCUMENTATION = r"docs\build\html\index.html"
+PATH_DOCUMENTATION_HTML = r"help/index.html"
+PATH_ABOUT_HTML = r"help/about.html"
 
 # Status for "Status bar"
 SB_ON_INIT = "Importe o inserte datos para comenzar..."
