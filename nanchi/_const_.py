@@ -72,17 +72,17 @@ PATH_DOCUMENTATION_HTML = r"help/index.html"
 PATH_ABOUT_HTML = r"help/about.html"
 
 # Status for "Status bar"
-SB_ON_INIT = "Importe o inserte datos para comenzar..."
-SB_ON_IMPORT_IMAGE = "Imagen importada de %s"
-SB_ON_IMPORT_IMAGE_CANCEL = "Imagen no importada..."
-SB_ON_IMPORT_DATA = "Datos importados de %s"
-SB_ON_IMPORT_DATA_FAIL = "Error al cargar el archivo %s"
-SB_ON_CREATE_DATA_FUNCTION = "Datos definidos a partir de f(x)"
-SB_ON_CREATE_DATA_BIVARIABLE_FUNCTION = "Datos definidos a partir de f(x,y)"
+SB_ON_INIT = "Import or insert data to start..."
+SB_ON_IMPORT_IMAGE = "Image imported from %s"
+SB_ON_IMPORT_IMAGE_CANCEL = "Unimported image"
+SB_ON_IMPORT_DATA = "Data imported from %s"
+SB_ON_IMPORT_DATA_FAIL = "Error on load file %s"
+SB_ON_CREATE_DATA_FUNCTION = "Data from f(x)"
+SB_ON_CREATE_DATA_BIVARIABLE_FUNCTION = "Data from f(x,y)"
 
 
 #Import dialog
-IMPORT_DIALOG_WILDCARD = "Todos los archivos (*.*)|*.*|Archivos TXT (*.txt)|*.txt|Archivos DAT (*.dat)|*.dat"
+IMPORT_DIALOG_WILDCARD = "All files (*.*)|*.*|TXT Files (*.txt)|*.txt|DAT Files (*.dat)|*.dat"
 
 
 

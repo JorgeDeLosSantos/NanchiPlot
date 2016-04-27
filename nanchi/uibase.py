@@ -95,34 +95,34 @@ class GraphPanel(wx.Panel):
         pum.AppendSeparator()
         
         gs = wx.Menu()
-        pum.AppendMenu(-1, "Estilo de rejilla", gs)
-        gridcolor = wx.MenuItem(pum, -1, u"Color de rejilla")
+        pum.AppendMenu(-1, "Grid style", gs)
+        gridcolor = wx.MenuItem(pum, -1, u"Grid color")
         pum.AppendItem(gridcolor)
         
         pum.AppendSeparator()
-        axbackg = wx.MenuItem(pum, -1, u"Color de fondo")
+        axbackg = wx.MenuItem(pum, -1, u"Background Color")
         pum.AppendItem(axbackg)
         aspax = wx.Menu()
         _aspax_auto = wx.MenuItem(aspax, -1, u"auto")
         aspax.AppendItem(_aspax_auto)        
         _aspax_equal = wx.MenuItem(aspax, -1, u"equal")
         aspax.AppendItem(_aspax_equal)
-        pum.AppendMenu(-1, "Aspecto del axes", aspax)
+        pum.AppendMenu(-1, "Axes aspect", aspax)
         
         pum.AppendSeparator()
-        xlabel = wx.MenuItem(pum, -1, u"Etiqueta X")
+        xlabel = wx.MenuItem(pum, -1, u"X-Label")
         pum.AppendItem(xlabel)
-        ylabel = wx.MenuItem(pum, -1, u"Etiqueta Y")
+        ylabel = wx.MenuItem(pum, -1, u"Y-Label")
         pum.AppendItem(ylabel)
-        title = wx.MenuItem(pum, -1, u"Insertar título")
+        title = wx.MenuItem(pum, -1, u"Insert title")
         pum.AppendItem(title)
-        intext = wx.MenuItem(pum, -1, u"Insertar texto/anotación")
+        intext = wx.MenuItem(pum, -1, u"Insert text/annotation")
         pum.AppendItem(intext)
         
         pum.AppendSeparator()
-        setxticks = wx.MenuItem(pum, -1, u"Modificar xticks")
+        setxticks = wx.MenuItem(pum, -1, u"Update xticks")
         pum.AppendItem(setxticks)
-        setyticks = wx.MenuItem(pum, -1, u"Modificar yticks")
+        setyticks = wx.MenuItem(pum, -1, u"Update yticks")
         pum.AppendItem(setyticks)
         
         pum.AppendSeparator()
@@ -160,14 +160,14 @@ class GraphPanel(wx.Panel):
     def set_text(self,event):
         cx = event.xdata
         cy = event.ydata
-        dialog = wx.TextEntryDialog(self,"Inserte el texto",
+        dialog = wx.TextEntryDialog(self,"Insert text",
         NANCHI_MAIN_CAPTION, u"", style=wx.OK|wx.CANCEL)
         if dialog.ShowModal() == wx.ID_OK:
             if not cx is None and not cy is None:
                 self.axes.text(cx, cy, unicode(dialog.GetValue()), picker=True)
                 self.canvas.draw()
             else:
-                msg = wx.MessageDialog(self,u"Seleccione una posición dentro del axes",
+                msg = wx.MessageDialog(self,u"Select a position inside of Axes",
                 caption=DEFAULT_DIALOG_CAPTION, style=wx.ICON_ERROR|wx.OK)
                 msg.ShowModal()
                 msg.Destroy()
@@ -294,7 +294,7 @@ class GraphPanel(wx.Panel):
         
     def set_line_label(self,event):
         self.canvas.mpl_disconnect(self.LINE_LABEL_EVT)
-        dlg = wx.TextEntryDialog(self, u"Inserte una etiqueta", NANCHI_MAIN_CAPTION)
+        dlg = wx.TextEntryDialog(self, u"Insert a label", NANCHI_MAIN_CAPTION)
         if dlg.ShowModal()==wx.ID_OK:
             _label = dlg.GetValue()
             event.artist.set_label(_label)
@@ -310,7 +310,7 @@ class GraphPanel(wx.Panel):
         pass
         
     def OnZoom(self,event):
-        self.sb.SetStatusText(u"Arrastre el cursor para seleccionar una región")
+        self.sb.SetStatusText(u"Drag the cursor to select a region")
         self.canvas.zoomit()
         #~ xl = self.axes.get_xlim()
         #~ yl = self.axes.get_ylim()
@@ -319,7 +319,7 @@ class GraphPanel(wx.Panel):
         
     def OnMoveLine(self,event):
         self.MOVE_LINE_EVT = self.canvas.mpl_connect("pick_event", self.move_line)
-        self.sb.SetStatusText(u"Seleccione una línea para mover")
+        self.sb.SetStatusText(u"Select a line to move")
         
     def move_line(self,event):
         self._selected_line = event.artist
@@ -345,12 +345,12 @@ class GraphPanel(wx.Panel):
         self.axes.relim()
         self.axes.autoscale_view(True,True,True)
         self.canvas.draw()
-        self.sb.SetStatusText(u"La línea %s se ha movido"%(self._selected_line.__repr__()))
+        self.sb.SetStatusText(u"Line %s has been moved"%(self._selected_line.__repr__()))
         
 
     def OnMoveText(self,event):
         self.MOVE_TEXT_EVT = self.canvas.mpl_connect("pick_event", self.move_text)
-        self.sb.SetStatusText(u"Seleccione un texto para mover")
+        self.sb.SetStatusText(u"Select a text to move")
         
     def move_text(self,event):
         self._selected_text = event.artist
@@ -370,7 +370,7 @@ class GraphPanel(wx.Panel):
         self.axes.relim()
         self.axes.autoscale_view(True,True,True)
         self.canvas.draw()
-        self.sb.SetStatusText(u"El texto %s se ha movido a la posición (%0.4f,%0.4f)"
+        self.sb.SetStatusText(u"Text %s has been moved to the position (%0.4f,%0.4f)"
                               %(self._selected_text.get_text(),
                               self._selected_text.get_position()[0],
                               self._selected_text.get_position()[1]))
@@ -522,26 +522,28 @@ class DataGrid(grid.Grid):
             
     def OnRightClick(self,event):
         pum = wx.Menu()
-        delrows = wx.MenuItem(pum, -1, "Eliminar filas")
+        delrows = wx.MenuItem(pum, -1, "Delete rows")
         pum.AppendItem(delrows)
-        delcols = wx.MenuItem(pum, -1, "Eliminar columnas")
+        delcols = wx.MenuItem(pum, -1, "Delete columns")
         pum.AppendItem(delcols)
         pum.AppendSeparator()
-        addrow = wx.MenuItem(pum, -1, "Agregar fila...")
+        addrow = wx.MenuItem(pum, -1, "Add rows...")
         pum.AppendItem(addrow)
-        addcol = wx.MenuItem(pum, -1, "Agregar columna...")
+        addcol = wx.MenuItem(pum, -1, "Add columns...")
         pum.AppendItem(addcol)
         pum.AppendSeparator()
-        editcollabel = wx.MenuItem(pum, -1, "Editar etiqueta de columna")
+        editcollabel = wx.MenuItem(pum, -1, "Edit column label")
         pum.AppendItem(editcollabel)
         pum.AppendSeparator()
-        randomfill = wx.MenuItem(pum, -1, "Rellenar columnas aleatoriamente")
+        randomfill = wx.MenuItem(pum, -1, "Fill column randomly")
         pum.AppendItem(randomfill)
-        pum.AppendSeparator()
-        plot = wx.MenuItem(pum, -1, u"Graficar líneas")
-        pum.AppendItem(plot)
-        bar = wx.MenuItem(pum, -1, u"Graficar barras")
-        pum.AppendItem(bar)
+        
+        # Not support for plot from data panel
+        #~ pum.AppendSeparator()
+        #~ plot = wx.MenuItem(pum, -1, u"Graficar líneas")
+        #~ pum.AppendItem(plot)
+        #~ bar = wx.MenuItem(pum, -1, u"Graficar barras")
+        #~ pum.AppendItem(bar)
         
         # Binds
         pum.Bind(wx.EVT_MENU, self.del_rows, delrows)
@@ -551,8 +553,8 @@ class DataGrid(grid.Grid):
         pum.Bind(wx.EVT_MENU, self.edit_collabel, editcollabel)
         pum.Bind(wx.EVT_MENU, self.random_fill, randomfill)
         
-        pum.Bind(wx.EVT_MENU, self.plot, plot)
-        pum.Bind(wx.EVT_MENU, self.bar, bar)
+        #~ pum.Bind(wx.EVT_MENU, self.plot, plot)
+        #~ pum.Bind(wx.EVT_MENU, self.bar, bar)
         # Show 
         self.PopupMenu(pum)
         pum.Destroy()
@@ -573,7 +575,7 @@ class DataGrid(grid.Grid):
         
     def edit_collabel(self,event):
         ccols = self.GetSelectedCols()
-        dlg = wx.TextEntryDialog(None, "Inserte etiqueta...",
+        dlg = wx.TextEntryDialog(None, "Insert new label...",
         DEFAULT_DIALOG_CAPTION)
         if dlg.ShowModal() == wx.ID_OK:
             label = dlg.GetValue()

@@ -38,46 +38,46 @@ class MainToolbar(wx.ToolBar):
         #~ reset_view_bmp = wx.Bitmap(PATH_RESET_VIEW_ICON)
         
         # Toolbar components
-        self.import_tool = self.AddLabelTool(-1, "Importar datos...", 
-        import_bmp, shortHelp="Importar datos...")
+        self.import_tool = self.AddLabelTool(-1, "Import data...", 
+        import_bmp, shortHelp="Import data...")
         
-        self.load_image_tool = self.AddLabelTool(-1, "Importar imagen...", 
-        load_image_bmp, shortHelp="Importar imagen...")
+        self.load_image_tool = self.AddLabelTool(-1, "Import image...", 
+        load_image_bmp, shortHelp="Import image...")
         
-        self.function_tool = self.AddLabelTool(-1, "Generar datos...", 
-        function_bmp, shortHelp=u"Generar datos de función...")
+        self.function_tool = self.AddLabelTool(-1, "Generate data...", 
+        function_bmp, shortHelp=u"Generate data from f(x)...")
         
-        self.bivariable_function_tool = self.AddLabelTool(-1, "Generar datos...", 
-        bivariable_function_bmp, shortHelp=u"Generar datos de función bivariable...")
+        self.bivariable_function_tool = self.AddLabelTool(-1, "Generate data...", 
+        bivariable_function_bmp, shortHelp=u"Generate data from f(x,y)...")
         
         self.AddSeparator()
         self.AddSeparator()
         self.AddSeparator()
         self.AddSeparator()
         
-        self.plot_tool = self.AddLabelTool(-1, u"Líneas", 
-        plot_bmp, shortHelp=u"Líneas")
+        self.plot_tool = self.AddLabelTool(-1, u"Lines", 
+        plot_bmp, shortHelp=u"Lines")
         
         #~ self.polar_tool = self.AddLabelTool(-1, u"Polar", 
         #~ polar_bmp, shortHelp=u"Polar")
         
-        self.bar_tool = self.AddLabelTool(-1, "Barras", 
-        bar_bmp, shortHelp=u"Barras")
+        self.bar_tool = self.AddLabelTool(-1, "Bars", 
+        bar_bmp, shortHelp=u"Bars")
         
         self.scatter_tool = self.AddLabelTool(-1, "Scatter", 
         scatter_bmp, shortHelp=u"Scatter")
         
         self.pie_tool = self.AddLabelTool(-1, "Pie", 
-        pie_bmp, shortHelp=u"Pastel")
+        pie_bmp, shortHelp=u"Pie")
         
-        self.image_tool = self.AddLabelTool(-1, "Imagen", 
-        image_bmp, shortHelp=u"Imagen")
+        self.image_tool = self.AddLabelTool(-1, "Image", 
+        image_bmp, shortHelp=u"Image")
         
-        self.contour_tool = self.AddLabelTool(-1, "Contorno", 
-        contour_bmp, shortHelp=u"Contorno")
+        self.contour_tool = self.AddLabelTool(-1, "Contour", 
+        contour_bmp, shortHelp=u"Contour")
         
-        self.contourf_tool = self.AddLabelTool(-1, "Contorno relleno", 
-        contourf_bmp, shortHelp=u"Contorno relleno")
+        self.contourf_tool = self.AddLabelTool(-1, "Filled contour", 
+        contourf_bmp, shortHelp=u"Filled contour")
         
 
 class AxesToolbar(wx.ToolBar):
@@ -115,32 +115,32 @@ class AxesToolbar(wx.ToolBar):
         zoom_box_bmp, shortHelp=u"Zoom Box")
         
         self.reset_view_tool = self.AddLabelTool(-1, "Reset view", 
-        reset_view_bmp, shortHelp=u"Vista inicial")
+        reset_view_bmp, shortHelp=u"Reset view")
         
         self.AddSeparator()
         
         self.axes_color_tool = self.AddLabelTool(-1, "Axes color", 
         axes_color_bmp, shortHelp=u"Axes color")
         
-        self.grid_color_tool = self.AddLabelTool(-1, "Color de rejilla", 
-        grid_color_bmp, shortHelp=u"Color de rejilla")
+        self.grid_color_tool = self.AddLabelTool(-1, "Grid color", 
+        grid_color_bmp, shortHelp=u"Grid color")
         
-        self.grid_style_tool = self.AddLabelTool(-1, "Estilo de rejilla", 
-        grid_style_bmp, shortHelp=u"Estilo de rejilla")
+        self.grid_style_tool = self.AddLabelTool(-1, "Grid style", 
+        grid_style_bmp, shortHelp=u"Grid style")
         
         self.AddSeparator()
         
-        self.xlabel_tool = self.AddLabelTool(-1, u"XLabel", 
-        xlabel_bmp, shortHelp=u"Modificar XLabel")
+        self.xlabel_tool = self.AddLabelTool(-1, u"X-Label", 
+        xlabel_bmp, shortHelp=u"X-Label")
         
-        self.ylabel_tool = self.AddLabelTool(-1, u"YLabel", 
-        ylabel_bmp, shortHelp=u"Modificar YLabel")
+        self.ylabel_tool = self.AddLabelTool(-1, u"Y-Label", 
+        ylabel_bmp, shortHelp=u"Y-Label")
         
-        self.xticks_tool = self.AddLabelTool(-1, u"XTicks", 
-        xticks_bmp, shortHelp=u"Modificar XTicks")
+        self.xticks_tool = self.AddLabelTool(-1, u"X-Ticks", 
+        xticks_bmp, shortHelp=u"X-Ticks")
         
-        self.yticks_tool = self.AddLabelTool(-1, u"YTicks", 
-        yticks_bmp, shortHelp=u"Modificar YTicks")
+        self.yticks_tool = self.AddLabelTool(-1, u"Y-Ticks", 
+        yticks_bmp, shortHelp=u"Y-Ticks")
 
 
 class LineToolbar(wx.ToolBar):
@@ -161,25 +161,25 @@ class LineToolbar(wx.ToolBar):
         text_bmp = wx.Bitmap(PATH_TEXT_ICON)
         move_text_bmp = wx.Bitmap(PATH_MOVE_TEXT_ICON)
 
-        self.line_color_tool = self.AddLabelTool(-1, u"Color de línea", 
-        line_color_bmp, shortHelp=u"Color de línea")
+        self.line_color_tool = self.AddLabelTool(-1, u"Line color", 
+        line_color_bmp, shortHelp=u"Line color")
         
-        self.line_style_tool = self.AddLabelTool(-1, u"Estilo de línea", 
-        line_style_bmp, shortHelp=u"Estilo de línea")
+        self.line_style_tool = self.AddLabelTool(-1, u"Line style", 
+        line_style_bmp, shortHelp=u"Line style")
         
-        self.line_width_tool = self.AddLabelTool(-1, u"Grosor de línea", 
-        line_width_bmp, shortHelp=u"Grosor de línea")
+        self.line_width_tool = self.AddLabelTool(-1, u"Line width", 
+        line_width_bmp, shortHelp=u"Line width")
         
-        self.line_label_tool = self.AddLabelTool(-1, u"Etiqueta de línea", 
-        line_label_bmp, shortHelp=u"Etiqueta de línea")
+        self.line_label_tool = self.AddLabelTool(-1, u"Line label", 
+        line_label_bmp, shortHelp=u"Line label")
         
-        self.show_legend_tool = self.AddLabelTool(-1, u"Mostrar leyendas", 
-        show_legend_bmp, shortHelp=u"Mostrar leyendas")
+        self.show_legend_tool = self.AddLabelTool(-1, u"Show legends", 
+        show_legend_bmp, shortHelp=u"Show legends")
         
         self.AddSeparator()
         
-        self.text_tool = self.AddLabelTool(-1, u"Texto", 
-        text_bmp, shortHelp=u"Insertar texto/anotación")
+        self.text_tool = self.AddLabelTool(-1, u"Text", 
+        text_bmp, shortHelp=u"Insert text/annotation")
         
         self.AddSeparator()
         
@@ -188,11 +188,11 @@ class LineToolbar(wx.ToolBar):
         
         self.AddSeparator()
         
-        self.move_line_tool = self.AddLabelTool(-1, u"Mover línea", 
-        move_line_bmp, shortHelp=u"Mover línea")
+        self.move_line_tool = self.AddLabelTool(-1, u"Move line", 
+        move_line_bmp, shortHelp=u"Move line")
         
-        self.move_text_tool = self.AddLabelTool(-1, u"Mover texto", 
-        move_text_bmp, shortHelp=u"Mover texto")
+        self.move_text_tool = self.AddLabelTool(-1, u"Move text", 
+        move_text_bmp, shortHelp=u"Move text")
 
 
 if __name__=='__main__':

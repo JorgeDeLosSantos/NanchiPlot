@@ -28,6 +28,7 @@ class NanchiPlot(wx.Frame):
         wx.Frame.__init__(self,parent,title=NANCHI_MAIN_CAPTION,size=(800,600))
         self.initMenu()
         self.initCtrls()
+        self.initCtrls()
         self.initToolBar()
         self.initSizers()
         self.initEvents()

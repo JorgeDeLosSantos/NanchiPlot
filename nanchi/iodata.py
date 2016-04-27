@@ -18,16 +18,20 @@ def read_txt(filename,delimiter=None,dtype="float",**kwargs):
         except:
             X = np.genfromtxt(filename, delimiter=delimiter, dtype=np.str_)
     return X
-    
+
+
 def read_csv(filename,dtype="float"):
     X = np.loadtxt(filename, delimiter=",", dtype=dtype)
     return X
 
+
 def write_txt(filename, array, delimiter=",", fmt="%0.4f"):
     np.savetxt(filename, array, delimiter=delimiter, fmt=fmt )
 
+
 def write_csv():
     pass
+
         
 def imread(filename):
     """
@@ -55,8 +59,10 @@ def rgb2gray(rgb):
     """
     return np.dot(rgb[:,:,:3], [0.2125, 0.7154, 0.0721])
 
+
 def gray2rgb(gray):
     pass
+
 
 if __name__=='__main__':
     #X = read_txt("data/data_with_comments.txt",skiprows=3)

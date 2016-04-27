@@ -65,8 +65,8 @@ class FunctionDialog(wx.Dialog):
         self._b = wx.StaticText(self.prange, -1, u"b", size=(-1,25))
         self.b = wx.TextCtrl(self.prange, -1, u"10", size=(50,25))
         
-        self.okbutton = wx.Button(self.pbutton, wx.ID_OK, u"Aceptar", size=(-1,25))
-        self.cancelbutton = wx.Button(self.pbutton, wx.ID_CANCEL, u"Cancelar", size=(-1,25), 
+        self.okbutton = wx.Button(self.pbutton, wx.ID_OK, size=(-1,25))
+        self.cancelbutton = wx.Button(self.pbutton, wx.ID_CANCEL, size=(-1,25), 
                                 style=wx.ID_CANCEL)
         
         for ctrl in [self._fun,self._a,self._b]:
@@ -144,8 +144,8 @@ class BivariableFunctionDialog(wx.Dialog):
         self._y2 = wx.StaticText(self.prangey, -1, u"y2", size=(-1,25))
         self.y2 = wx.TextCtrl(self.prangey, -1, u"10", size=(50,25))
         
-        self.okbutton = wx.Button(self.pbutton, wx.ID_OK, u"Aceptar", size=(-1,25))
-        self.cancelbutton = wx.Button(self.pbutton, wx.ID_CANCEL, u"Cancelar", size=(-1,25), 
+        self.okbutton = wx.Button(self.pbutton, wx.ID_OK, size=(-1,25))
+        self.cancelbutton = wx.Button(self.pbutton, wx.ID_CANCEL, size=(-1,25), 
                                 style=wx.ID_CANCEL)
         
         for ctrl in [self._fun,self._x1, self._x2, self._y1, self._y2]:
@@ -303,12 +303,12 @@ class ImportDialog(wx.Dialog):
         self.grid.SetColLabelSize(0)
         
         # Controles conf.
-        self._dlm = wx.StaticText(self.pctrls, -1, u"Delimitador", size=(-1,25))
+        self._dlm = wx.StaticText(self.pctrls, -1, u"Delimiter", size=(-1,25))
         self.dlm = wx.TextCtrl(self.pctrls, -1, u",", size=(-1,25))
         self.dlm.SetFont(self.VALUE_FONT)
-        self._skiprows = wx.StaticText(self.pctrls, -1, u"Leer a partir de fila:", size=(-1,25))
+        self._skiprows = wx.StaticText(self.pctrls, -1, u"Start reading from row...", size=(-1,25))
         self.skiprows = wx.SpinCtrl(self.pctrls, -1, min=1, max=100)
-        self.preview = wx.Button(self.pctrls, -1, u"Vista previa")
+        self.preview = wx.Button(self.pctrls, -1, u"Preview")
         
         # Set labels
         for label in [self._dlm, self._skiprows]:
@@ -319,8 +319,8 @@ class ImportDialog(wx.Dialog):
         self.log = LogCtrl(self.plog)
         
         # Botones
-        self.okbutton = wx.Button(self.pbutton, wx.ID_OK, u"Aceptar", size=(100,25))
-        self.cancelbutton = wx.Button(self.pbutton, wx.ID_CANCEL, u"Cancelar", 
+        self.okbutton = wx.Button(self.pbutton, wx.ID_OK, size=(100,25))
+        self.cancelbutton = wx.Button(self.pbutton, wx.ID_CANCEL, 
                                       size=(100,25), style=wx.ID_CANCEL)
         
         self.Bind(wx.EVT_BUTTON, self.OnPreview, self.preview)
