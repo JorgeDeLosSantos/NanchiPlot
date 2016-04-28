@@ -1,81 +1,66 @@
 # NanchiPlot
 
-## ¿Qué es NanchiPlot?
+## Features
 
 ![](nanchi/img/nanchi_logo.png)
 
-NanchiPlot está pensado como un software de graficado a partir de un conjunto de valores numéricos definidos 
-en una grilla/malla, los cuales pueden representar pares de coordenadas (x,y), una lista de cantidades 
-cualesquiera, intensidades de pixeles para imagenes en escala de grises, o cualquier otro tipo arreglo de datos que 
-el usuario importe o ingrese en las celdas destinadas para tal propósito.
+Plot types:
 
-Para definir los arreglos de datos el usuario puede importarlos desde un fichero de datos (ASCII), crearlos 
-a partir de una función f(x) o bien importar una imagen.
+* Line plot
+* Scatter plot
+* Bar plot
+* Pie plot
+* Images 
+* Contour graphs
 
-Las opciones de graficado disponibles son:
+Capabilities:
 
-* Gráficas de líneas (Coordenadas Rectangulares)
-* Gráficas de puntos (Scatter Plot)
-* Gráficas de barras
-* Gráficas de pastel
-* Representación de imágenes
-* Gráficas de contorno (curvas de nivel)
+* Import data from plain text files. 
+* Import data from CSV files.
+* Import images as data (grayscale only).
+* Create data from f(x) and f(x,y) functions.
+* Custom styles, colors and width of lines.
+* Custom styles, colors and width of grids.
+* Custom background color of Axes.
+* Insert text/annotations.
+* Move lines interactively.
+* Move texts interactively.
 
-Algunas de las capacidades de NanchiPlot se enlistan a continuación:
-
-* Importar datos de ficheros de texto plano.
-* Importar datos de archivos CSV.
-* Importar imágenes como datos (MxN: imágenes en escala de grises).
-* Operaciones básicas con imágenes (binarización, filtros).
-* Crear datos a partir de funciones de una y dos variables.
-* Personalizar estilos, grosores y colores de líneas
-* Personalizar estilos, grosores y colores de rejillas
-* Personalizar el color de fondo (axes)
-* Insertar textos/anotaciones
-* Mover líneas de manera interactiva
-* Mover textos de manera interactiva
-
-
-## Requerimientos
+## Requirements
 
 * wxPython
 * Matplotlib
 * NumPy
-* Scikit-image (optional for image processing operations)
 
-## Instalación
+## Installation
 
-Situese en el directorio de su preferencia y cree una carpeta `NanchiPlot`
-
-```
-mkdir NanchiPlot
-cd NanchiPlot
-```
-
-Dentro de este directorio, clone el repositorio desde:
+Currently this is not a PyPI library, then to install, clone this repository:
 
 ```
 git clone https://github.com/JorgeDeLosSantos/NanchiPlot.git
 ```
 
-Finalmente ejecute el archivo `NanchiPlot.py`
+and install with:
 
 ```
-NOTA: 
-
-Esta versión de desarrollo no dispone de un procedimiento que instale el código 
-como cualquier otra librería de Python. En las versiones liberadas se introducirá 
-un script que permita a NanchiPlot ser ejecutado desde la consola (vía scripts de Python: /PYTHON_DIR/Scripts/NanchiPlot.py).
+python setup.py install
 ```
 
-## Documentación 
+Or using `pip`:
 
-La documentación está en desarrollo. Puede compilar la documentación disponible (docs/_source/) utilizando *Sphinx*.
+```
+python setup.py sdist
+cd dist
+pip install nanchi-0.1.0.zip
+```
 
+## Documentation
 
-## Versión:
+Build the documentation using Sphinx. Currently in write process.
+
+## Version
  
-Actualmente en fase de desarrollo inicial. **(0.1.0)-dev**
+In development: **0.1.0-dev**
 
 ## Screenshots
 
@@ -85,9 +70,9 @@ Actualmente en fase de desarrollo inicial. **(0.1.0)-dev**
 ![](docs/source/_contents/img/screenshots/screen_04.PNG)
 ![](docs/source/_contents/img/screenshots/screen_05.PNG)
 
-## Más información
+## More info
 
 ```
-Desarrollador: Pedro Jorge De Los Santos
+Developer: Pedro Jorge De Los Santos
 E-mail: delossantosmfq@gmail.com
 ```
