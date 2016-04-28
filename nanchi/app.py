@@ -337,6 +337,13 @@ class NanchiPlot(wx.Frame):
             x = range(len(X[:,0]))
             self.axes.bar(x,X[:,0], width=0.6 ,align="center")
             self.axes.set_xlim(0 - wf, x[-1] + wf)
+        elif cols > 1:
+            for jj in range(cols):
+                kw = 1.0/(cols+1)
+                x = np.array(range(len(X[:,0])))
+                self.axes.bar(x+((jj+1.0)/cols), X[:,jj], width=kw)
+        else:
+            pass
         self.canvas.draw()
         
     def OnScatter(self,event):
