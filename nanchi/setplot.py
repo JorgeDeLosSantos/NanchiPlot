@@ -16,7 +16,7 @@ def set_default_params(axes,figure):
     mpl.rc('ytick', color=YTICK_COLOR, labelsize=TICK_LABEL_SIZE)
     
     # Axes properties
-    mpl.rc('axes', grid=True, facecolor=AXES_BG_COLOR, hold=False)
+    mpl.rc('axes', grid=True, facecolor=AXES_BG_COLOR, hold=True)
     
     # Grid properties
     mpl.rc('grid', color=GRID_COLOR)
