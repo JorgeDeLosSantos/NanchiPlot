@@ -32,5 +32,21 @@ setup(
             'nanchi=nanchi.app:run',
         ]
     },
+    classifiers=[
+      "Development Status :: 2 - Pre-Alpha",
+      "Intended Audience :: Education",
+      "Intended Audience :: Science/Research",
+      "Intended Audience :: End Users/Desktop",
+      "Environment :: Win32 (MS Windows)",
+      "License :: OSI Approved :: MIT License",
+      "Operating System :: OS Independent",
+      "Programming Language :: Python",
+      "Programming Language :: Python :: 2.7",
+      "Programming Language :: Python :: Implementation :: CPython",
+      "Topic :: Desktop Environment",
+      "Topic :: Scientific/Engineering :: Visualization",
+      "Topic :: Multimedia :: Graphics",
+      "Topic :: Utilities",
+    ],
     package_data={"nanchi": PACK_DATA}
 )

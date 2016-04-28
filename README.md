@@ -41,7 +41,6 @@ Algunas de las capacidades de NanchiPlot se enlistan a continuación:
 * wxPython
 * Matplotlib
 * NumPy
-* Scikit-image (optional for image processing operations)
 
 ## Instalación
 
