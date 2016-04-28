@@ -70,7 +70,6 @@ In development: **0.1.0-dev**
 <img src="docs/source/_contents/img/screenshots/screen_04.PNG" width="40%">
 <img src="docs/source/_contents/img/screenshots/screen_05.PNG" width="40%">
 
-
 ## More info
 
 ```

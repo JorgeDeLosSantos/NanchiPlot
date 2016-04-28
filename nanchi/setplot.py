@@ -34,8 +34,9 @@ def set_default_axes_props(axes):
     axes.set_axis_bgcolor(AXES_BG_COLOR)
 
 
-
 def is_reversed_yaxis(axes):
+    """
+    """
     a,b = axes.get_ylim()
     if a > b: return True
     return False

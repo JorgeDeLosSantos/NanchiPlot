@@ -73,20 +73,22 @@ class GraphPanel(wx.Panel):
         # Graph properties
         setplot.set_default_params(self.axes,self.figure)
         # FigureCanvas
-        self.mainsz.Add(self.canvas, 1, wx.EXPAND|wx.ALL, 2)
+        self.mainsz.Add(self.canvas, 1, wx.EXPAND|wx.ALL, 1)
     
     def OnRightClick(self,event):
         if event.button == 3:
             self.InitPopUpMenu()
-        else:
+        elif event.button == 1:
+            # To implement: move lines and texts 
+            # without previous selection of this option
+            # on LineToolbar
             pass
-            
 
     def InitPopUpMenu(self):
         pum = wx.Menu()
         
-        ls = wx.Menu() # Line Style
-        pum.AppendMenu(-1, u"Line style", ls)
+        ls = wx.MenuItem(pum, -1, "Line style")
+        pum.AppendItem(ls)
         linecolor = wx.MenuItem(pum, -1, u"Line color")
         pum.AppendItem(linecolor)
         linewidth = wx.MenuItem(pum, -1, u"Line width")
@@ -94,10 +96,12 @@ class GraphPanel(wx.Panel):
         
         pum.AppendSeparator()
         
-        gs = wx.Menu()
-        pum.AppendMenu(-1, "Grid style", gs)
+        gs = wx.MenuItem(pum, -1, "Grid style")
+        pum.AppendItem(gs)
         gridcolor = wx.MenuItem(pum, -1, u"Grid color")
         pum.AppendItem(gridcolor)
+        gridwidth = wx.MenuItem(pum, -1, u"Grid width")
+        pum.AppendItem(gridwidth)
         
         pum.AppendSeparator()
         axbackg = wx.MenuItem(pum, -1, u"Background Color")
@@ -132,7 +136,11 @@ class GraphPanel(wx.Panel):
         # Binds
         self.Bind(wx.EVT_MENU, self.OnText, intext)
         self.Bind(wx.EVT_MENU, self.OnBackground, axbackg)
+        
         self.Bind(wx.EVT_MENU, self.OnGridColor, gridcolor)
+        self.Bind(wx.EVT_MENU, self.OnGridWidth, gridwidth)
+        self.Bind(wx.EVT_MENU, self.OnGridStyle, gs)
+        
         self.Bind(wx.EVT_MENU, self.OnXLabel, xlabel)
         self.Bind(wx.EVT_MENU, self.OnYLabel, ylabel)
         self.Bind(wx.EVT_MENU, self.OnTitle, title)
@@ -142,6 +150,7 @@ class GraphPanel(wx.Panel):
         self.Bind(wx.EVT_MENU, self.OnAxesAspect, _aspax_auto)
         
         # Lines
+        self.Bind(wx.EVT_MENU, self.OnLineStyle, ls)
         self.Bind(wx.EVT_MENU, self.OnLineColor, linecolor)
         self.Bind(wx.EVT_MENU, self.OnLineWidth, linewidth)
         
@@ -198,8 +207,19 @@ class GraphPanel(wx.Panel):
         self.canvas.draw()
         
     def OnGridStyle(self,event):
-        _gs = event.GetEventObject().GetLabel(event.GetId())
-        self.axes.grid(ls=_gs)
+        dlg = aux.LineStyleDialog(None)
+        if dlg.ShowModal() == wx.ID_OK:
+            self._gs = dlg.GetData()
+            self.axes.grid(ls=self._gs)
+        dlg.Destroy()
+        self.canvas.draw()
+        
+    def OnGridWidth(self,event):
+        dlg = wx.TextEntryDialog(self, u"Insert a width", NANCHI_MAIN_CAPTION)
+        if dlg.ShowModal()==wx.ID_OK:
+            _lw = float(dlg.GetValue())
+            self.axes.grid(lw=_lw)
+        dlg.Destroy()
         self.canvas.draw()
         
     def OnLineColor(self,event):
@@ -233,7 +253,7 @@ class GraphPanel(wx.Panel):
         
     def set_line_width(self,event):
         self.canvas.mpl_disconnect(self.LINE_WIDTH_EVT)
-        dlg = wx.TextEntryDialog(self, u"Inserte un grosor de línea", NANCHI_MAIN_CAPTION)
+        dlg = wx.TextEntryDialog(self, u"Insert a width", NANCHI_MAIN_CAPTION)
         if dlg.ShowModal()==wx.ID_OK:
             _lw = float(dlg.GetValue())
             event.artist.set_linewidth(_lw)
@@ -312,10 +332,6 @@ class GraphPanel(wx.Panel):
     def OnZoom(self,event):
         self.sb.SetStatusText(u"Drag the cursor to select a region")
         self.canvas.zoomit()
-        #~ xl = self.axes.get_xlim()
-        #~ yl = self.axes.get_ylim()
-        #~ self.sb.SetStatusText(u"Zoom aplicado, nueva región: (%0.4f,%0.4f,%0.4f,%0.4f)"%
-                              #~ (xl[0],xl[1],yl[0],yl[1]))
         
     def OnMoveLine(self,event):
         self.MOVE_LINE_EVT = self.canvas.mpl_connect("pick_event", self.move_line)
@@ -330,6 +346,9 @@ class GraphPanel(wx.Panel):
         self._mpl_ml_release = self.canvas.mpl_connect("button_release_event", self._ml_release)
     
     def _ml_motion(self,event):
+        """
+        Move line motion
+        """
         cx = event.xdata
         cy = event.ydata
         deltax = cx - self._p0[0]
