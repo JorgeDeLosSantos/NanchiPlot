@@ -11,9 +11,7 @@
 import wx
 import os
 import numpy as np
-import matplotlib
-matplotlib.use('WXAgg') # wxPython backend
-import matplotlib.cm as cm # Colormap
+from initmpl import *
 import setplot as setplot # Axes & Figure props
 import iodata as io # Read & Write data
 import uibase as ui # Base interfaces
@@ -199,15 +197,13 @@ class NanchiPlot(wx.Frame):
         
     def OnExit(self,event):
         """
-        Archivo -> Salir -> (Atajo) Ctrl+Q 
+        File -> Quit 
         """
         self.Close(True)
         
     def OnHelp(self,event):
         """
-        Ayuda -> Ayuda
-        
-        Abre la documentación en HTML
+        Help -> Help
         """
         try:
             os.startfile(PATH_DOCUMENTATION_HTML)
@@ -329,31 +325,35 @@ class NanchiPlot(wx.Frame):
         pass
         
     def OnBar(self,event):
+        """
+        Plot bars
+        """
         setplot.set_default_params(self.axes,self.figure)
         X = self.data.grid_data.GetArrayData()
         rows,cols = X.shape
         wf = 0.6
-        if cols == 1: # Common case
+        if cols == -1: # never
             x = range(len(X[:,0]))
             self.axes.bar(x,X[:,0], width=0.6 ,align="center")
             self.axes.set_xlim(0 - wf, x[-1] + wf)
-        elif cols > 1:
-            for jj in range(cols):
-                kw = 1.0/(cols+1)
-                x = np.array(range(len(X[:,0])))
-                self.axes.bar(x+((jj+1.0)/cols), X[:,jj], width=kw)
-        else:
-            pass
+            
+        # for each column
+        for jj in range(cols):
+            kw = 1.0/(cols+1.5)
+            x = np.array(range(len(X[:,0])))
+            self.axes.bar(x+((jj+0.0)/(cols+1)), X[:,jj], width=kw, color=BAR_COLOR_CYCLE[jj])
+            
         self.canvas.draw()
+        
         
     def OnScatter(self,event):
         setplot.set_default_params(self.axes,self.figure)
         X = self.data.grid_data.GetArrayData()
         rows,cols = X.shape
         if cols == 2: # Common case
-            self.axes.plot(X[:,0],X[:,1],"bo")
+            self.axes.plot(X[:,0],X[:,1], "o", color="#348ABD")
         elif cols == 1:
-            self.axes.plot(X[:,0],"bo")
+            self.axes.plot(X[:,0],"o", color="#348ABD")
         self.canvas.draw()
         
     def OnPie(self,event):
@@ -419,6 +419,8 @@ class NanchiPlot(wx.Frame):
         xmod = image.binarize(cx)
         self.data.grid_data.SetArrayData(xmod)
         
+    # OnReset
+        
     def OnResetView(self,event):
         self.axes.autoscale()
         self.axes.set_aspect("auto")
@@ -426,6 +428,9 @@ class NanchiPlot(wx.Frame):
         self.canvas.draw()
         
     def OnAbout(self,event):
+        """
+        Show about dialog
+        """
         aux.AboutDialog(None)
 
 
@@ -437,11 +442,16 @@ class App(wx.App):
         frame = NanchiPlot(None)
         return True
 
+
 def run():
+    """
+    Entry point for nanchi
+    """
     REDIRECT = False
     LOG_FILE = "nanchi.log"
     app = App(REDIRECT)
     app.MainLoop()
+
 
 if __name__=='__main__':
     run() # Run app

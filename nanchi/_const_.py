@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import os.path as path
 import site
+import matplotlib
 
 VERSION = "0.1.0-dev"
 NANCHI_MAIN_CAPTION = "NanchiPlot %s"%(VERSION)
@@ -15,6 +16,8 @@ LINE_COLOR = "#000000"
 GRID_COLOR = "#080808"
 XTICK_COLOR = "#101635"
 YTICK_COLOR = "#101635"
+
+BAR_COLOR_CYCLE = ["#348ABD", "#E24A33", "#988ED5", "#777777", "#FBC15E", "#8EBA42", "#FFB5B8"]
 
 # Font sizes
 TICK_LABEL_SIZE = 10

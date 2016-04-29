@@ -580,11 +580,13 @@ class DataGrid(grid.Grid):
 
     def del_rows(self,event):
         rows = self.GetSelectedRows()
-        self.DeleteRows(rows[0],len(rows))
+        if not isempty(rows):
+            self.DeleteRows(rows[0],len(rows))
         
     def del_cols(self,event):
         cols = self.GetSelectedCols()
-        self.DeleteCols(cols[0],len(cols))
+        if not isempty(cols):
+            self.DeleteCols(cols[0],len(cols))
         
     def add_row(self,event):
         self.AppendRows(1)
@@ -593,6 +595,9 @@ class DataGrid(grid.Grid):
         self.AppendCols(1)
         
     def edit_collabel(self,event):
+        """
+        Set column label
+        """
         ccols = self.GetSelectedCols()
         dlg = wx.TextEntryDialog(None, "Insert new label...",
         DEFAULT_DIALOG_CAPTION)
@@ -623,11 +628,4 @@ class DataGrid(grid.Grid):
 
         
 if __name__=='__main__':
-    app = wx.App()
-    fr = GraphWindow(None,"Hi",size=(600,400))
-    sz = wx.BoxSizer(wx.VERTICAL)
-    dp = DataPanel(fr)
-    sz.Add(dp, 1, wx.EXPAND)
-    fr.SetSizer(sz)
-    fr.Show()
-    app.MainLoop()
+    pass

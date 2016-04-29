@@ -9,17 +9,17 @@ def set_default_params(axes,figure):
     # Figure properties
     axes.cla()
     mpl.rc('figure',autolayout=True)
-    figure.set_facecolor(FIGURE_BG_COLOR)
+    #~ figure.set_facecolor(FIGURE_BG_COLOR)
     
     # Tick properties
-    mpl.rc('xtick', color=XTICK_COLOR, labelsize=TICK_LABEL_SIZE)
-    mpl.rc('ytick', color=YTICK_COLOR, labelsize=TICK_LABEL_SIZE)
+    #~ mpl.rc('xtick', color=XTICK_COLOR, labelsize=TICK_LABEL_SIZE)
+    #~ mpl.rc('ytick', color=YTICK_COLOR, labelsize=TICK_LABEL_SIZE)
     
     # Axes properties
-    mpl.rc('axes', grid=True, facecolor=AXES_BG_COLOR, hold=True)
+    #~ mpl.rc('axes', grid=True, facecolor=AXES_BG_COLOR, hold=True)
     
     # Grid properties
-    mpl.rc('grid', color=GRID_COLOR)
+    #~ mpl.rc('grid', color=GRID_COLOR)
     
     set_default_axes_props(axes)
     
@@ -31,7 +31,7 @@ def set_default_axes_props(axes):
         axes.invert_yaxis()
     if not axes.get_frame_on():
         axes.set_frame_on(True)
-    axes.set_axis_bgcolor(AXES_BG_COLOR)
+    #~ axes.set_axis_bgcolor(AXES_BG_COLOR)
 
 
 def is_reversed_yaxis(axes):

@@ -11,7 +11,7 @@ patch.antialiased: True
 font.family: Arial
 font.size: 10.0
 
-axes.facecolor: 202020
+axes.facecolor: black
 axes.edgecolor: bcbcbc
 axes.linewidth: 1.0
 axes.grid: True
@@ -45,7 +45,6 @@ legend.framealpha: 0.8
 legend.shadow: True
 
 text.color: white
-text.settex: True
 
 figure.facecolor: 587070
 figure.edgecolor: 0.5
