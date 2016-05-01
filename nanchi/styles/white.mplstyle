@@ -1,4 +1,5 @@
 # from http://www.huyng.com/posts/sane-color-scheme-for-matplotlib/
+# GGPLOT based
 
 patch.linewidth: 0.5
 patch.facecolor: 348ABD  # blue
@@ -7,8 +8,8 @@ patch.antialiased: True
 
 font.size: 10.0
 
-axes.facecolor: E5E5E5
-axes.edgecolor: white
+axes.facecolor: FAFAFA
+axes.edgecolor: DADADA
 axes.linewidth: 1
 axes.grid: True
 axes.titlesize: x-large
@@ -31,8 +32,8 @@ xtick.direction: in
 ytick.color: 555555
 ytick.direction: out
 
-grid.color: white
-grid.linestyle: -    # solid line
+grid.color: D0D0D0
+grid.linestyle: dotted    # dotted
 
 figure.facecolor: white
 figure.edgecolor: 0.50

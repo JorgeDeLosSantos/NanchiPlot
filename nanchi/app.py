@@ -3,7 +3,7 @@
 # NanchiPlot 0.1.0-dev
 # License: MIT License
 # Author: Pedro Jorge De Los Santos
-# E-mail: delossantosmfq@gmail.com
+# E-mail: delossantosmfq@gmail.com 
 # Code: https://github.com/JorgeDeLosSantos/NanchiPlot
 #
 #~ from __future__ import absolute_import
