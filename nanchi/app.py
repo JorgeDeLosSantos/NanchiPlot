@@ -17,7 +17,6 @@ import iodata as io # Read & Write data
 import uibase as ui # Base interfaces
 import uiaux as aux # Auxiliar interfaces
 import uitoolbar as tb
-import image as image # Image operations
 from _const_ import * # Constants
 
 
