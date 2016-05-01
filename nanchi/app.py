@@ -57,18 +57,6 @@ class NanchiPlot(wx.Frame):
         m_file.AppendSeparator()
         _exit = m_file.Append(-1, "Quit \tCtrl+Q")
         
-        # Not support for image in 0.1.0 version
-        #~ m_image = wx.Menu()
-        #~ filters = wx.Menu()
-        #~ sobel = wx.MenuItem(filters, -1, "Sobel")
-        #~ filters.AppendItem(sobel)
-        #~ roberts = wx.MenuItem(filters, -1, "Roberts")
-        #~ filters.AppendItem(roberts)
-        #~ prewitt = wx.MenuItem(filters, -1, "Prewitt")
-        #~ filters.AppendItem(prewitt)
-        #~ m_image.AppendMenu(-1, "Filters", filters)
-        #~ binarizar = m_image.Append(-1, "Binarize")
-        
         m_help = wx.Menu()
         _help = m_help.Append(-1, "Help")
         about = m_help.Append(-1, "About...")
@@ -85,11 +73,6 @@ class NanchiPlot(wx.Frame):
         
         self.Bind(wx.EVT_MENU, self.OnImport, import_data)
         self.Bind(wx.EVT_MENU, self.OnLoadImage, import_image)
-        
-        #~ self.Bind(wx.EVT_MENU, self.OnSobel, sobel)
-        #~ self.Bind(wx.EVT_MENU, self.OnRoberts, roberts)
-        #~ self.Bind(wx.EVT_MENU, self.OnPrewitt, prewitt)
-        #~ self.Bind(wx.EVT_MENU, self.OnBinarize, binarize)
         
         self.Bind(wx.EVT_MENU, self.OnAbout, about)
         self.Bind(wx.EVT_MENU, self.OnHelp, _help)
@@ -397,27 +380,6 @@ class NanchiPlot(wx.Frame):
         rows,cols = X.shape
         self.axes.contourf(X)
         self.canvas.draw()
-        
-    # Image operations ============================
-    def OnSobel(self,event):
-        cx = self.data.grid_data.GetArrayData()
-        xmod = image.sobel(cx)
-        self.data.grid_data.SetArrayData(xmod)
-        
-    def OnPrewitt(self,event):
-        cx = self.data.grid_data.GetArrayData()
-        xmod = image.prewitt(cx)
-        self.data.grid_data.SetArrayData(xmod)
-        
-    def OnRoberts(self,event):
-        cx = self.data.grid_data.GetArrayData()
-        xmod = image.roberts(cx)
-        self.data.grid_data.SetArrayData(xmod)
-        
-    def OnBinarize(self,event):
-        cx = self.data.grid_data.GetArrayData()
-        xmod = image.binarize(cx)
-        self.data.grid_data.SetArrayData(xmod)
         
     # OnReset
         
