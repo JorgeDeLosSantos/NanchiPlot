@@ -14,9 +14,9 @@
    height="32px"
    id="svg2985"
    version="1.1"
-   inkscape:version="0.48.5 r10040"
+   inkscape:version="0.91 r13725"
    sodipodi:docname="save_icon_32x32.svg"
-   inkscape:export-filename="C:\Users\User\Desktop\LABPro\PX1602 - NanchiPlot\NanchiPlot\nanchi\img\save_icon_32x32.png"
+   inkscape:export-filename="C:\Users\adminIS\Desktop\LABPro\PX1602 - NanchiPlot\NanchiPlot\nanchi\img\save_icon_32x32.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -54,7 +54,7 @@
        fx="-16.485441"
        fy="13.105287"
        r="14.511777"
-       gradientTransform="matrix(-2.6576769,2.8688432,-2.492889,-2.3093956,3.7477115,85.58373)"
+       gradientTransform="matrix(-2.0910073,2.2571488,-1.9613555,-1.8169865,6.4375592,71.071761)"
        gradientUnits="userSpaceOnUse" />
     <radialGradient
        inkscape:collect="always"
@@ -65,7 +65,7 @@
        fx="-29.788168"
        fy="26.194967"
        r="1.5327073"
-       gradientTransform="matrix(-2.8013199,5.0862689,-21.135169,-11.640433,482.14231,481.30214)"
+       gradientTransform="matrix(-2.2040228,4.0017752,-16.628731,-9.1584612,382.82892,382.41514)"
        gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
@@ -76,16 +76,16 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="7.9180417"
-     inkscape:cx="1.4435719"
-     inkscape:cy="1.7114816"
+     inkscape:cx="21.502118"
+     inkscape:cy="1.5851877"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:grid-bbox="true"
      inkscape:document-units="px"
-     inkscape:window-width="1366"
-     inkscape:window-height="705"
-     inkscape:window-x="-4"
-     inkscape:window-y="-4"
+     inkscape:window-width="1280"
+     inkscape:window-height="962"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata2990">
@@ -95,7 +95,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -106,26 +106,26 @@
     <rect
        style="fill:url(#radialGradient3777);fill-opacity:1;fill-rule:nonzero;stroke:none"
        id="rect2987"
-       width="29.023554"
-       height="27.86261"
-       x="1.555146"
-       y="2.0987365"
-       ry="1.2629385" />
+       width="22.835155"
+       height="21.921747"
+       x="4.7124925"
+       y="5.3874283"
+       ry="0.99365491" />
     <rect
        style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
        id="rect3757"
-       width="18.90799"
-       height="9.6241703"
-       x="6.5804219"
-       y="20.254219"
-       ry="0.91044313" />
+       width="14.876431"
+       height="7.5721059"
+       x="8.6662798"
+       y="19.671801"
+       ry="0.71631855" />
     <rect
        style="fill:url(#radialGradient3785);fill-opacity:1;fill-rule:nonzero;stroke:none"
        id="rect3759"
-       width="3.0654147"
-       height="7.5686555"
-       x="10.420731"
-       y="21.086414"
-       ry="1.2629385" />
+       width="2.4118073"
+       height="5.9548678"
+       x="11.687758"
+       y="20.326555"
+       ry="0.99365491" />
   </g>
 </svg>

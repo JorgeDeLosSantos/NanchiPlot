@@ -14,9 +14,9 @@
    height="32px"
    id="svg2985"
    version="1.1"
-   inkscape:version="0.48.5 r10040"
+   inkscape:version="0.91 r13725"
    sodipodi:docname="plot_icon_32x32.svg"
-   inkscape:export-filename="C:\Users\User\Desktop\LABPro\PX1602 - NanchiPlot\NanchiPlot\nanchi\img\plot_icon_32x32.png"
+   inkscape:export-filename="C:\Users\adminIS\Desktop\LABPro\PX1602 - NanchiPlot\NanchiPlot\nanchi\img\plot_icon_32x32.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -42,7 +42,7 @@
        fx="-21.88369"
        fy="22.50828"
        r="13.082407"
-       gradientTransform="matrix(1.4581565,3.5657035,-3.4553973,1.413048,125.50443,61.61496)"
+       gradientTransform="matrix(1.2789441,3.1274664,-3.0307172,1.2393796,112.42209,55.683105)"
        gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
@@ -53,16 +53,16 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="7.5855582"
-     inkscape:cx="-4.0624349"
+     inkscape:cx="-28.384969"
      inkscape:cy="6.1461"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:grid-bbox="true"
      inkscape:document-units="px"
-     inkscape:window-width="1366"
-     inkscape:window-height="705"
-     inkscape:window-x="-4"
-     inkscape:window-y="-4"
+     inkscape:window-width="1280"
+     inkscape:window-height="962"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata2990">
@@ -81,16 +81,8 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer">
     <path
-       style="fill:none;stroke:#0059d2;stroke-width:2.37533855;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m -64.939017,20.208282 c 0,0 2.960088,-9.412744 6.082879,-10.7854234 4.243609,-1.865351 7.094549,8.3521514 12.587341,7.8362834 4.630886,-0.43492 5.119255,-18.11613736 5.119255,-18.11613736"
-       id="path3008"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cssc"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
-    <path
-       style="fill:none;stroke:url(#radialGradient5243);stroke-width:3.50000000000000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 3.924797,25.922127 c 0,0 2.960088,-9.412744 6.082879,-10.785424 4.243609,-1.865351 7.094549,8.352152 12.587341,7.836284 4.630886,-0.43492 5.119255,-18.1161375 5.119255,-18.1161375"
+       style="fill:none;stroke:url(#radialGradient5243);stroke-width:1.75419319;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 5.7849961,24.377043 c 0,0 2.5962831,-8.255886 5.3352729,-9.459858 3.722055,-1.636093 6.222604,7.325644 11.040314,6.873177 4.061734,-0.381466 4.490081,-15.8896013 4.490081,-15.8896013"
        id="path3008-3"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cssc"

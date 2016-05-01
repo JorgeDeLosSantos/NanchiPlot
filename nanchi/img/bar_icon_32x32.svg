@@ -14,9 +14,9 @@
    height="32px"
    id="svg2985"
    version="1.1"
-   inkscape:version="0.48.5 r10040"
+   inkscape:version="0.91 r13725"
    sodipodi:docname="bar_icon_32x32.svg"
-   inkscape:export-filename="C:\Users\User\Desktop\LABPro\PX1602 - NanchiPlot\NanchiPlot\nanchi\img\bar_icon_32x32.png"
+   inkscape:export-filename="C:\Users\adminIS\Desktop\LABPro\PX1602 - NanchiPlot\NanchiPlot\nanchi\img\bar_icon_32x32.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -85,46 +85,46 @@
        inkscape:collect="always"
        xlink:href="#linearGradient2994"
        id="linearGradient3000"
-       x1="5.5352612"
-       y1="7.1266446"
-       x2="5.4919238"
-       y2="-3.992208"
+       x1="5.3285155"
+       y1="31.729395"
+       x2="5.6986694"
+       y2="-41.826687"
        gradientUnits="userSpaceOnUse" />
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient3002"
        id="linearGradient3008"
        x1="9.6914577"
-       y1="14.414473"
-       x2="9.9212866"
-       y2="4.4449582"
+       y1="30.747391"
+       x2="10.541524"
+       y2="-34.423252"
        gradientUnits="userSpaceOnUse" />
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient3010"
        id="linearGradient3016"
-       x1="15.311213"
-       y1="21.803883"
-       x2="14.95291"
-       y2="13.306557"
+       x1="15.104466"
+       y1="31.520935"
+       x2="14.952911"
+       y2="-23.700941"
        gradientUnits="userSpaceOnUse" />
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient3018"
        id="linearGradient3024"
-       x1="20.15526"
-       y1="14.171948"
+       x1="19.948515"
+       y1="31.74534"
        x2="19.796957"
-       y2="1.4530739"
+       y2="-26.457609"
        gradientUnits="userSpaceOnUse" />
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient3026"
        id="linearGradient3032"
-       x1="25.69206"
-       y1="9.267931"
-       x2="25.660328"
-       y2="1.7249259"
+       x1="26.312298"
+       y1="33.043697"
+       x2="26.07382"
+       y2="-42.518673"
        gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
@@ -135,16 +135,16 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="5.598901"
-     inkscape:cx="1.4435719"
-     inkscape:cy="16"
+     inkscape:cx="-4.2308166"
+     inkscape:cy="15.821394"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:grid-bbox="true"
      inkscape:document-units="px"
-     inkscape:window-width="1366"
-     inkscape:window-height="705"
-     inkscape:window-x="-4"
-     inkscape:window-y="-4"
+     inkscape:window-width="1280"
+     inkscape:window-height="962"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata2990">
@@ -163,7 +163,8 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer">
     <g
-       id="g2987">
+       id="g2987"
+       transform="matrix(0.86389414,0,0,0.86389414,3.3487001,2.525431)">
       <rect
          y="2.8871439"
          x="3.6074593"
