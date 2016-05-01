@@ -26,11 +26,14 @@ TICK_LABEL_SIZE = 10
 # Captions
 DEFAULT_DIALOG_CAPTION = NANCHI_MAIN_CAPTION
 
+
 # Graphics properties
 LINE_STYLES = "'-' | '--' | '-.' | ':' | 'None' ".split("|")
 
+
 # Icons & Images dirs
 cdir, _  = path.split(path.abspath(__file__))
+
 
 IMGS_PATH = path.join(cdir, u"img")
 PATH_NANCHI_LOGO = path.join(IMGS_PATH,"nanchi_logo.png")
@@ -86,6 +89,16 @@ SB_ON_CREATE_DATA_BIVARIABLE_FUNCTION = "Data from f(x,y)"
 
 #Import dialog
 IMPORT_DIALOG_WILDCARD = "All files (*.*)|*.*|TXT Files (*.txt)|*.txt|DAT Files (*.dat)|*.dat"
+
+
+
+# MPL-Stylesheets
+WHITE_STYLE = path.join(cdir, u'styles','white.mplstyle')
+DARK_STYLE = path.join(cdir, u'styles','dark.mplstyle')
+BLUE_STYLE = path.join(cdir, u'styles','blue.mplstyle')
+
+
+
 
 
 

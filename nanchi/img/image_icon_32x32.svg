@@ -14,9 +14,9 @@
    height="32px"
    id="svg2985"
    version="1.1"
-   inkscape:version="0.48.5 r10040"
+   inkscape:version="0.91 r13725"
    sodipodi:docname="image_icon_32x32.svg"
-   inkscape:export-filename="C:\Users\User\Desktop\LABPro\PX1602 - NanchiPlot\NanchiPlot\nanchi\img\image_icon_32x32.png"
+   inkscape:export-filename="C:\Users\adminIS\Desktop\LABPro\PX1602 - NanchiPlot\NanchiPlot\nanchi\img\image_icon_32x32.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -405,7 +405,8 @@
        y1="20"
        x2="17.000002"
        y2="-7.500001"
-       gradientUnits="userSpaceOnUse" />
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.73516452,0,0,0.73516452,4.9616682,4.9560776)" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -414,17 +415,17 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.99999996"
-     inkscape:cx="24.75"
-     inkscape:cy="19.535534"
+     inkscape:zoom="1.9999999"
+     inkscape:cx="-59.057334"
+     inkscape:cy="18.535534"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:grid-bbox="true"
      inkscape:document-units="px"
-     inkscape:window-width="1366"
-     inkscape:window-height="705"
-     inkscape:window-x="-4"
-     inkscape:window-y="-4"
+     inkscape:window-width="1280"
+     inkscape:window-height="962"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1"
      showguides="true"
      inkscape:guide-bbox="true" />
@@ -447,24 +448,24 @@
     <rect
        style="fill:url(#linearGradient3027);fill-opacity:1;fill-rule:nonzero;stroke:none"
        id="rect3026"
-       width="32.084969"
-       height="31.99658"
-       x="-0.14473878"
-       y="-0.067029797" />
+       width="23.58773"
+       height="23.522751"
+       x="4.8552613"
+       y="4.9067993" />
     <rect
        style="fill:#f2f2f2;fill-opacity:1;fill-rule:nonzero;stroke:none"
        id="rect3062"
-       width="29.698484"
-       height="20.064152"
-       x="1.0926994"
-       y="8.4182491" />
+       width="21.833273"
+       height="14.750453"
+       x="5.7649817"
+       y="11.144876" />
     <rect
        style="fill:#0000ff;fill-opacity:1;fill-rule:nonzero;stroke:none"
        id="rect3784"
-       width="6.1871853"
-       height="6.1871848"
-       x="6.4843874"
-       y="19.64357" />
+       width="4.5485992"
+       height="4.5485988"
+       x="9.7287598"
+       y="19.397333" />
     <path
        sodipodi:type="star"
        style="fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:none"
@@ -480,9 +481,9 @@
        inkscape:rounded="0"
        inkscape:randomized="0"
        d="m -26.693283,-8.6586409 -8.829029,4.3739414 -6.888186,-7.0452835 4.571897,-8.728167 9.713773,1.650981 z"
-       inkscape:transform-center-x="0.21433241"
-       inkscape:transform-center-y="0.19495931"
-       transform="matrix(0.49387016,0,0,0.51808906,32.395327,20.327911)" />
+       inkscape:transform-center-x="0.15756974"
+       inkscape:transform-center-y="0.14332756"
+       transform="matrix(0.36307582,0,0,0.38088069,28.777563,19.900437)" />
     <path
        sodipodi:type="star"
        style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none"
@@ -498,8 +499,8 @@
        inkscape:rounded="0"
        inkscape:randomized="0"
        d="m -31.643029,44.551146 -14.20174,-8.064077 14.084566,-8.267029 z"
-       inkscape:transform-center-x="-0.71203299"
-       inkscape:transform-center-y="-0.28123707"
-       transform="matrix(0.14740825,0.42761386,-0.50536054,0.1742093,46.230666,31.802358)" />
+       inkscape:transform-center-x="-0.52346033"
+       inkscape:transform-center-y="-0.20675725"
+       transform="matrix(0.10836932,0.31436655,-0.37152315,0.12807249,38.948813,28.336042)" />
   </g>
 </svg>

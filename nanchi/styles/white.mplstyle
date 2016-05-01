@@ -26,7 +26,7 @@ axes.prop_cycle: cycler('color', ['E24A33', '348ABD', '988ED5', '777777', 'FBC15
                    # FFB5B8 : pink
 
 xtick.color: 555555
-xtick.direction: out
+xtick.direction: in
 
 ytick.color: 555555
 ytick.direction: out

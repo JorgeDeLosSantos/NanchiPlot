@@ -1,4 +1,4 @@
-lines.linewidth: 2
+lines.linewidth: 1
 lines.color: FF00FF
 lines.antialiased: True
 lines.markersize: 7.0
@@ -11,7 +11,7 @@ patch.antialiased: True
 font.family: Arial
 font.size: 10.0
 
-axes.facecolor: black
+axes.facecolor: 1B7BC8
 axes.edgecolor: bcbcbc
 axes.linewidth: 1.0
 axes.grid: True
@@ -20,9 +20,9 @@ axes.titleweight: bold
 axes.labelsize: large
 axes.labelcolor: FAFAFA
 axes.axisbelow: True
-axes.color_cycle: 348ABD, E24A33, 988ED5, 777777, FBC15E, 8EBA42, FFB5B8
+axes.color_cycle: 85E5FF, E24A33, 988ED5, 777777, FBC15E, 8EBA42, FFB5B8
 
-grid.color: 9F9F9F
+grid.color: FFF785
 grid.linestyle: dotted
 
 xtick.major.size: 0.0
@@ -46,10 +46,12 @@ legend.shadow: True
 
 text.color: white
 
-figure.facecolor: 101010
+figure.facecolor: 003093
 figure.edgecolor: 0.5
 figure.subplot.hspace: 0.5
 
 
-savefig.facecolor: 202020
+savefig.facecolor: 003093
 savefig.edgecolor: 101010
+
+
