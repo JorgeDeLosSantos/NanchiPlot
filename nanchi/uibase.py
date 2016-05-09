@@ -250,12 +250,14 @@ class GraphPanel(wx.Panel):
     def OnLineWidth(self,event):
         self.LINE_WIDTH_EVT = self.canvas.mpl_connect("pick_event", self.set_line_width)
         
-        
     def set_line_width(self,event):
         self.canvas.mpl_disconnect(self.LINE_WIDTH_EVT)
         dlg = wx.TextEntryDialog(self, u"Insert a width", NANCHI_MAIN_CAPTION)
         if dlg.ShowModal()==wx.ID_OK:
-            _lw = float(dlg.GetValue())
+            try:
+                _lw = float(dlg.GetValue())
+            except ValueError:
+                _lw = event.artist.get_linewidth()
             event.artist.set_linewidth(_lw)
         dlg.Destroy()
         self.canvas.draw()
