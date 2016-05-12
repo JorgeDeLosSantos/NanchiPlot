@@ -632,8 +632,10 @@ class SetupWindow(wx.Frame):
         wx.Frame.__init__(self, parent=None, id=wx.ID_ANY, title="Settings",
                           size=(400,200), **kwargs)
         
+        # Init controls
         self.initCtrls()
         
+        # Center
         self.Centre(True)
         self.Show()
         
@@ -643,24 +645,20 @@ class SetupWindow(wx.Frame):
         self.buttonsz = wx.BoxSizer(wx.HORIZONTAL)
         
         # Theme controls
-        themes = "White|Dark|Blue".split("|")
+        themes = "White|Dark".split("|")
         _theme_label = wx.StaticText(self, wx.ID_ANY, "Themes")
         _theme_options = wx.ComboBox(self, wx.ID_ANY, choices=themes)
-        self.themesz.Add(_theme_label, 1, wx.EXPAND|wx.ALL, 2)
-        self.themesz.Add(_theme_options, 4, wx.EXPAND|wx.ALL, 2)
-        
-        # 
+        self.themesz.Add(_theme_label, 1, wx.ALIGN_LEFT|wx.ALL, 2)
+        self.themesz.Add(_theme_options, 4, wx.ALIGN_LEFT|wx.ALL, 2)
         
         # Buttons (OK|CANCEL)
         _ok_button = wx.Button(self, wx.ID_OK)
         _cancel_button = wx.Button(self, wx.ID_CANCEL)
-        self.buttonsz.Add(_ok_button, 1, wx.EXPAND)
-        self.buttonsz.Add(_cancel_button, 1, wx.EXPAND)
+        self.buttonsz.Add(_ok_button, 1, wx.ALIGN_CENTER|wx.ALL, 5)
+        self.buttonsz.Add(_cancel_button, 1, wx.ALIGN_CENTER|wx.ALL, 5)
         
         self.mainsz.Add(self.themesz, 1, wx.EXPAND|wx.ALL, 5)
-        self.mainsz.Add(self.buttonsz, 1, wx.EXPAND|wx.ALL, 5)
-        
-        
+        self.mainsz.Add(self.buttonsz, 1, wx.ALIGN_CENTRE|wx.ALL, 5)
         
         
         self.SetSizer(self.mainsz)
