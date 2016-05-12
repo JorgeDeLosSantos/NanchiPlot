@@ -85,6 +85,7 @@ SB_ON_IMPORT_DATA = "Data imported from %s"
 SB_ON_IMPORT_DATA_FAIL = "Error on load file %s"
 SB_ON_CREATE_DATA_FUNCTION = "Data from f(x)"
 SB_ON_CREATE_DATA_BIVARIABLE_FUNCTION = "Data from f(x,y)"
+SB_ERROR_ON_CREATE_DATA = "Please check inputs, some values are wrong"
 
 
 #Import dialog
