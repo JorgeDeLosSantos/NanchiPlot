@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm # Colormap
 from _const_ import *
 
-
 DEFAULT_STYLE = WHITE_STYLE
 
 if True:
