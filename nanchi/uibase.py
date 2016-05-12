@@ -626,6 +626,59 @@ class DataGrid(grid.Grid):
         self.canvas.draw()
         
 
+
+class SetupWindow(wx.Frame):
+    def __init__(self,**kwargs):
+        wx.Frame.__init__(self, parent=None, id=wx.ID_ANY, title="Settings",
+                          size=(400,200), **kwargs)
+        
+        self.initCtrls()
+        
+        self.Centre(True)
+        self.Show()
+        
+    def initCtrls(self):
+        self.mainsz = wx.BoxSizer(wx.VERTICAL)
+        self.themesz = wx.BoxSizer(wx.HORIZONTAL)
+        self.buttonsz = wx.BoxSizer(wx.HORIZONTAL)
+        
+        # Theme controls
+        themes = "White|Dark|Blue".split("|")
+        _theme_label = wx.StaticText(self, wx.ID_ANY, "Themes")
+        _theme_options = wx.ComboBox(self, wx.ID_ANY, choices=themes)
+        self.themesz.Add(_theme_label, 1, wx.EXPAND|wx.ALL, 2)
+        self.themesz.Add(_theme_options, 4, wx.EXPAND|wx.ALL, 2)
+        
+        # 
+        
+        # Buttons (OK|CANCEL)
+        _ok_button = wx.Button(self, wx.ID_OK)
+        _cancel_button = wx.Button(self, wx.ID_CANCEL)
+        self.buttonsz.Add(_ok_button, 1, wx.EXPAND)
+        self.buttonsz.Add(_cancel_button, 1, wx.EXPAND)
+        
+        self.mainsz.Add(self.themesz, 1, wx.EXPAND|wx.ALL, 5)
+        self.mainsz.Add(self.buttonsz, 1, wx.EXPAND|wx.ALL, 5)
+        
+        
+        
+        
+        self.SetSizer(self.mainsz)
+        
+        # Bind events
+        _ok_button.Bind(wx.EVT_BUTTON, self.OnOK)
+        _cancel_button.Bind(wx.EVT_BUTTON, self.OnCancel)
+        
+    def OnOK(self,event):
+        print 1
+        
+    def OnCancel(self,event):
+        print 0
+        self.Close(True)
+        
+        
         
 if __name__=='__main__':
-    pass
+    app = wx.App()
+    SetupWindow()
+    app.MainLoop()
