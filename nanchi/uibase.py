@@ -250,12 +250,14 @@ class GraphPanel(wx.Panel):
     def OnLineWidth(self,event):
         self.LINE_WIDTH_EVT = self.canvas.mpl_connect("pick_event", self.set_line_width)
         
-        
     def set_line_width(self,event):
         self.canvas.mpl_disconnect(self.LINE_WIDTH_EVT)
         dlg = wx.TextEntryDialog(self, u"Insert a width", NANCHI_MAIN_CAPTION)
         if dlg.ShowModal()==wx.ID_OK:
-            _lw = float(dlg.GetValue())
+            try:
+                _lw = float(dlg.GetValue())
+            except ValueError:
+                _lw = event.artist.get_linewidth()
             event.artist.set_linewidth(_lw)
         dlg.Destroy()
         self.canvas.draw()
@@ -540,6 +542,9 @@ class DataGrid(grid.Grid):
         
             
     def OnRightClick(self,event):
+        """
+        On right click, show pop-up menu.
+        """
         pum = wx.Menu()
         delrows = wx.MenuItem(pum, -1, "Delete rows")
         pum.AppendItem(delrows)
@@ -554,15 +559,8 @@ class DataGrid(grid.Grid):
         editcollabel = wx.MenuItem(pum, -1, "Edit column label")
         pum.AppendItem(editcollabel)
         pum.AppendSeparator()
-        randomfill = wx.MenuItem(pum, -1, "Fill column randomly")
+        randomfill = wx.MenuItem(pum, -1, "Fill columns randomly")
         pum.AppendItem(randomfill)
-        
-        # Not support for plot from data panel
-        #~ pum.AppendSeparator()
-        #~ plot = wx.MenuItem(pum, -1, u"Graficar líneas")
-        #~ pum.AppendItem(plot)
-        #~ bar = wx.MenuItem(pum, -1, u"Graficar barras")
-        #~ pum.AppendItem(bar)
         
         # Binds
         pum.Bind(wx.EVT_MENU, self.del_rows, delrows)
@@ -572,26 +570,36 @@ class DataGrid(grid.Grid):
         pum.Bind(wx.EVT_MENU, self.edit_collabel, editcollabel)
         pum.Bind(wx.EVT_MENU, self.random_fill, randomfill)
         
-        #~ pum.Bind(wx.EVT_MENU, self.plot, plot)
-        #~ pum.Bind(wx.EVT_MENU, self.bar, bar)
         # Show 
         self.PopupMenu(pum)
         pum.Destroy()
 
     def del_rows(self,event):
+        """
+        Delete rows
+        """
         rows = self.GetSelectedRows()
         if not isempty(rows):
             self.DeleteRows(rows[0],len(rows))
         
     def del_cols(self,event):
+        """
+        Delete columns
+        """
         cols = self.GetSelectedCols()
         if not isempty(cols):
             self.DeleteCols(cols[0],len(cols))
         
     def add_row(self,event):
+        """
+        Add row
+        """
         self.AppendRows(1)
         
     def add_col(self,event):
+        """
+        Add column
+        """
         self.AppendCols(1)
         
     def edit_collabel(self,event):
@@ -607,24 +615,16 @@ class DataGrid(grid.Grid):
             self.SetColLabelValue(col,label)
     
     def random_fill(self,event):
+        """
+        Fill columns randomly
+        """
         cols = self.GetSelectedCols()
         nrows = self.GetNumberRows()
         for ii in range(nrows):
             for col in cols:
                 val = str(np.random.rand())
                 self.SetCellValue(ii,col,val)
-                
-    def plot(self,event):
-        data = self.GetSelectedData()
-        self.axes.plot(data)
-        self.canvas.draw()
-        
-    def bar(self,event):
-        X = self.GetSelectedData()
-        x = range(len(X[:,0]))
-        self.axes.bar(x,X[:,0], width=0.6 ,align="center")
-        self.canvas.draw()
-        
+
 
 
 class SetupWindow(wx.Frame):

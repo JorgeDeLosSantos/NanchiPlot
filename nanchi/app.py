@@ -12,11 +12,11 @@ import wx
 import os
 import numpy as np
 from initmpl import *
-import setplot as setplot # Axes & Figure props
+import setplot # Axes & Figure props
 import iodata as io # Read & Write data
-import uibase as ui # Base interfaces
+import uibase as ui # Main interfaces
 import uiaux as aux # Auxiliar interfaces
-import uitoolbar as tb
+import uitoolbar as tb # Toolbars (Toolbar, AxesToolbar, LineToolbar)
 from _const_ import * # Constants
 
 
@@ -34,11 +34,13 @@ class NanchiPlot(wx.Frame):
         self.icon = wx.Icon(PATH_NANCHI_LOGO)
         self.SetIcon(self.icon)
         
+        # Reference to main objects
         self.axes = self.notebook.graphs.axes
         self.figure = self.notebook.graphs.figure
         self.canvas = self.notebook.graphs.canvas
         self.data = self.notebook.data
         
+        # Display on center
         self.Centre(True)
         self.Show()
         
@@ -79,7 +81,7 @@ class NanchiPlot(wx.Frame):
         
     def initSizers(self):
         """
-        Inicializar los sizers
+        Init sizers
         """
         self.mainsz = wx.BoxSizer(wx.VERTICAL)
         self.panelsz = wx.BoxSizer(wx.HORIZONTAL)
@@ -261,27 +263,36 @@ class NanchiPlot(wx.Frame):
         dialog = aux.FunctionDialog(None)
         if dialog.ShowModal() == wx.ID_OK:
             fx,a,b = dialog.GetData()
-            x = np.linspace(float(a), float(b), 100)
-            fx = eval(fx)
-            self.data.grid_data.SetArrayData(np.array([x,fx]).transpose())
-            self.data.grid_data.SetColLabelValue(0,"x")
-            self.data.grid_data.SetColLabelValue(1,"f(x)")
-            self.sb.SetStatusText(SB_ON_CREATE_DATA_FUNCTION)
+            try:
+                x = np.linspace(float(a), float(b), 100)
+                fx = eval(fx)
+                self.data.grid_data.SetArrayData(np.array([x,fx]).transpose())
+                self.data.grid_data.SetColLabelValue(0,"x")
+                self.data.grid_data.SetColLabelValue(1,"f(x)")
+                self.sb.SetStatusText(SB_ON_CREATE_DATA_FUNCTION)
+            except:
+                self.sb.SetStatusText(SB_ERROR_ON_CREATE_DATA)
         dialog.Destroy()
         
     def OnBivariableFunction(self,event):
+        """
+        For data from f(x,y)
+        """
         from numpy import (sin,cos,tan,log,exp)
         dialog = aux.BivariableFunctionDialog(None)
         if dialog.ShowModal() == wx.ID_OK:
             fxy,x,y = dialog.GetData()
-            x1,x2 = [float(n) for n in x]
-            y1,y2 = [float(n) for n in y]
-            xx = np.linspace(x1, x2, 100)
-            yy = np.linspace(y1, y2, 100)
-            x,y = np.meshgrid(xx,yy)
-            Z = eval(fxy)
-            self.data.grid_data.SetArrayData(Z)
-            self.sb.SetStatusText(SB_ON_CREATE_DATA_BIVARIABLE_FUNCTION)
+            try:
+                x1,x2 = [float(n) for n in x]
+                y1,y2 = [float(n) for n in y]
+                xx = np.linspace(x1, x2, 100)
+                yy = np.linspace(y1, y2, 100)
+                x,y = np.meshgrid(xx,yy)
+                Z = eval(fxy)
+                self.data.grid_data.SetArrayData(Z)
+                self.sb.SetStatusText(SB_ON_CREATE_DATA_BIVARIABLE_FUNCTION)
+            except:
+                self.sb.SetStatusText(SB_ERROR_ON_CREATE_DATA)
         dialog.Destroy()
         
     def OnPlot(self,event):
@@ -313,18 +324,16 @@ class NanchiPlot(wx.Frame):
         setplot.set_default_params(self.axes,self.figure)
         X = self.data.grid_data.GetArrayData()
         rows,cols = X.shape
-        wf = 0.6
-        if cols == -1: # never
-            x = range(len(X[:,0]))
-            self.axes.bar(x,X[:,0], width=0.6 ,align="center")
-            self.axes.set_xlim(0 - wf, x[-1] + wf)
-            
+        _k = 0
         # for each column
         for jj in range(cols):
             kw = 1.0/(cols+1.5)
             x = np.array(range(len(X[:,0])))
-            self.axes.bar(x+((jj+0.0)/(cols+1)), X[:,jj], width=kw, color=BAR_COLOR_CYCLE[jj])
-            
+            if (jj*(_k+1)) >= len(BAR_COLOR_CYCLE):
+                _k += 1
+            jjmod = jj-(_k*len(BAR_COLOR_CYCLE))
+            print jjmod
+            self.axes.bar(x+((jj+0.0)/(cols+1)), X[:,jj], width=kw, color=BAR_COLOR_CYCLE[jjmod])
         self.canvas.draw()
         
         

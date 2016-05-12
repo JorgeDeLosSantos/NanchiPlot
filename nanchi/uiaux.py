@@ -10,7 +10,6 @@ import uibase as ui
 import iodata as io
 from _const_ import *
 from util import isempty
-    
 
 class FunctionDialog(wx.Dialog):
     def __init__(self,parent,**kwargs):
@@ -535,13 +534,13 @@ class LineStyleDialog(wx.Dialog):
         self.panel = wx.Panel(self, -1)
         self.pbutton = wx.Panel(self, -1)
         
-        self._label = wx.StaticText(self.panel, -1, u"Seleccione un estilo de línea")
+        self._label = wx.StaticText(self.panel, -1, u"Select a line style")
         self._lstyles = "-|--|:|-.".split("|")
         self.options = wx.ComboBox(self.panel, -1, choices=self._lstyles)
         self.options.SetFont(self.LABEL_FONT)
         
-        self.okbt = wx.Button(self.pbutton, wx.ID_OK, u"Aceptar")
-        self.cancelbt =    wx.Button(self.pbutton, wx.ID_CANCEL, u"Cancelar")
+        self.okbt = wx.Button(self.pbutton, wx.ID_OK)
+        self.cancelbt =    wx.Button(self.pbutton, wx.ID_CANCEL)
         
     def initSizers(self):
         self.sz = wx.BoxSizer(wx.VERTICAL)
@@ -584,8 +583,8 @@ class PieLabelsDialog(wx.Dialog):
 
         self.grid = wxgrid.Grid(self.panel)
         
-        self.okbt = wx.Button(self.pbutton, wx.ID_OK, u"Aceptar")
-        self.cancelbt =    wx.Button(self.pbutton, wx.ID_CANCEL, u"Cancelar")
+        self.okbt = wx.Button(self.pbutton, wx.ID_OK)
+        self.cancelbt =    wx.Button(self.pbutton, wx.ID_CANCEL)
         
     def initSizers(self):
         self.sz = wx.BoxSizer(wx.VERTICAL)
