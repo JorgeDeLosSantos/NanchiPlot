@@ -46,7 +46,7 @@ class NanchiPlot(wx.Frame):
         
     def initMenu(self):
         """
-        Creating Menu bar
+        Creating menu bar
         """
         m_file = wx.Menu()
         save = m_file.Append(-1, "Save image... \tCtrl+S")
@@ -81,7 +81,7 @@ class NanchiPlot(wx.Frame):
         
     def initSizers(self):
         """
-        Init sizers
+        Initialize sizers
         """
         self.mainsz = wx.BoxSizer(wx.VERTICAL)
         self.panelsz = wx.BoxSizer(wx.HORIZONTAL)
@@ -89,8 +89,8 @@ class NanchiPlot(wx.Frame):
         self.mainsz.Add(self.toolbar, 0, wx.EXPAND)
         self.panelsz.Add(self.notebook, 1, wx.EXPAND|wx.ALL, 2)
 		
-        self.panelsz.Add(self.axestoolbar, 0, wx.EXPAND|wx.ALL) # Quitando el borde
-        self.panelsz.Add(self.linetoolbar, 0, wx.EXPAND|wx.ALL) # Quitando el borde
+        self.panelsz.Add(self.axestoolbar, 0, wx.EXPAND|wx.ALL)
+        self.panelsz.Add(self.linetoolbar, 0, wx.EXPAND|wx.ALL)
 		
         self.mainsz.Add(self.mainpanel, 1, wx.EXPAND)
         
@@ -99,7 +99,7 @@ class NanchiPlot(wx.Frame):
         
     def initCtrls(self):
         """
-        Init basic controls
+        Initialize basic controls
         """
         # Status bar
         self.SB_FONT = wx.Font(10, wx.SWISS, wx.NORMAL, wx.NORMAL)
@@ -115,7 +115,7 @@ class NanchiPlot(wx.Frame):
         
     def initToolBar(self):
         """
-        Init tool bar
+        Initialize tool bar
         """
         self.toolbar = tb.MainToolbar(self)
         self.toolbar.Realize()
@@ -128,7 +128,7 @@ class NanchiPlot(wx.Frame):
         
     def initEvents(self):
         """
-        Init events
+        Initialize events
         """
         self.graphs = self.notebook.graphs
         
@@ -243,6 +243,9 @@ class NanchiPlot(wx.Frame):
         
             
     def OnLoadImage(self,event):
+        """
+        Import images
+        """
         path = ""
         wildcard = "*.png"
         dlg = wx.FileDialog(self, message="Select an image",
@@ -259,6 +262,9 @@ class NanchiPlot(wx.Frame):
         dlg.Destroy()
             
     def OnFunction(self,event):
+        """
+        Create data from f(x) function
+        """
         from numpy import (sin,cos,tan,log,exp)
         dialog = aux.FunctionDialog(None)
         if dialog.ShowModal() == wx.ID_OK:
@@ -276,7 +282,7 @@ class NanchiPlot(wx.Frame):
         
     def OnBivariableFunction(self,event):
         """
-        For data from f(x,y)
+        Create data from f(x,y) function
         """
         from numpy import (sin,cos,tan,log,exp)
         dialog = aux.BivariableFunctionDialog(None)
@@ -296,6 +302,9 @@ class NanchiPlot(wx.Frame):
         dialog.Destroy()
         
     def OnPlot(self,event):
+        """
+        Line plot
+        """
         setplot.set_default_params(self.axes,self.figure)
         busy_dlg = aux.BusyInfo("Wait a moment...", self)
         X = self.data.grid_data.GetArrayData()
@@ -314,6 +323,8 @@ class NanchiPlot(wx.Frame):
     def OnPolar(self,event):
         """
         Unavailable
+        
+        Possibility: Rectangular axes -> Polar axes (temporarily)
         """
         pass
         

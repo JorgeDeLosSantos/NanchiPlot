@@ -341,13 +341,13 @@ class ImportDialog(wx.Dialog):
                     self.grid.SetArrayData(data[:,:mps])
                 else:
                     self.grid.SetArrayData(data)
-                infostr = u"Vista previa de datos leídos de %s\nTamaño: (%g,%g)"%(
+                infostr = u"Preview from '%s'\nSize: (%g,%g)"%(
                                                             filename,
                                                             data.shape[0],
                                                             data.shape[1])
                 self.log.write(infostr)
             else:
-                self.log.write(u"No se han podido leer los datos")
+                self.log.write(u"Unable to read data")
         except Exception as exc:
             self.log.write(exc)
 
@@ -360,7 +360,7 @@ class ImportDialog(wx.Dialog):
             if not data is None:
                 return data
             else:
-                self.log.write("No se han podido leer los datos")
+                self.log.write("Unable to read data")
         except Exception as exc:
             self.log.write(exc)
         

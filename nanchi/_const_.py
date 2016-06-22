@@ -92,7 +92,6 @@ SB_ERROR_ON_CREATE_DATA = "Please check inputs, some values are wrong"
 IMPORT_DIALOG_WILDCARD = "All files (*.*)|*.*|TXT Files (*.txt)|*.txt|DAT Files (*.dat)|*.dat"
 
 
-
 # MPL-Stylesheets
 WHITE_STYLE = path.join(cdir, u'styles','white.mplstyle')
 DARK_STYLE = path.join(cdir, u'styles','dark.mplstyle')
