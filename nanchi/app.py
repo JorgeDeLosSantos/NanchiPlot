@@ -64,7 +64,6 @@ class NanchiPlot(wx.Frame):
         
         menu_bar = wx.MenuBar()
         menu_bar.Append(m_file, "File")
-        #~ menu_bar.Append(m_image, "Imagen")
         menu_bar.Append(m_help, "Help")
         self.SetMenuBar(menu_bar)
         
@@ -137,7 +136,6 @@ class NanchiPlot(wx.Frame):
         self.Bind(wx.EVT_TOOL, self.OnFunction, self.toolbar.function_tool)
         self.Bind(wx.EVT_TOOL, self.OnBivariableFunction, self.toolbar.bivariable_function_tool)
         self.Bind(wx.EVT_TOOL, self.OnPlot, self.toolbar.plot_tool)
-        #self.Bind(wx.EVT_TOOL, self.OnPolar, self.toolbar.polar_tool)
         self.Bind(wx.EVT_TOOL, self.OnBar, self.toolbar.bar_tool)
         self.Bind(wx.EVT_TOOL, self.OnScatter, self.toolbar.scatter_tool)
         self.Bind(wx.EVT_TOOL, self.OnPie, self.toolbar.pie_tool)
@@ -191,10 +189,10 @@ class NanchiPlot(wx.Frame):
         """
         try:
             os.startfile(PATH_DOCUMENTATION_HTML)
-        except WindowsError:
+        except:
             """ Not exist file"""
+            print("Help file not found")
             pass
-            
         
     def OnSave(self,event):
         """
@@ -247,7 +245,7 @@ class NanchiPlot(wx.Frame):
         Import images
         """
         path = ""
-        wildcard = "*.png"
+        wildcard = "PNG (*.png)|*.png|JPG (*.jpg)|*.jpg|TIFF (*.tiff)|*.tiff"
         dlg = wx.FileDialog(self, message="Select an image",
         defaultDir=os.getcwd(), wildcard=wildcard, style=wx.OPEN)
         if dlg.ShowModal() == wx.ID_OK:
