@@ -7,32 +7,19 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="32px"
    height="32px"
    id="svg2985"
    version="1.1"
-   inkscape:version="0.91 r13725"
+   inkscape:version="0.48.5 r10040"
    sodipodi:docname="image_icon_32x32.svg"
-   inkscape:export-filename="C:\Users\adminIS\Desktop\LABPro\PX1602 - NanchiPlot\NanchiPlot\nanchi\img\image_icon_32x32.png"
+   inkscape:export-filename="C:\Users\User\Desktop\LABPro\PX1602 - NanchiPlot\NanchiPlot\nanchi\img\image_icon_32x32.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
      id="defs2987">
-    <linearGradient
-       inkscape:collect="always"
-       id="linearGradient3021">
-      <stop
-         style="stop-color:#008080;stop-opacity:1;"
-         offset="0"
-         id="stop3023" />
-      <stop
-         style="stop-color:#008080;stop-opacity:0;"
-         offset="1"
-         id="stop3025" />
-    </linearGradient>
     <inkscape:path-effect
        effect="skeletal"
        id="path-effect3504"
@@ -397,16 +384,6 @@
        prop_units="false"
        vertical_pattern="false"
        fuse_tolerance="0" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient3021"
-       id="linearGradient3027"
-       x1="17.5"
-       y1="20"
-       x2="17.000002"
-       y2="-7.500001"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.73516452,0,0,0.73516452,4.9616682,4.9560776)" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -415,17 +392,17 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.9999999"
-     inkscape:cx="-59.057334"
+     inkscape:zoom="5.656854"
+     inkscape:cx="-32.696857"
      inkscape:cy="18.535534"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:grid-bbox="true"
      inkscape:document-units="px"
-     inkscape:window-width="1280"
-     inkscape:window-height="962"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     inkscape:window-x="-4"
+     inkscape:window-y="-4"
      inkscape:window-maximized="1"
      showguides="true"
      inkscape:guide-bbox="true" />
@@ -437,7 +414,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -446,7 +423,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer">
     <rect
-       style="fill:url(#linearGradient3027);fill-opacity:1;fill-rule:nonzero;stroke:none"
+       style="fill:#333333;fill-opacity:1;fill-rule:nonzero;stroke:none"
        id="rect3026"
        width="23.58773"
        height="23.522751"
@@ -460,7 +437,7 @@
        x="5.7649817"
        y="11.144876" />
     <rect
-       style="fill:#0000ff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       style="fill:#333333;fill-opacity:1;fill-rule:nonzero;stroke:none"
        id="rect3784"
        width="4.5485992"
        height="4.5485988"
@@ -468,7 +445,7 @@
        y="19.397333" />
     <path
        sodipodi:type="star"
-       style="fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       style="fill:#999999;fill-opacity:1;fill-rule:nonzero;stroke:none"
        id="path3786"
        sodipodi:sides="5"
        sodipodi:cx="-34.117905"
@@ -486,7 +463,7 @@
        transform="matrix(0.36307582,0,0,0.38088069,28.777563,19.900437)" />
     <path
        sodipodi:type="star"
-       style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       style="fill:#808080;fill-opacity:1;fill-rule:nonzero;stroke:none"
        id="path3788"
        sodipodi:sides="3"
        sodipodi:cx="-36.416"

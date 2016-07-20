@@ -7,126 +7,19 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="32px"
    height="32px"
    id="svg2985"
    version="1.1"
-   inkscape:version="0.91 r13725"
+   inkscape:version="0.48.5 r10040"
    sodipodi:docname="bar_icon_32x32.svg"
-   inkscape:export-filename="C:\Users\adminIS\Desktop\LABPro\PX1602 - NanchiPlot\NanchiPlot\nanchi\img\bar_icon_32x32.png"
+   inkscape:export-filename="C:\Users\User\Desktop\LABPro\PX1602 - NanchiPlot\NanchiPlot\nanchi\img\bar_icon_32x32.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
-     id="defs2987">
-    <linearGradient
-       inkscape:collect="always"
-       id="linearGradient3026">
-      <stop
-         style="stop-color:#0000ff;stop-opacity:1;"
-         offset="0"
-         id="stop3028" />
-      <stop
-         style="stop-color:#0000ff;stop-opacity:0;"
-         offset="1"
-         id="stop3030" />
-    </linearGradient>
-    <linearGradient
-       inkscape:collect="always"
-       id="linearGradient3018">
-      <stop
-         style="stop-color:#0000ff;stop-opacity:1;"
-         offset="0"
-         id="stop3020" />
-      <stop
-         style="stop-color:#0000ff;stop-opacity:0;"
-         offset="1"
-         id="stop3022" />
-    </linearGradient>
-    <linearGradient
-       inkscape:collect="always"
-       id="linearGradient3010">
-      <stop
-         style="stop-color:#0000ff;stop-opacity:1;"
-         offset="0"
-         id="stop3012" />
-      <stop
-         style="stop-color:#0000ff;stop-opacity:0;"
-         offset="1"
-         id="stop3014" />
-    </linearGradient>
-    <linearGradient
-       inkscape:collect="always"
-       id="linearGradient3002">
-      <stop
-         style="stop-color:#0000ff;stop-opacity:1;"
-         offset="0"
-         id="stop3004" />
-      <stop
-         style="stop-color:#0000ff;stop-opacity:0;"
-         offset="1"
-         id="stop3006" />
-    </linearGradient>
-    <linearGradient
-       inkscape:collect="always"
-       id="linearGradient2994">
-      <stop
-         style="stop-color:#0000ff;stop-opacity:1;"
-         offset="0"
-         id="stop2996" />
-      <stop
-         style="stop-color:#0000ff;stop-opacity:0;"
-         offset="1"
-         id="stop2998" />
-    </linearGradient>
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient2994"
-       id="linearGradient3000"
-       x1="5.3285155"
-       y1="31.729395"
-       x2="5.6986694"
-       y2="-41.826687"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient3002"
-       id="linearGradient3008"
-       x1="9.6914577"
-       y1="30.747391"
-       x2="10.541524"
-       y2="-34.423252"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient3010"
-       id="linearGradient3016"
-       x1="15.104466"
-       y1="31.520935"
-       x2="14.952911"
-       y2="-23.700941"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient3018"
-       id="linearGradient3024"
-       x1="19.948515"
-       y1="31.74534"
-       x2="19.796957"
-       y2="-26.457609"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient3026"
-       id="linearGradient3032"
-       x1="26.312298"
-       y1="33.043697"
-       x2="26.07382"
-       y2="-42.518673"
-       gradientUnits="userSpaceOnUse" />
-  </defs>
+     id="defs2987" />
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -141,10 +34,10 @@
      showgrid="true"
      inkscape:grid-bbox="true"
      inkscape:document-units="px"
-     inkscape:window-width="1280"
-     inkscape:window-height="962"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     inkscape:window-x="-4"
+     inkscape:window-y="-4"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata2990">
@@ -154,7 +47,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -164,42 +57,43 @@
      inkscape:groupmode="layer">
     <g
        id="g2987"
-       transform="matrix(0.86389414,0,0,0.86389414,3.3487001,2.525431)">
+       transform="matrix(0.86389414,0,0,0.86389414,3.3487001,2.525431)"
+       style="fill:#000000">
       <rect
          y="2.8871439"
          x="3.6074593"
          height="26.16585"
          width="3.1256132"
          id="rect2988"
-         style="fill:url(#linearGradient3000);fill-opacity:1;fill-rule:nonzero;stroke:none" />
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none" />
       <rect
          y="10.797915"
          x="18.744358"
          height="18.210426"
          width="3.1256132"
          id="rect2988-1"
-         style="fill:url(#linearGradient3024);fill-opacity:1;fill-rule:nonzero;stroke:none" />
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none" />
       <rect
          y="19.274288"
          x="13.386162"
          height="9.6447506"
          width="3.1256132"
          id="rect2988-7"
-         style="fill:url(#linearGradient3016);fill-opacity:1;fill-rule:nonzero;stroke:none" />
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none" />
       <rect
          y="11.772817"
          x="8.2065744"
          height="17.146223"
          width="3.1256132"
          id="rect2988-4"
-         style="fill:url(#linearGradient3008);fill-opacity:1;fill-rule:nonzero;stroke:none" />
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none" />
       <rect
          y="6.5485764"
          x="24.102552"
          height="22.504417"
          width="3.1256132"
          id="rect2988-1-0"
-         style="fill:url(#linearGradient3032);fill-opacity:1;fill-rule:nonzero;stroke:none" />
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none" />
     </g>
   </g>
 </svg>

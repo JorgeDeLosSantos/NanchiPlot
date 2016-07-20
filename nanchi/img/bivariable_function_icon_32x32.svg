@@ -27,7 +27,7 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.3997253"
+     inkscape:zoom="3.959021"
      inkscape:cx="-13.922127"
      inkscape:cy="19.428177"
      inkscape:current-layer="layer1"
@@ -47,7 +47,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -69,7 +69,7 @@
          style="font-size:20px;font-family:Times New Roman;-inkscape-font-specification:Verdana Oblique;font-style:oblique" /></text>
     <text
        xml:space="preserve"
-       style="font-size:23.12374305999999900px;font-style:oblique;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000080;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Sans Bold Oblique"
+       style="font-size:23.12374305999999900px;font-style:oblique;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Sans Bold Oblique"
        x="22.805202"
        y="16.888378"
        id="text2999"
@@ -79,6 +79,6 @@
          id="tspan3001"
          x="22.805202"
          y="16.888378"
-         style="font-size:16.51696205000000000px;font-weight:bold;fill:#000080;font-family:Times New Roman;-inkscape-font-specification:Sans Bold Oblique">f(x,y)</tspan></text>
+         style="font-size:16.51696205000000000px;font-weight:bold;fill:#000000;font-family:Times New Roman;-inkscape-font-specification:Sans Bold Oblique">f(x,y)</tspan></text>
   </g>
 </svg>
