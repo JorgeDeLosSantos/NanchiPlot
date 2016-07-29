@@ -7,19 +7,63 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="32px"
    height="32px"
    id="svg2985"
    version="1.1"
-   inkscape:version="0.48.5 r10040"
+   inkscape:version="0.91 r13725"
    sodipodi:docname="function_icon_32x32.svg"
-   inkscape:export-filename="C:\Users\User\Desktop\LABPro\PX1602 - NanchiPlot\NanchiPlot\nanchi\img\function_icon_32x32.png"
+   inkscape:export-filename="C:\Users\adminIS\Desktop\LABPro\PX1602 - NanchiPlot\NanchiPlot\nanchi\img\function_icon_32x32.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
-     id="defs2987" />
+     id="defs2987">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient3343">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop3345" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="1"
+         id="stop3347" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3343"
+       id="linearGradient3349"
+       x1="34.515526"
+       y1="4.5273895"
+       x2="-27.886272"
+       y2="46.125523"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.99730811,0,0,0.9973081,0.20100378,-0.30760045)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3343"
+       id="linearGradient3343-7"
+       x1="2.2868893"
+       y1="23.503616"
+       x2="68.806618"
+       y2="-14.233497"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.1468492,0,0,1.1468492,-3.7546396,-1.7930878)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3343"
+       id="linearGradient3353"
+       x1="2.2868893"
+       y1="23.503616"
+       x2="68.806618"
+       y2="-14.233497"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.1468492,0,0,1.1468492,-3.9350416,-1.2709053)" />
+  </defs>
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -28,16 +72,16 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="7.0725624"
-     inkscape:cx="15.761123"
-     inkscape:cy="16.001972"
+     inkscape:cx="16.42177"
+     inkscape:cy="15.71919"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:grid-bbox="true"
      inkscape:document-units="px"
-     inkscape:window-width="1366"
-     inkscape:window-height="705"
-     inkscape:window-x="-4"
-     inkscape:window-y="-4"
+     inkscape:window-width="1280"
+     inkscape:window-height="962"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata2990">
@@ -47,7 +91,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -57,16 +101,16 @@
      inkscape:groupmode="layer">
     <text
        xml:space="preserve"
-       style="font-size:18.27016068000000000px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
-       x="19.029018"
-       y="18.545132"
-       id="text2995"
+       style="font-style:oblique;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:23.50623131px;line-height:125%;font-family:Verdana;-inkscape-font-specification:'Sans Bold Oblique';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:url(#linearGradient3343-7);fill-opacity:1;stroke:none"
+       x="21.58367"
+       y="16.186106"
+       id="text2999"
        sodipodi:linespacing="125%"
-       transform="scale(0.88883797,1.1250644)"><tspan
+       transform="scale(0.74559011,1.3412195)"><tspan
          sodipodi:role="line"
-         id="tspan2997"
-         x="19.029018"
-         y="18.545132"
-         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Times New Roman;-inkscape-font-specification:Times New Roman">f(x)</tspan></text>
+         id="tspan3001"
+         x="21.58367"
+         y="16.186106"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16.79016876px;font-family:Arial;-inkscape-font-specification:'Arial Bold';fill:url(#linearGradient3343-7)">f(x)</tspan></text>
   </g>
 </svg>
