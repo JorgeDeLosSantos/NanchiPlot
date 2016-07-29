@@ -360,8 +360,14 @@ class NanchiPlot(wx.Frame):
         setplot.set_default_params(self.axes,self.figure)
         X = self.data.grid_data.GetArrayData()
         rows,cols = X.shape
+        
+        n = float(rows)
+        from matplotlib import cm
+        a=np.random.random(n)
+        colors=cm.Set1(np.arange(n)/n)
+        
         if cols == 1:
-            _ , self.pie_labels = self.axes.pie(X[:,0], labels=X[:,0])
+            _ , self.pie_labels = self.axes.pie(X[:,0], labels=X[:,0], colors=colors)
             self.axes.set_aspect("equal")
         else:
             pass
