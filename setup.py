@@ -38,5 +38,5 @@ setup(
       "Topic :: Multimedia :: Graphics",
       "Topic :: Utilities",
     ],
-    package_data={"nanchi": ["img/*.*","help/*.*","¨data/*.*","styles/*.*"]}
+    package_data={"nanchi": ["img/*","help/*","¨data/*","styles/*"]}
 )

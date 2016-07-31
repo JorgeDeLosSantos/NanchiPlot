@@ -333,16 +333,38 @@ class NanchiPlot(wx.Frame):
         setplot.set_default_params(self.axes,self.figure)
         X = self.data.grid_data.GetArrayData()
         rows,cols = X.shape
-        _k = 0
+        #~ _k = 0
         # for each column
-        for jj in range(cols):
-            kw = 1.0/(cols+1.5)
-            x = np.array(range(len(X[:,0])))
-            if (jj*(_k+1)) >= len(BAR_COLOR_CYCLE):
-                _k += 1
-            jjmod = jj-(_k*len(BAR_COLOR_CYCLE))
-            print jjmod
-            self.axes.bar(x+((jj+0.0)/(cols+1)), X[:,jj], width=kw, color=BAR_COLOR_CYCLE[jjmod])
+        #~ for jj in range(cols):
+            #~ kw = 1.0/(cols+1.5)
+            #~ x = np.array(range(len(X[:,0])))
+            #~ self.axes.bar(x+((jj+0.0)/(cols+1)), X[:,jj], width=kw, color=BAR_COLOR_CYCLE)
+
+        # Reference: http://matthiaseisen.com/pp/patterns/p0178/
+        #
+        # Space between bars groups (FACTOR)
+        KB = 0.85
+        # Counter
+        k = 0
+        # For each row
+        for jj in range(rows):
+            kw = 1.0/(cols+1.5) # bar width
+            x = np.linspace(k, k+KB, cols, endpoint=False)
+            self.axes.bar(x, X[jj,:], width=kw, color=BAR_COLOR_CYCLE)
+            k += 1
+        
+        # For ticks and labels
+        STEP = 1.0
+        INITIAL_TICK = KB/2.0
+        END_TICK = rows
+        _xticks = np.arange(INITIAL_TICK, END_TICK, STEP)
+        self.axes.set_xticks(_xticks)
+        
+        # 
+        _tick_labels = range(1, rows+1)
+        self.axes.set_xticklabels(_tick_labels)
+        
+        # Redraw
         self.canvas.draw()
         
         

@@ -385,8 +385,8 @@ class TickDialog(wx.Dialog):
 
         self.grid = TickGrid(self.panel)
         
-        self.okbt = wx.Button(self.pbutton, wx.ID_OK, u"Aceptar")
-        self.cancelbt =    wx.Button(self.pbutton, wx.ID_CANCEL, u"Cancelar")
+        self.okbt = wx.Button(self.pbutton, wx.ID_OK, u"OK")
+        self.cancelbt =    wx.Button(self.pbutton, wx.ID_CANCEL, u"Cancel")
         
     def initSizers(self):
         self.sz = wx.BoxSizer(wx.VERTICAL)
@@ -432,7 +432,7 @@ class TickGrid(wxgrid.Grid):
         self.CreateGrid(rows,cols)
         self.SetRowLabelSize(0)
         self.SetColLabelValue(0, "Tick")
-        self.SetColLabelValue(1, "Etiqueta")
+        self.SetColLabelValue(1, "TickLabel")
         self.Bind(wxgrid.EVT_GRID_CELL_CHANGE, self.OnCellEdit)
         self.Bind(wxgrid.EVT_GRID_CELL_RIGHT_CLICK, self.OnRightClick)
         
@@ -481,17 +481,17 @@ class TickGrid(wxgrid.Grid):
         
     def OnRightClick(self,event):
         pum = wx.Menu()
-        addrow = wx.MenuItem(pum, -1, "Agregar fila...")
+        addrow = wx.MenuItem(pum, -1, "Add row...")
         pum.AppendItem(addrow)
         
         pum.AppendSeparator()
         
-        delrows = wx.MenuItem(pum, -1, "Eliminar filas")
+        delrows = wx.MenuItem(pum, -1, "Delete rows")
         pum.AppendItem(delrows)
         
         pum.AppendSeparator()
         
-        clearcell = wx.MenuItem(pum, -1, "Limpiar celdas")
+        clearcell = wx.MenuItem(pum, -1, "Clear cells")
         pum.AppendItem(clearcell)
         
         # Binds
