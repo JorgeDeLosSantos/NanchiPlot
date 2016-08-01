@@ -236,19 +236,24 @@ class GraphPanel(wx.Panel):
         self.canvas.mpl_disconnect(self.LINE_COLOR_EVT)
         
     def OnLineStyle(self,event):
+        self.LINE_STYLE_EVT = self.canvas.mpl_connect("pick_event", self.set_line_style)
+        self.sb.SetStatusText("Select a line")
+        
+    def set_line_style(self,event):
         dlg = aux.LineStyleDialog(None)
         if dlg.ShowModal() == wx.ID_OK:
             self._ls = dlg.GetData()
-            self.LINE_STYLE_EVT = self.canvas.mpl_connect("pick_event", self.set_line_style)
+            event.artist.set_linestyle(self._ls)
         dlg.Destroy()
-        
-    def set_line_style(self,event):
-        event.artist.set_linestyle(self._ls)
+        # Quit LS_EVT
         self.canvas.mpl_disconnect(self.LINE_STYLE_EVT)
+        # Update SB
+        self.sb.SetStatusText("Done: Line style applied")
         self.canvas.draw()
         
     def OnLineWidth(self,event):
         self.LINE_WIDTH_EVT = self.canvas.mpl_connect("pick_event", self.set_line_width)
+        self.sb.SetStatusText("Select a line")
         
     def set_line_width(self,event):
         self.canvas.mpl_disconnect(self.LINE_WIDTH_EVT)
@@ -266,7 +271,7 @@ class GraphPanel(wx.Panel):
     def OnXLabel(self,event):
         current_label = unicode(self.axes.get_xlabel())
         dialog = wx.TextEntryDialog(None,
-        "Inserte la etiqueta en X",
+        "Insert xlabel",
         NANCHI_MAIN_CAPTION, current_label, style=wx.OK|wx.CANCEL)
         if dialog.ShowModal() == wx.ID_OK:
             self.axes.set_xlabel(dialog.GetValue())
@@ -276,7 +281,7 @@ class GraphPanel(wx.Panel):
     def OnYLabel(self,event):
         current_label = unicode(self.axes.get_ylabel())
         dialog = wx.TextEntryDialog(self,
-        "Inserte la etiqueta en Y",
+        "Insert ylabel",
         NANCHI_MAIN_CAPTION, current_label, style=wx.OK|wx.CANCEL)
         if dialog.ShowModal() == wx.ID_OK:
             self.axes.set_ylabel(dialog.GetValue())
@@ -285,7 +290,7 @@ class GraphPanel(wx.Panel):
         
     def OnTitle(self,event):
         dialog = wx.TextEntryDialog(self,
-        u"Inserte el título",
+        u"Insert a title",
         NANCHI_MAIN_CAPTION, "", style=wx.OK|wx.CANCEL)
         if dialog.ShowModal() == wx.ID_OK:
             self.axes.set_title(dialog.GetValue())
@@ -322,11 +327,10 @@ class GraphPanel(wx.Panel):
             event.artist.set_label(_label)
         dlg.Destroy()
         self.canvas.draw()
-        
+    
     def OnShowLegend(self,event):
         self.axes.legend(loc="best")
         self.canvas.draw()
-        
         
     def OnPieLabels(self,event):
         pass

@@ -20,14 +20,6 @@ YTICK_COLOR = "#101635"
 
 BAR_COLOR_CYCLE = ['#E24A33', '#348ABD', '#988ED5', '#777777', '#FBC15E', '#8EBA42', '#FFB5B8']
 
-#~ BAR_COLOR_CYCLE = ["#348ABD",
-                   #~ "#DF6B59", 
-                   #~ "#66B560", 
-                   #~ "#988ED5", 
-                   #~ "#FBC15E", 
-                   #~ "#FBC959", 
-                   #~ "#FFB5B8"]
-
 # Font sizes
 TICK_LABEL_SIZE = 10
 
@@ -98,9 +90,12 @@ SB_ON_CREATE_DATA_BIVARIABLE_FUNCTION = "Data from f(x,y)"
 SB_ERROR_ON_CREATE_DATA = "Please check inputs, some values are wrong"
 
 
-#Import dialog
+# WildCards
 IMPORT_DIALOG_WILDCARD = "All files (*.*)|*.*|TXT Files (*.txt)|*.txt|DAT Files (*.dat)|*.dat"
-
+ON_SAVE_WILDCARD = "PNG (*.png)|*.png|PDF (*.pdf)|*.pdf|EPS (*.eps)|*.eps|JPG (*.jpg)|*jpg"
+ON_EXPORT_ASCII_WILDCARD = "TXT File (*.txt)|*.txt|DAT (*.dat)|*.dat"
+ON_EXPORT_IMAGE_WILDCARD = "PNG (*.png)|*.png|PDF (*.pdf)|*.pdf|JPG (*.jpg)|*jpg"
+ON_IMPORT_IMAGE_WILDCARD = "PNG (*.png)|*.png|JPG (*.jpg)|*.jpg|TIFF (*.tiff)|*.tiff"
 
 # MPL-Stylesheets
 WHITE_STYLE = path.join(cdir, u'styles','white.mplstyle')

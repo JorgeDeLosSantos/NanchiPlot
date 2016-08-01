@@ -7,19 +7,44 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="32px"
    height="32px"
    id="svg2985"
    version="1.1"
-   inkscape:version="0.48.5 r10040"
+   inkscape:version="0.91 r13725"
    sodipodi:docname="nanchi_logo.svg"
-   inkscape:export-filename="C:\Users\User\Desktop\LABPro\PX1602 - NanchiPlot\NanchiPlot\nanchi\img\nanchi_logo.png"
+   inkscape:export-filename="C:\Users\adminIS\Desktop\LABPro\PX1602 - NanchiPlot\NanchiPlot\nanchi\img\nanchi_logo.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
-     id="defs2987" />
+     id="defs2987">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient3345">
+      <stop
+         style="stop-color:#ffff00;stop-opacity:1;"
+         offset="0"
+         id="stop3347" />
+      <stop
+         style="stop-color:#ffff00;stop-opacity:0;"
+         offset="1"
+         id="stop3349" />
+    </linearGradient>
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3345"
+       id="radialGradient3351"
+       cx="-38.980865"
+       cy="15.880765"
+       fx="-38.980865"
+       fy="15.880765"
+       r="6.8737231"
+       gradientTransform="matrix(-2.5604373,2.7045236,-1.1143458,-1.7553962,-121.09227,149.18247)"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -28,16 +53,16 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="11.197802"
-     inkscape:cx="15.151129"
-     inkscape:cy="12.42787"
+     inkscape:cx="0.99656415"
+     inkscape:cy="12.338567"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:grid-bbox="true"
      inkscape:document-units="px"
-     inkscape:window-width="1366"
-     inkscape:window-height="705"
-     inkscape:window-x="-4"
-     inkscape:window-y="-4"
+     inkscape:window-width="1280"
+     inkscape:window-height="962"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata2990">
@@ -47,7 +72,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -63,20 +88,20 @@
          sodipodi:open="true"
          sodipodi:end="8.9213206"
          sodipodi:start="2.6384032"
-         d="m -44.965768,19.993377 c -1.819444,-4.126312 -0.614863,-9.312628 2.690507,-11.5839605 3.30537,-2.2713327 7.459853,-0.767575 9.279298,3.3587365 1.819444,4.126312 0.614863,9.312628 -2.690507,11.58396 -3.304744,2.270903 -7.45843,0.768187 -9.278415,-3.356735"
+         d="m -44.965768,19.993377 a 6.8316979,8.5284595 0 0 1 2.690106,-11.583685 6.8316979,8.5284595 0 0 1 9.279257,3.35746 6.8316979,8.5284595 0 0 1 -2.688862,11.584135 6.8316979,8.5284595 0 0 1 -9.279618,-3.355909"
          sodipodi:ry="8.5284595"
          sodipodi:rx="6.8316979"
          sodipodi:cy="15.880765"
          sodipodi:cx="-38.980865"
          id="path2987"
-         style="fill:#ffff00;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.08008265;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         style="fill:url(#radialGradient3351);fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.08008265;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
          sodipodi:type="arc" />
       <path
          transform="matrix(0.99041092,0.13815283,-0.09474364,0.67921255,29.497865,2.2674159)"
          sodipodi:open="true"
          sodipodi:end="8.9213206"
          sodipodi:start="2.6384032"
-         d="m -14.866827,18.695603 c -0.868101,-1.166601 -0.293367,-2.632889 1.283705,-3.275046 1.577072,-0.642157 3.559277,-0.217011 4.4273777,0.94959 0.8681009,1.166601 0.2933664,2.63289 -1.2837057,3.275046 -1.576773,0.642036 -3.558597,0.217184 -4.426956,-0.949024"
+         d="m -14.866827,18.695603 a 3.2595682,2.4111874 0 0 1 1.283514,-3.274968 3.2595682,2.4111874 0 0 1 4.4273581,0.949229 3.2595682,2.4111874 0 0 1 -1.2829211,3.275096 3.2595682,2.4111874 0 0 1 -4.42753,-0.948791"
          sodipodi:ry="2.4111874"
          sodipodi:rx="3.2595682"
          sodipodi:cy="17.532875"

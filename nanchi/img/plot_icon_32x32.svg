@@ -23,15 +23,15 @@
      id="defs2987">
     <linearGradient
        inkscape:collect="always"
-       id="linearGradient4157">
+       id="linearGradient4141">
       <stop
-         style="stop-color:#000000;stop-opacity:1;"
+         style="stop-color:#00a0d3;stop-opacity:1;"
          offset="0"
-         id="stop4159" />
+         id="stop4143" />
       <stop
-         style="stop-color:#000000;stop-opacity:0;"
+         style="stop-color:#00a0d3;stop-opacity:0;"
          offset="1"
-         id="stop4161" />
+         id="stop4145" />
     </linearGradient>
     <linearGradient
        id="linearGradient3785">
@@ -46,14 +46,13 @@
     </linearGradient>
     <linearGradient
        inkscape:collect="always"
-       xlink:href="#linearGradient4157"
-       id="linearGradient4163"
-       x1="1.5207312"
-       y1="-7.8117995"
-       x2="48.35648"
-       y2="51.247795"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="translate(-0.65914727,0.79097673)" />
+       xlink:href="#linearGradient4141"
+       id="linearGradient4147"
+       x1="15.099165"
+       y1="-0.03386179"
+       x2="42.951473"
+       y2="59.157562"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -63,8 +62,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="7.5855582"
-     inkscape:cx="10.543157"
-     inkscape:cy="16.560627"
+     inkscape:cx="33.968629"
+     inkscape:cy="16.428798"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:grid-bbox="true"
@@ -91,7 +90,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer">
     <path
-       style="fill:none;stroke:url(#linearGradient4163);stroke-width:1.75419319;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:none;stroke:url(#linearGradient4147);stroke-width:1.75419319;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 5.1258488,25.16802 c 0,0 2.5962831,-8.255886 5.3352732,-9.459858 3.722055,-1.636093 6.222604,7.325644 11.040314,6.873177 4.061734,-0.381466 4.490081,-15.8896016 4.490081,-15.8896016"
        id="path3008-3"
        inkscape:connector-curvature="0"

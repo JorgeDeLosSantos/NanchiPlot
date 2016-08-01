@@ -34,9 +34,26 @@ Capabilities:
 
 ## Installation
 
-Currently this is not a PyPI library, then to install, clone this repository:
+Currently this is not a PyPI library, then to install you can use `pip` as follows:
 
 ```
+pip install git+https://github.com/JorgeDeLosSantos/NanchiPlot.git
+```
+
+## Run NanchiPlot
+
+To execute enter `nanchi` in a console to run the main script.
+
+Alternatively you can use a simple Python script:
+
+```python
+import nanchi.app as app
+
+# Rup application
+app.run()
+```
+
+<!-- ```
 git clone https://github.com/JorgeDeLosSantos/NanchiPlot.git
 ```
 
@@ -52,7 +69,7 @@ Or using `pip`:
 python setup.py sdist
 cd dist
 pip install nanchi-0.1.0.zip
-```
+``` -->
 
 ## Documentation
 
@@ -64,11 +81,11 @@ In development: **0.1.0-dev**
 
 ## Screenshots
 
-<img src="docs/source/_contents/img/screenshots/screen_01.PNG" width="40%">
-<img src="docs/source/_contents/img/screenshots/screen_02.PNG" width="40%">
-<img src="docs/source/_contents/img/screenshots/screen_03.PNG" width="40%">
-<img src="docs/source/_contents/img/screenshots/screen_04.PNG" width="40%">
-<img src="docs/source/_contents/img/screenshots/screen_05.PNG" width="40%">
+<img src="docs/source/_contents/img/screenshots/screen_01.PNG" width="60%">
+<img src="docs/source/_contents/img/screenshots/screen_02.PNG" width="60%">
+<img src="docs/source/_contents/img/screenshots/screen_03.PNG" width="60%">
+<img src="docs/source/_contents/img/screenshots/screen_04.PNG" width="60%">
+<!-- <img src="docs/source/_contents/img/screenshots/screen_05.PNG" width="40%"> -->
 
 ## More info
 

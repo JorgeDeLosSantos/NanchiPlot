@@ -198,7 +198,7 @@ class NanchiPlot(wx.Frame):
         """
         File -> Save image... -> (Short-Cut) Ctrl + S
         """
-        wldc = "PNG (*.png)|*.png|PDF (*.pdf)|*.pdf|EPS (*.eps)|*.eps|JPG (*.jpg)|*jpg"
+        wldc = ON_SAVE_WILDCARD
         dlg=wx.FileDialog(self, "Save", os.getcwd(), style=wx.SAVE, wildcard=wldc)
         if dlg.ShowModal() == wx.ID_OK:
             self.figure.savefig(dlg.GetPath())
@@ -206,7 +206,7 @@ class NanchiPlot(wx.Frame):
         
     def OnExportASCII(self,event):
         data = self.data.grid_data.GetArrayData()
-        wldc = "TXT File (*.txt)|*.txt|DAT (*.dat)|*.dat"
+        wldc = ON_EXPORT_ASCII_WILDCARD
         dlg=wx.FileDialog(self, "Save", os.getcwd(), style=wx.SAVE, wildcard=wldc)
         if dlg.ShowModal() == wx.ID_OK:
             fname = dlg.GetPath()
@@ -215,7 +215,7 @@ class NanchiPlot(wx.Frame):
         
     def OnExportImage(self,event):
         data = self.data.grid_data.GetArrayData()
-        wldc = "PNG (*.png)|*.png|PDF (*.pdf)|*.pdf|JPG (*.jpg)|*jpg"
+        wldc = ON_EXPORT_IMAGE_WILDCARD
         dlg=wx.FileDialog(self, "Save", os.getcwd(), style=wx.SAVE, wildcard=wldc)
         if dlg.ShowModal() == wx.ID_OK:
             fname = dlg.GetPath()
@@ -245,7 +245,7 @@ class NanchiPlot(wx.Frame):
         Import images
         """
         path = ""
-        wildcard = "PNG (*.png)|*.png|JPG (*.jpg)|*.jpg|TIFF (*.tiff)|*.tiff"
+        wildcard = ON_IMPORT_IMAGE_WILDCARD
         dlg = wx.FileDialog(self, message="Select an image",
         defaultDir=os.getcwd(), wildcard=wildcard, style=wx.OPEN)
         if dlg.ShowModal() == wx.ID_OK:
@@ -258,6 +258,7 @@ class NanchiPlot(wx.Frame):
         else:
             self.sb.SetStatusText(SB_ON_IMPORT_IMAGE_CANCEL)
         dlg.Destroy()
+        
             
     def OnFunction(self,event):
         """
@@ -266,9 +267,9 @@ class NanchiPlot(wx.Frame):
         from numpy import (sin,cos,tan,log,exp)
         dialog = aux.FunctionDialog(None)
         if dialog.ShowModal() == wx.ID_OK:
-            fx,a,b = dialog.GetData()
+            fx,a,b,points = dialog.GetData()
             try:
-                x = np.linspace(float(a), float(b), 100)
+                x = np.linspace(float(a), float(b), float(points))
                 fx = eval(fx)
                 self.data.grid_data.SetArrayData(np.array([x,fx]).transpose())
                 self.data.grid_data.SetColLabelValue(0,"x")
@@ -278,6 +279,7 @@ class NanchiPlot(wx.Frame):
                 self.sb.SetStatusText(SB_ERROR_ON_CREATE_DATA)
         dialog.Destroy()
         
+        
     def OnBivariableFunction(self,event):
         """
         Create data from f(x,y) function
@@ -285,12 +287,12 @@ class NanchiPlot(wx.Frame):
         from numpy import (sin,cos,tan,log,exp)
         dialog = aux.BivariableFunctionDialog(None)
         if dialog.ShowModal() == wx.ID_OK:
-            fxy,x,y = dialog.GetData()
+            fxy,x,y,points = dialog.GetData()
             try:
                 x1,x2 = [float(n) for n in x]
                 y1,y2 = [float(n) for n in y]
-                xx = np.linspace(x1, x2, 100)
-                yy = np.linspace(y1, y2, 100)
+                xx = np.linspace(x1, x2, points)
+                yy = np.linspace(y1, y2, points)
                 x,y = np.meshgrid(xx,yy)
                 Z = eval(fxy)
                 self.data.grid_data.SetArrayData(Z)
@@ -330,16 +332,9 @@ class NanchiPlot(wx.Frame):
         """
         Plot bars
         """
-        setplot.set_default_params(self.axes,self.figure)
+        setplot.set_default_params(self.axes, self.figure)
         X = self.data.grid_data.GetArrayData()
-        rows,cols = X.shape
-        #~ _k = 0
-        # for each column
-        #~ for jj in range(cols):
-            #~ kw = 1.0/(cols+1.5)
-            #~ x = np.array(range(len(X[:,0])))
-            #~ self.axes.bar(x+((jj+0.0)/(cols+1)), X[:,jj], width=kw, color=BAR_COLOR_CYCLE)
-
+        rows,cols = X.shape 
         # Reference: http://matthiaseisen.com/pp/patterns/p0178/
         #
         # Space between bars groups (FACTOR)
@@ -353,16 +348,18 @@ class NanchiPlot(wx.Frame):
             self.axes.bar(x, X[jj,:], width=kw, color=BAR_COLOR_CYCLE)
             k += 1
         
-        # For ticks and labels
+        # For ticks
         STEP = 1.0
-        INITIAL_TICK = KB/2.0
+        INITIAL_TICK = KB/2.0 # Medium point
         END_TICK = rows
         _xticks = np.arange(INITIAL_TICK, END_TICK, STEP)
         self.axes.set_xticks(_xticks)
         
-        # 
+        # For xticklabels
         _tick_labels = range(1, rows+1)
         self.axes.set_xticklabels(_tick_labels)
+        
+        # Change xticklabels using "X-Ticks" icon (AxesToolbar)
         
         # Redraw
         self.canvas.draw()
@@ -373,9 +370,9 @@ class NanchiPlot(wx.Frame):
         X = self.data.grid_data.GetArrayData()
         rows,cols = X.shape
         if cols == 2: # Common case
-            self.axes.plot(X[:,0],X[:,1], "o", color="#348ABD")
-        elif cols == 1:
-            self.axes.plot(X[:,0],"o", color="#348ABD")
+            self.axes.plot(X[:,0], X[:,1], "o", color="#348ABD")
+        elif cols == 1: # one column
+            self.axes.plot(X[:,0], "o", color="#348ABD")
         self.canvas.draw()
         
     def OnPie(self,event):
@@ -383,7 +380,7 @@ class NanchiPlot(wx.Frame):
         X = self.data.grid_data.GetArrayData()
         rows,cols = X.shape
         
-        n = float(rows)
+        n = float(rows) 
         from matplotlib import cm
         a=np.random.random(n)
         colors=cm.Set1(np.arange(n)/n)
@@ -392,12 +389,12 @@ class NanchiPlot(wx.Frame):
             _ , self.pie_labels = self.axes.pie(X[:,0], labels=X[:,0], colors=colors)
             self.axes.set_aspect("equal")
         else:
-            pass
+            pass # nothing to do here
         self.canvas.draw()
         
     def OnPieLabels(self,event):
-        if hasattr(self,"pie_labels"):
-            dlg = aux.PieLabelsDialog(None,self.pie_labels)
+        if hasattr(self, "pie_labels"):
+            dlg = aux.PieLabelsDialog(None, self.pie_labels)
             if dlg.ShowModal() == wx.ID_OK:
                 dlg.GetData()
             dlg.Destroy()

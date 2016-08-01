@@ -15,7 +15,7 @@ class FunctionDialog(wx.Dialog):
     def __init__(self,parent,**kwargs):
         #_styles = (wx.CLOSE_BOX|wx.CAPTION)
         wx.Dialog.__init__(self,parent=parent,title=DEFAULT_DIALOG_CAPTION,
-                          size=(200,150))
+                          size=(200,180))
         self.LABEL_FONT = wx.Font(10, wx.SWISS, wx.NORMAL, wx.BOLD)
         self.initCtrls()
         self.initSizers()
@@ -25,6 +25,7 @@ class FunctionDialog(wx.Dialog):
         self.out_fun = ""
         self.out_a = ""
         self.out_b = ""
+        self.out_points = ""
         
         self.Centre(True)
         #self.Show()
@@ -33,6 +34,7 @@ class FunctionDialog(wx.Dialog):
         self.mainsz = wx.BoxSizer(wx.VERTICAL)
         self.pfunsz = wx.BoxSizer(wx.HORIZONTAL)
         self.prangesz = wx.BoxSizer(wx.HORIZONTAL)
+        self.pointssz = wx.BoxSizer(wx.HORIZONTAL)
         self.pbuttonsz = wx.BoxSizer(wx.HORIZONTAL)
         
         self.pfunsz.Add(self._fun, 1, wx.ALIGN_LEFT|wx.ALL, 5)
@@ -42,10 +44,13 @@ class FunctionDialog(wx.Dialog):
         self.prangesz.Add(self._b, 1, wx.ALIGN_LEFT|wx.ALL, 5)
         self.prangesz.Add(self.b, 4, wx.ALIGN_LEFT|wx.ALL, 5)
         
+        self.pointssz.Add(self._points, 1, wx.ALIGN_LEFT|wx.ALL, 5)
+        self.pointssz.Add(self.points, 4, wx.ALIGN_LEFT|wx.ALL, 5)
+        
         self.pbuttonsz.Add(self.okbutton, 1, wx.ALIGN_CENTRE|wx.ALL, 5)
         self.pbuttonsz.Add(self.cancelbutton, 1, wx.ALIGN_CENTRE|wx.ALL, 5)
         
-        for panel in [self.pfun, self.prange, self.pbutton]:
+        for panel in [self.pfun, self.prange, self.pointssz, self.pbutton]:
             self.mainsz.Add(panel, 1, wx.EXPAND)
         
         self.pfun.SetSizer(self.pfunsz)
@@ -54,28 +59,37 @@ class FunctionDialog(wx.Dialog):
         self.SetSizer(self.mainsz)
         
     def initCtrls(self):
+        # Panels
         self.pfun = wx.Panel(self, -1)
         self.prange = wx.Panel(self, -1)
         self.pbutton = wx.Panel(self, -1)
+        
+        # Controls
         self._fun = wx.StaticText(self.pfun, -1, u"f(x)", size=(-1,25))
         self.fun = wx.TextCtrl(self.pfun, -1, u"15*x^2-x^3", size=(-1,25))
+        
         self._a = wx.StaticText(self.prange, -1, u"a", size=(-1,25))
         self.a = wx.TextCtrl(self.prange, -1, u"0", size=(50,25))
+        
         self._b = wx.StaticText(self.prange, -1, u"b", size=(-1,25))
         self.b = wx.TextCtrl(self.prange, -1, u"10", size=(50,25))
+        
+        self._points = wx.StaticText(self, -1, u"Points", size=(-1,25))
+        self.points = wx.TextCtrl(self, -1, u"100", size=(80,25))
         
         self.okbutton = wx.Button(self.pbutton, wx.ID_OK, size=(-1,25))
         self.cancelbutton = wx.Button(self.pbutton, wx.ID_CANCEL, size=(-1,25), 
                                 style=wx.ID_CANCEL)
         
-        for ctrl in [self._fun,self._a,self._b]:
+        for ctrl in [self._fun,self._a,self._b, self._points]:
             ctrl.SetFont(self.LABEL_FONT)
             
     def GetData(self):
         self.out_fun = self.fun.GetValue().replace("^","**")
         self.out_a = self.a.GetValue()
         self.out_b = self.b.GetValue()
-        self.data = (self.out_fun, self.out_a, self.out_b)
+        self.out_points = self.points.GetValue()
+        self.data = (self.out_fun, self.out_a, self.out_b, self.out_points)
         return self.data
         
 
@@ -83,7 +97,7 @@ class BivariableFunctionDialog(wx.Dialog):
     def __init__(self,parent,**kwargs):
         #_styles = (wx.CLOSE_BOX|wx.CAPTION)
         wx.Dialog.__init__(self,parent=parent,title=DEFAULT_DIALOG_CAPTION,
-                          size=(220,180))
+                          size=(220,200))
         self.LABEL_FONT = wx.Font(10, wx.SWISS, wx.NORMAL, wx.BOLD)
         self.initCtrls()
         self.initSizers()
@@ -93,17 +107,21 @@ class BivariableFunctionDialog(wx.Dialog):
         self.out_fun = ""
         self.out_x = ""
         self.out_y = ""
+        self.out_points = ""
         
         self.Centre(True)
         #self.Show()
         
     def initSizers(self):
+        # Sizers
         self.mainsz = wx.BoxSizer(wx.VERTICAL)
         self.pfunsz = wx.BoxSizer(wx.HORIZONTAL)
         self.prangexsz = wx.BoxSizer(wx.HORIZONTAL)
         self.prangeysz = wx.BoxSizer(wx.HORIZONTAL)
+        self.pointssz = wx.BoxSizer(wx.HORIZONTAL)
         self.pbuttonsz = wx.BoxSizer(wx.HORIZONTAL)
         
+        # add to sizers
         self.pfunsz.Add(self._fun, 1, wx.ALIGN_LEFT|wx.ALL, 5)
         self.pfunsz.Add(self.fun, 4, wx.ALIGN_LEFT|wx.ALL, 5)
         self.prangexsz.Add(self._x1, 1, wx.ALIGN_LEFT|wx.ALL, 5)
@@ -115,10 +133,13 @@ class BivariableFunctionDialog(wx.Dialog):
         self.prangeysz.Add(self._y2, 1, wx.ALIGN_LEFT|wx.ALL, 5)
         self.prangeysz.Add(self.y2, 4, wx.ALIGN_LEFT|wx.ALL, 5)
         
+        self.pointssz.Add(self._points, 1, wx.ALIGN_LEFT|wx.ALL, 5)
+        self.pointssz.Add(self.points, 4, wx.ALIGN_LEFT|wx.ALL, 5)
+        
         self.pbuttonsz.Add(self.okbutton, 1, wx.ALIGN_CENTRE|wx.ALL, 5)
         self.pbuttonsz.Add(self.cancelbutton, 1, wx.ALIGN_CENTRE|wx.ALL, 5)
         
-        for panel in [self.pfun, self.prangex, self.prangey, self.pbutton]:
+        for panel in [self.pfun, self.prangex, self.prangey, self.pointssz, self.pbutton]:
             self.mainsz.Add(panel, 1, wx.EXPAND)
         
         self.pfun.SetSizer(self.pfunsz)
@@ -132,29 +153,38 @@ class BivariableFunctionDialog(wx.Dialog):
         self.prangex = wx.Panel(self, -1)
         self.prangey = wx.Panel(self, -1)
         self.pbutton = wx.Panel(self, -1)
+        
         self._fun = wx.StaticText(self.pfun, -1, u"f(x,y)", size=(-1,25))
         self.fun = wx.TextCtrl(self.pfun, -1, u"(x*y)/(x^2+y^2)", size=(-1,25))
+        
         self._x1 = wx.StaticText(self.prangex, -1, u"x1", size=(-1,25))
         self.x1 = wx.TextCtrl(self.prangex, -1, u"-10", size=(50,25))
+        
         self._x2 = wx.StaticText(self.prangex, -1, u"x2", size=(-1,25))
         self.x2 = wx.TextCtrl(self.prangex, -1, u"10", size=(50,25))
+        
         self._y1 = wx.StaticText(self.prangey, -1, u"y1", size=(-1,25))
         self.y1 = wx.TextCtrl(self.prangey, -1, u"-10", size=(50,25))
+        
         self._y2 = wx.StaticText(self.prangey, -1, u"y2", size=(-1,25))
         self.y2 = wx.TextCtrl(self.prangey, -1, u"10", size=(50,25))
+        
+        self._points = wx.StaticText(self, -1, u"Points", size=(-1,25))
+        self.points = wx.TextCtrl(self, -1, u"100", size=(80,25))
         
         self.okbutton = wx.Button(self.pbutton, wx.ID_OK, size=(-1,25))
         self.cancelbutton = wx.Button(self.pbutton, wx.ID_CANCEL, size=(-1,25), 
                                 style=wx.ID_CANCEL)
         
-        for ctrl in [self._fun,self._x1, self._x2, self._y1, self._y2]:
+        for ctrl in [self._fun,self._x1, self._x2, self._y1, self._y2, self._points]:
             ctrl.SetFont(self.LABEL_FONT)
             
     def GetData(self):
         self.out_fun = self.fun.GetValue().replace("^","**")
         self.out_x = [self.x1.GetValue(), self.x2.GetValue()]
         self.out_y = [self.y1.GetValue(), self.y2.GetValue()]
-        self.data = (self.out_fun, self.out_x, self.out_y)
+        self.out_points = self.points.GetValue()
+        self.data = (self.out_fun, self.out_x, self.out_y, self.out_points)
         return self.data
 
 
@@ -689,4 +719,4 @@ def test_pie():
 
 
 if __name__=='__main__':
-    test_pie()
+    test_function()

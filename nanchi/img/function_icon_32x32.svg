@@ -46,16 +46,6 @@
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient3343"
-       id="linearGradient3343-7"
-       x1="2.2868893"
-       y1="23.503616"
-       x2="68.806618"
-       y2="-14.233497"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(1.1468492,0,0,1.1468492,-3.7546396,-1.7930878)" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient3343"
        id="linearGradient3353"
        x1="2.2868893"
        y1="23.503616"
@@ -72,8 +62,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="7.0725624"
-     inkscape:cx="16.42177"
-     inkscape:cy="15.71919"
+     inkscape:cx="-9.6649564"
+     inkscape:cy="15.577799"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:grid-bbox="true"
@@ -101,7 +91,7 @@
      inkscape:groupmode="layer">
     <text
        xml:space="preserve"
-       style="font-style:oblique;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:23.50623131px;line-height:125%;font-family:Verdana;-inkscape-font-specification:'Sans Bold Oblique';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:url(#linearGradient3343-7);fill-opacity:1;stroke:none"
+       style="font-style:oblique;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:23.50623131px;line-height:125%;font-family:Verdana;-inkscape-font-specification:'Sans Bold Oblique';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#5fbcd3;fill-opacity:1;stroke:none;"
        x="21.58367"
        y="16.186106"
        id="text2999"
@@ -111,6 +101,6 @@
          id="tspan3001"
          x="21.58367"
          y="16.186106"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16.79016876px;font-family:Arial;-inkscape-font-specification:'Arial Bold';fill:url(#linearGradient3343-7)">f(x)</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16.79016876px;font-family:Arial;-inkscape-font-specification:'Arial Bold';fill:#5fbcd3;">f(x)</tspan></text>
   </g>
 </svg>
