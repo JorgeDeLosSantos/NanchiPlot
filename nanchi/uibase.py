@@ -400,12 +400,17 @@ class GraphPanel(wx.Panel):
                               self._selected_text.get_position()[0],
                               self._selected_text.get_position()[1]))
 
+
+
+# =====================================================================
+
 class GraphWindow(wx.Frame):
     def __init__(self,parent,title,*args,**kwargs):
         wx.Frame.__init__(self,parent=parent,title=title,*args,**kwargs)
         self.SetBackgroundColour(FRAME_BG_COLOR)
         self.Centre(True)
-        
+
+# =====================================================================
         
 class DataPanel(scrolled.ScrolledPanel):
     def __init__(self,parent,*args,**kwargs):
@@ -435,6 +440,7 @@ class DataPanel(scrolled.ScrolledPanel):
         pass
         
 
+# Main class for grid data
 class DataGrid(grid.Grid):
     def __init__(self,parent,gridsize,**kwargs):
         grid.Grid.__init__(self,parent=parent,id=-1,**kwargs)
@@ -474,6 +480,7 @@ class DataGrid(grid.Grid):
         self.UpdateGridSize(r,c)
         for i in range(r):
             for j in range(c):
+                if i==0: self.SetColFormatFloat(5, 6, 4)
                 val = str(data[i][j])
                 self.SetCellValue(i,j,val)
         
@@ -678,9 +685,24 @@ class SetupWindow(wx.Frame):
         print 0
         self.Close(True)
         
+
+
+class Graph3DWindow(object):
+    def __init__(self, data):
+        from mpl_toolkits.mplot3d import Axes3D
+        self.data = data
+        self.initCtrls()
         
+    def initCtrls(self):
+        self.figure = plt.figure()
+        nr, nc = self.data.shape
+        X, Y = np.meshgrid(np.linspace(1,nr,nr), np.linspace(1,nc,nc))
+        Z = self.data
+        self.axes = self.figure.add_subplot(111, projection="3d")
+        surf = self.axes.plot_surface(X, Y, Z, rstride=1, cstride=1,cmap="hot")
+        plt.show()
         
 if __name__=='__main__':
-    app = wx.App()
-    SetupWindow()
-    app.MainLoop()
+    #~ app = wx.App()
+    Graph3DWindow(np.random.random((10,10)))
+    #~ app.MainLoop()
