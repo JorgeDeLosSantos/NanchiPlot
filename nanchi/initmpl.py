@@ -12,7 +12,13 @@ if True:
     """
     Only this...
     """
-    plt.style.use(DEFAULT_STYLE)
+    try:
+        plt.style.use(DEFAULT_STYLE)
+    except:
+        pass
 else:
-    plt.style.use(DARK_STYLE)
+    try:
+        plt.style.use(DARK_STYLE)
+    except:
+        pass
 

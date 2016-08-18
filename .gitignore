@@ -64,3 +64,8 @@ target/
 # Experimental scripts
 _experimental/
 
+
+# py2exe installer
+installer/
+
+

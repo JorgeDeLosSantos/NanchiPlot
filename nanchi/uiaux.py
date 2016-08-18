@@ -6,10 +6,17 @@ import wx.html as html
 import wx.grid as wxgrid
 import  wx.lib.floatbar as wxfb
 import webbrowser
-import uibase as ui
-import iodata as io
-from _const_ import *
-from util import isempty
+
+try:
+    import uibase as ui
+    import iodata as io
+    from _const_ import *
+    from util import isempty
+except:
+    import nanchi.uibase as ui
+    import nanchi.iodata as io
+    from nanchi._const_ import *
+    from nanchi.util import isempty
 
 class FunctionDialog(wx.Dialog):
     def __init__(self,parent,**kwargs):

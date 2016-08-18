@@ -8,14 +8,22 @@ import numpy as np
 import matplotlib
 
 import matplotlib.pyplot as plt
-from uimpl import FigureCanvas # Customized canvas
 from matplotlib.figure import Figure
 
-import setplot
-import uimpl
-import uiaux as aux
-from util import isempty, rgb2hex
-from _const_ import *  # String & Constants values
+try:
+    from uimpl import FigureCanvas # Customized canvas
+    import setplot
+    import uimpl
+    import uiaux as aux
+    from util import isempty, rgb2hex
+    from _const_ import *  # String & Constants values
+except ImportError:
+    from nanchi.uimpl import FigureCanvas # Customized canvas
+    import nanchi.setplot as setplot
+    import nanchi.uimpl as uimpl
+    import nanchi.uiaux as aux
+    from nanchi.util import isempty, rgb2hex
+    from nanchi._const_ import *  # String & Constants values
 
 class NanchiNoteBook(aui.AuiNotebook):
     def __init__(self, parent):

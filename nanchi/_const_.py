@@ -37,6 +37,10 @@ cdir, _  = path.split(path.abspath(__file__))
 
 
 IMGS_PATH = path.join(cdir, u"img")
+
+if ".exe" in IMGS_PATH:
+    IMGS_PATH = u"img\\"
+
 PATH_NANCHI_LOGO = path.join(IMGS_PATH,"nanchi_logo.png")
 PATH_IMPORT_ICON = path.join(IMGS_PATH, "import_icon_32x32.png")
 PATH_LOAD_IMAGE_ICON = path.join(IMGS_PATH, "load_image_icon_32x32.png")

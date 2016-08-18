@@ -11,13 +11,24 @@
 import wx
 import os
 import numpy as np
-from initmpl import *
-import setplot # Axes & Figure props
-import iodata as io # Read & Write data
-import uibase as ui # Main interfaces
-import uiaux as aux # Auxiliar interfaces
-import uitoolbar as tb # Toolbars (Toolbar, AxesToolbar, LineToolbar)
-from _const_ import * # Constants
+
+# Nanchi files
+try:
+    from initmpl import *
+    import setplot # Axes & Figure props
+    import iodata as io # Read & Write data
+    import uibase as ui # Main interfaces
+    import uiaux as aux # Auxiliar interfaces
+    import uitoolbar as tb # Toolbars (Toolbar, AxesToolbar, LineToolbar)
+    from _const_ import * # Constants
+except:
+    from nanchi.initmpl import *
+    import nanchi.setplot as setplot# Axes & Figure props
+    import nanchi.iodata as io # Read & Write data
+    import nanchi.uibase as ui # Main interfaces
+    import nanchi.uiaux as aux # Auxiliar interfaces
+    import nanchi.uitoolbar as tb # Toolbars (Toolbar, AxesToolbar, LineToolbar)
+    from nanchi._const_ import * # Constants
 
 
 class NanchiPlot(wx.Frame):
