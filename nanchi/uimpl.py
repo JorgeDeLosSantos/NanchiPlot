@@ -36,7 +36,7 @@ class ZoomRectangle(object):
         self.canvas.draw()
         
     def on_press(self,event):
-        print "Press"
+        #~ print "Press"
         self.x0 = event.xdata
         self.y0 = event.ydata
         self.motion = self.canvas.mpl_connect("motion_notify_event", self.on_motion)

@@ -77,7 +77,10 @@ class GraphPanel(wx.Panel):
         self.axes = self.figure.add_subplot(111)
         self.canvas = FigureCanvas(self, -1, self.figure)
         
+        # Initial events
         self.EVT_ON_RIGHT = self.canvas.mpl_connect('button_press_event', self.OnRightClick)
+        self.EVT_ON_SCROLL = self.canvas.mpl_connect('scroll_event', self.OnScroll)
+        
         # Graph properties
         setplot.set_default_params(self.axes,self.figure)
         # FigureCanvas
@@ -91,7 +94,27 @@ class GraphPanel(wx.Panel):
             # without previous selection of this option
             # on LineToolbar
             pass
-
+            
+    def OnScroll(self,event):
+        print 0
+        scale_factor =2.0
+        minx, maxx = self.axes.get_xlim()
+        miny, maxy = self.axes.get_ylim()
+        xdata, ydata = event.xdata, event.ydata
+        if event.button == "up":
+            kf = 1.0/scale_factor
+        elif event.button == "down":
+            kf= scale_factor
+        xfactor = 0.5*(maxx - minx)*kf
+        yfactor = 0.5*(maxy - miny)*kf
+        if event.key is not(None) and "control" in event.key: # ctrl + control --- why ?
+            self.axes.set_xlim((xdata - xfactor, xdata + xfactor))
+            self.axes.set_ylim((ydata - yfactor, ydata  + yfactor))
+        else: pass
+        self.canvas.draw() # Update
+        print "Done..."
+        
+    
     def InitPopUpMenu(self):
         pum = wx.Menu()
         

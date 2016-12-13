@@ -15,10 +15,10 @@ if True:
     try:
         plt.style.use(DEFAULT_STYLE)
     except:
-        pass
+        pass # Default style
 else:
     try:
         plt.style.use(DARK_STYLE)
     except:
-        pass
+        pass #Default style
 

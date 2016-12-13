@@ -21,7 +21,7 @@ try:
     import uiaux as aux # Auxiliar interfaces
     import uitoolbar as tb # Toolbars (Toolbar, AxesToolbar, LineToolbar)
     from _const_ import * # Constants
-except:
+except ImportError:
     from nanchi.initmpl import *
     import nanchi.setplot as setplot# Axes & Figure props
     import nanchi.iodata as io # Read & Write data
@@ -201,7 +201,9 @@ class NanchiPlot(wx.Frame):
         try:
             os.startfile(PATH_DOCUMENTATION_HTML)
         except:
-            """ Not exist file"""
+            """
+            Not exist file
+            """
             print("Help file not found")
             pass
         
