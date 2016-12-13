@@ -6,7 +6,8 @@ import matplotlib.cm as cm # Colormap
 from _const_ import *
 
 # Default style for graphs
-DEFAULT_STYLE = WHITE_STYLE
+#~ DEFAULT_STYLE = WHITE_STYLE
+DEFAULT_STYLE = "thesis"
 
 if True:
     """

@@ -96,8 +96,10 @@ class GraphPanel(wx.Panel):
             pass
             
     def OnScroll(self,event):
-        print 0
-        scale_factor =2.0
+        """
+        Zoom -> Scrolling Mouse
+        """
+        scale_factor = 2.0
         minx, maxx = self.axes.get_xlim()
         miny, maxy = self.axes.get_ylim()
         xdata, ydata = event.xdata, event.ydata
@@ -112,7 +114,6 @@ class GraphPanel(wx.Panel):
             self.axes.set_ylim((ydata - yfactor, ydata  + yfactor))
         else: pass
         self.canvas.draw() # Update
-        print "Done..."
         
     
     def InitPopUpMenu(self):
